@@ -10,25 +10,25 @@ public class Cell {
 
     public Cell(int x, int y){
         this.type = 0;
-        setCellColor(0,0,0);
+        setColor(0,0,0);
         setCellCoordinate(x, y);
     }
 
     public Cell(int x, int y, int type){
         this.type = type;
-        changeColor(type);
+        setCellColor(type);
         setCellCoordinate(x, y);
     }
 
-    public void changeColor(int type){
+    public void setCellColor(int type){
         if( type == 1)
-            setCellColor(173,255,47);
+            setColor(Color.YELLOW);
         else if(type == 2)
-            setCellColor(255,0,0);
+            setColor(255,0,0);
         else if(type == 3)
-            setCellColor(0,0,255);
+            setColor(0,0,255);
         else
-            setCellColor(0,0,0);
+            setColor(0,0,0);
     }
 
 
@@ -42,17 +42,17 @@ public class Cell {
 
     public void changeToConductor(){
         this.type = 1;
-        setCellColor(173,255,47);
+        setColor(Color.YELLOW);
     }
 
     public void changeToTail(){
         this.type = 2;
-        setCellColor(255,0,0);
+        setColor(255,0,0);
     }
 
     public void changeToHead(){
         this.type = 3;
-        setCellColor(0,0,255);
+        setColor(0,0,255);
     }
 
     public boolean isEmpty(){
@@ -66,8 +66,13 @@ public class Cell {
         return color;
     }
 
-    private void setCellColor(int r, int g, int b) {
+    private void setColor(int r, int g, int b) {
         Color c = new Color(r,g,b);
+        this.color = c;
+    }
+
+    private void setColor(Color color) {
+        Color c = color;
         this.color = c;
     }
 

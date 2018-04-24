@@ -1,35 +1,39 @@
 //import static org.assertj.core.api.Assertions.*;
 
+import java.awt.*;
+
 public class TestCell {
 
+    private static void testColor(){
+        Cell cell0 = new Cell(0,0, 0);
+        Cell cell1 = new Cell(0,0, 1);
+        Cell cell2 = new Cell(0,0, 2);
+        Cell cell3 = new Cell(0,0, 3);
+
+        System.out.println(cell0.getColor().equals(Color.BLACK));
+        System.out.println(cell1.getColor().equals(Color.YELLOW));
+        System.out.println(cell2.getColor().equals(Color.RED));
+        System.out.println(cell3.getColor().equals(Color.BLUE));
+
+    }
+
+    private static void testTypeChaning(){
+        Cell testcell = new Cell(0,0,0);
+        testcell.changeToConductor();
+        System.out.println(testcell.getType() == 1);
+        testcell.changeToEmpty();
+        System.out.println(testcell.isEmpty());
+        testcell.changeToHead();
+        System.out.println(testcell.isHead() == 1);
+        testcell.changeToTail();
+        System.out.println(testcell.getType() == 2);
+    }
+
     public static void main(String[] args) {
-        // temporarily, it will be replaced with AssertJ tests
-        Board board = new Board(3,3);
-
-        board.addCell(new Cell(0, 0, 3));
-        board.addCell(new Cell(1, 0, 1));
-        board.addCell(new Cell(2, 0, 3));
-
-        board.addCell(new Cell(0, 1, 3));
-        board.addCell(new Cell(1, 1, 3));
-        board.addCell(new Cell(2, 1, 1));
-
-        board.addCell(new Cell(0, 2, 3));
-        board.addCell(new Cell(1, 2, 1));
-        board.addCell(new Cell(2, 2, 3));
-        /*
-         *  3    1   3
-         *  3    3   1
-         *  3    1   3
-         */
-        System.out.println(board);
-
-        System.out.println(board.countElectronHeadsNeighbours(new Cell(1, 1, 3))); // middle cell 5
-        System.out.println(board.countElectronHeadsNeighbours(new Cell(0, 0, 3))); // left top cell 2
-        System.out.println(board.countElectronHeadsNeighbours(new Cell(0, 2, 3))); // left bottom cell 2
-        System.out.println(board.countElectronHeadsNeighbours(new Cell(2, 0, 3))); // right top cell 1
-        System.out.println(board.countElectronHeadsNeighbours(new Cell(2, 2, 3))); // right bottom cell 1
-        System.out.println(board.countElectronHeadsNeighbours(new Cell(1, 2, 3))); // middle bottom 4
+        System.out.println("test1");
+        testColor();
+        System.out.println("\ntest2");
+        testTypeChaning();
     }
 
 }

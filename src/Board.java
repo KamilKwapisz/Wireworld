@@ -48,16 +48,16 @@ public class Board {
         return board.get(y).get(x);
     }
 
-    private void setSize(int width, int height){
+    public void setSize(int width, int height){
         this.width = width;
         this.height = height;
     }
 
-    private int getWidth() {
+    public int getWidth() {
         return this.width;
     }
 
-    private int getHeight() {
+    public int getHeight() {
         return this.height;
     }
 
