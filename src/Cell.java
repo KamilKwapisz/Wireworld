@@ -7,18 +7,6 @@ public class Cell {
     private Color color;
     private Coordinate coordinate;
 
-    public Cell(int type){
-        this.type = type;
-        changeColor(type);
-
-        setCellCoordinate(0,0); // TODO replacing with method returning first free coordinate
-    }
-
-    public Cell(){
-        this.type = 0;
-        setCellColor(0,0,0);
-        setCellCoordinate(0,0);
-    }
 
     public Cell(int x, int y){
         this.type = 0;
@@ -50,7 +38,6 @@ public class Cell {
 
     public void changeToEmpty(){
         this.type = 0;
-
     }
 
     public void changeToConductor(){
@@ -100,6 +87,14 @@ public class Cell {
         this.coordinate = new Coordinate(x, y);
     }
 
+    public int isHead(){
+        if(type == 3)
+            return 1;
+        else
+            return 0;
+    }
+
+
     @Override
     public String toString(){
         // (x, y)[type]
@@ -112,19 +107,21 @@ public class Cell {
     }
 
     public static void main(String[] args) {
-        Cell c1 = new Cell();
-        Cell c2 = new Cell(2,2,3);
-        Cell c3 = new Cell(2, 1);
+        Cell c1 = new Cell(2,2,3);
+        Cell c2 = new Cell(2, 1);
 
         System.out.println(c1);
         System.out.println(c2);
-        System.out.println(c3);
 
         Board board = new Board(3,3);
 
-        board.addCell(c1);
         board.addCell(c2);
+        board.addCell(c1);
         System.out.println(board);
+
+
+        ArrayList<Cell> l = board.getNotEmptyCells();
+        System.out.println(l);
 
     }
 }
