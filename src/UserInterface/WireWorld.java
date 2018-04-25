@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -20,8 +21,9 @@ public class WireWorld extends Application {
 	GridPane pane = loader.load();
 	Scene scene = new Scene(pane);
 
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("WireWorld");
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image("UserInterface/launcher.png"));
         primaryStage.show();
     }
 
