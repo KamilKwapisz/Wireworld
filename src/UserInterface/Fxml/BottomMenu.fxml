@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserInterface.Controllers.MenuController">
+<GridPane fx:id="menuPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserInterface.Controllers.MenuController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="250.0" prefWidth="330.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" prefWidth="310.0" />
@@ -33,11 +33,15 @@
          </GridPane.margin>
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Label text="Number of generations:">
+            <Label styleClass="UserInterface.css.menu.css" text="Number of generations:">
                <font>
                   <Font name="Eras Demi ITC" size="15.0" />
                </font>

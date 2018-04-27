@@ -68,6 +68,8 @@ public class MainController implements Initializable {
         } catch(IOException e){
             e.printStackTrace();
         }
+        String css = MenuController.class.getResource("/UserInterface/css/menu.css").toExternalForm();
+        wireMenu.getStylesheets().add(css);
         wireMenu.setCenter(menu);
         
  
