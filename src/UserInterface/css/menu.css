@@ -4,6 +4,7 @@
 
 .label {
     -fx-text-fill: #a6acad;
+    -fx-font-weight: 900;
 }
 
 #genNumber {

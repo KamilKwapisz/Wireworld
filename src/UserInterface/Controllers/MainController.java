@@ -72,7 +72,7 @@ public class MainController implements Initializable {
         wireMenu.getStylesheets().add(css);
         wireMenu.setCenter(menu);
         
- 
+        
     }    
 
     @FXML
