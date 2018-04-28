@@ -5,11 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <GridPane fx:id="menuPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserInterface.Controllers.MenuController">
@@ -87,22 +87,24 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </HBox>
-      <VBox alignment="TOP_CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <children>
-            <Slider fx:id="speedSlider">
+            <Slider fx:id="delaySlider" layoutX="136.0" layoutY="7.0" max="2.0" min="0.5" prefHeight="14.0" prefWidth="349.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </Slider>
-            <Label text="Speed">
+            <Label layoutX="263.0" layoutY="26.0" prefHeight="24.0" prefWidth="67.0" text="Delay:">
                <font>
                   <Font name="Eras Demi ITC" size="20.0" />
                </font>
             </Label>
+            <Label fx:id="delayValue" layoutX="330.0" layoutY="23.0" text="SLIDER_VALUE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </VBox>
+      </AnchorPane>
    </children>
 </GridPane>

@@ -38,6 +38,14 @@ public class GameGrid {
         return root;
     }
     
+    public void clearGrid(){
+        for(int x = 0; x < X_TILES; x++){
+            for(int y = 0; y < Y_TILES; y++){
+                grid[x][y].clearTile();
+            }
+        }
+    }
+    
     private class Tile extends StackPane{
         private int x, y;
         private int state;
@@ -52,7 +60,7 @@ public class GameGrid {
             /* We can remove this switch as soon as it works.
             ** We just need state = 0 on app load.
             */
-            border.setStroke(Color.web("181818"));
+            border.setStroke(Color.web("202020"));
             switch (this.state) {
                 case 0:
                     border.setFill(Color.BLACK);
@@ -93,6 +101,11 @@ public class GameGrid {
         public void setState(int state){
             this.state = state;
         }
+        public void clearTile(){
+            this.state = 0;
+            border.setFill(Color.BLACK);
+        }
+        
         
         public void changeState(MouseEvent e, int currentState){
             if(e.isPrimaryButtonDown()){

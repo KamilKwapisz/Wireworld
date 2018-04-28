@@ -73,3 +73,13 @@
 #pauseB:pressed{
     -fx-background-color: darkolivegreen;
 }
+
+.slider .track {
+    -fx-background-color: #a6acad;
+    -fx-padding: 0.25em;
+}
+
+.slider .thumb {
+    -fx-background-color: YELLOW;
+    -fx-background-radius: 0.3em;
+}

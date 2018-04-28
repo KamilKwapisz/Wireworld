@@ -1,6 +1,7 @@
 package UserInterface.Controllers;
 
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,8 +20,6 @@ public class MenuController implements Initializable {
     @FXML
     private Label currentGen;
     @FXML
-    private Slider speedSlider;
-    @FXML
     private GridPane menuPane;
     @FXML
     private Button backwardB;
@@ -30,11 +29,17 @@ public class MenuController implements Initializable {
     private Button playB;
     @FXML
     private Button forwardB;
+    @FXML
+    private Slider delaySlider;
+    @FXML
+    private Label delayValue;
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        delaySlider.setValue(1);
+        delayValue.setText(new Double(1).toString());
+        delayValue.textProperty().bindBidirectional(delaySlider.valueProperty(), NumberFormat.getNumberInstance());
     }    
 
     @FXML

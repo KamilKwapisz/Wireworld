@@ -56,8 +56,11 @@ public class MainController implements Initializable {
     private BorderPane wireDisplay;
     @FXML
     private BorderPane wireMenu;
+    @FXML
+    private MenuItem fileClear;
 
-
+    private GameGrid game;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         FXMLLoader botMenu = new FXMLLoader(this.getClass().getResource("/UserInterface/fxml/BottomMenu.fxml"));
@@ -72,7 +75,7 @@ public class MainController implements Initializable {
         wireMenu.getStylesheets().add(css);
         wireMenu.setCenter(menu);
         
-        GameGrid game = new GameGrid();
+        game = new GameGrid();
         
         wireDisplay.setCenter(game.createContent());
         //wireDisplay.getChildren().add(game.createContent());
@@ -152,6 +155,11 @@ public class MainController implements Initializable {
 
     @FXML
     private void showHelp(ActionEvent event) {
+    }
+
+    @FXML
+    private void clearGrid(ActionEvent event) {
+        game.clearGrid();
     }
     
 }
