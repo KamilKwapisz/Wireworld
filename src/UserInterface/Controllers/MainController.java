@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-
+import UserInterface.Controllers.GameGrid;
 
 public class MainController implements Initializable {
 
@@ -72,7 +72,10 @@ public class MainController implements Initializable {
         wireMenu.getStylesheets().add(css);
         wireMenu.setCenter(menu);
         
+        GameGrid game = new GameGrid();
         
+        wireDisplay.setCenter(game.createContent());
+        //wireDisplay.getChildren().add(game.createContent());
     }    
 
     @FXML
