@@ -14,8 +14,8 @@
   </columnConstraints>
   <rowConstraints>
       <RowConstraints maxHeight="25.0" minHeight="25.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="595.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="175.0" minHeight="175.0" prefHeight="175.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="600.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="170.0" minHeight="170.0" prefHeight="170.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <MenuBar maxHeight="25.0" minHeight="25.0" prefHeight="25.0">

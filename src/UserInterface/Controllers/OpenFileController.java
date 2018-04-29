@@ -20,7 +20,7 @@ class OpenFileController {
     public OpenFileController(GameGrid grid){
         createFileChooserToOpenFile();
         reader = image.getPixelReader();
-
+        System.out.println(grid.getXTiles() + "\n" + grid.getYTiles());
         loadToGrid(grid);
         
 
