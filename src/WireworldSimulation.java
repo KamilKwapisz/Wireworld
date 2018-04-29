@@ -48,7 +48,7 @@ public class WireworldSimulation {
             if( !isPaused ) {
                 ArrayList<Cell> notEmptyCells = board.getNotEmptyCells();
                 // we can work on not empty cells only because empty call will remain empty
-                // TODO figure out better way to do this
+                // TODO board copy should be replaced with frontend grid array
                 Board oldBoard = board.copyBoard(); // creating board copy to determine how cells should be changed
 
                 for (Cell cell : notEmptyCells) {
