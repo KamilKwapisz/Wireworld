@@ -20,12 +20,7 @@ class OpenFileController {
     public OpenFileController(GameGrid grid){
         createFileChooserToOpenFile();
         reader = image.getPixelReader();
-        
-        
-        System.out.println(image.getHeight());
-        System.out.println(image.getWidth());
-        System.out.println(grid.getXTiles());
-        System.out.println(grid.getYTiles());
+
         loadToGrid(grid);
         
 
@@ -51,8 +46,8 @@ class OpenFileController {
     }
     
     private void loadToGrid(GameGrid grid){
-        for(int x = 0; x < image.getWidth(); x++){
-            for(int y = 0; y < image.getHeight(); y++){
+        for(int x = 0; x < grid.getXTiles() && x < image.getWidth(); x++){
+            for(int y = 0; y < image.getHeight() && y < grid.getYTiles(); y++){
                 Color color = reader.getColor(x, y);
                 if(color.equals(Color.BLACK)){
                     grid.setBlack(x, y);
