@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Cell {
 
     private int type; // 0 - empty | 1 - conductor | 2 - electron tail | 3 - electron head
+    private int nextType; // type which cell will have after change
     private Color color;
     private Coordinate coordinate;
 
@@ -37,22 +38,26 @@ public class Cell {
     }
 
     public void changeToEmpty(){
-        this.type = 0;
+        this.nextType = 0;
     }
 
     public void changeToConductor(){
-        this.type = 1;
+        this.nextType = 1;
         setColor(Color.YELLOW);
     }
 
     public void changeToTail(){
-        this.type = 2;
+        this.nextType = 2;
         setColor(255,0,0);
     }
 
     public void changeToHead(){
-        this.type = 3;
+        this.nextType = 3;
         setColor(0,0,255);
+    }
+
+    public void changeType(){
+        this.type = nextType;
     }
 
     public boolean isEmpty(){
@@ -93,6 +98,8 @@ public class Cell {
     }
 
     public int isHead(){
+        // method returns 1 if true and 0 if false
+        // it's int method not boolean in order to provide more convenient way of calculating neighbours
         if(type == 3)
             return 1;
         else

@@ -30,6 +30,10 @@ public class TestBoard {
         System.out.println(board.countElectronHeadsNeighbours(new Cell(2, 0, 3))); // right top cell 1
         System.out.println(board.countElectronHeadsNeighbours(new Cell(2, 2, 3))); // right bottom cell 1
         System.out.println(board.countElectronHeadsNeighbours(new Cell(1, 2, 3))); // middle bottom 4
+
+        System.out.println(board.countElectronHeadsNeighbours(new Cell(2, 1, 3))); //3
+        System.out.println(board.countElectronHeadsNeighbours(new Cell(0, 1, 3))); // left edge 3
+        System.out.println(board.countElectronHeadsNeighbours(new Cell(1, 0, 1))); // top edge 4
     }
 
     private static void testSetSize(){
