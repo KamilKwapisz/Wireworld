@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -14,8 +15,8 @@
   </columnConstraints>
   <rowConstraints>
       <RowConstraints maxHeight="25.0" minHeight="25.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="595.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="175.0" minHeight="175.0" prefHeight="175.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="600.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="170.0" minHeight="170.0" prefHeight="170.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <MenuBar maxHeight="25.0" minHeight="25.0" prefHeight="25.0">
@@ -24,7 +25,6 @@
             <items>
               <MenuItem fx:id="fileOpen" mnemonicParsing="false" onAction="#openFile" text="Open..." />
                   <MenuItem fx:id="fileSave" mnemonicParsing="false" onAction="#saveFile" text="Save..." />
-                  <MenuItem fx:id="fileClear" mnemonicParsing="false" onAction="#clearGrid" text="Clear grid" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Insert">
@@ -63,6 +63,18 @@
                   </Menu>
                </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Board">
+               <items>
+                  <MenuItem fx:id="fileClear" mnemonicParsing="false" onAction="#clearGrid" text="Clear grid" />
+                  <Menu mnemonicParsing="false" text="Size of grid">
+                     <items>
+                        <CheckMenuItem fx:id="smallGrid" mnemonicParsing="false" onAction="#setSmallGrid" text="Small" />
+                        <CheckMenuItem fx:id="mediumGrid" mnemonicParsing="false" onAction="#setMediumGrid" text="Medium" />
+                        <CheckMenuItem fx:id="largeGrid" mnemonicParsing="false" onAction="#setLargeGrid" text="Large" />
+                     </items>
+                  </Menu>
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem fx:id="helpMenu" mnemonicParsing="false" onAction="#showHelp" text="About" />
