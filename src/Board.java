@@ -19,6 +19,7 @@ public class Board {
     }
 
     public ArrayList<Cell> getNotEmptyCells(){
+        // method returns arraylist with not empty cells on the board. We can work only on them because empty cell will remain empty
         ArrayList<Cell> newList = new ArrayList<Cell>();
         Cell tempCell;
 
@@ -98,13 +99,13 @@ public class Board {
 
         else if (x == 0) {
             // cells next to the left edge
-            headsNumber = this.getCell(x-1, y).isHead() + this.getCell(x+1, y).isHead()
-                    + this.getCell(x-1, y+1).isHead() + this.getCell(x, y+1).isHead()
-                    + this.getCell(x+1, 1).isHead();
-        } else if (y == 0) {
-            // cells next to the top edge
             headsNumber = this.getCell(x, y-1).isHead() + this.getCell(x, y+1).isHead()
                     + this.getCell(x+1, y-1).isHead() + this.getCell(x+1, y).isHead()
+                    + this.getCell(x+1, y+1).isHead();
+        } else if (y == 0) {
+            // cells next to the top edge
+            headsNumber = this.getCell(x-1, y).isHead() + this.getCell(x+1, y).isHead()
+                    + this.getCell(x-1, y+1).isHead() + this.getCell(x, y+1).isHead()
                     + this.getCell(x+1, y+1).isHead();
         } else if (y == height-1) {
             // cells next to the bottom edge
@@ -114,11 +115,22 @@ public class Board {
         } else if (x == width-1) {
             // cells next to the right edge
             headsNumber = this.getCell(x-1, y).isHead() + this.getCell(x-1, y-1).isHead()
-                    + this.getCell(x, y-1).isHead() + this.getCell(x+1, y).isHead()
-                    + this.getCell(x+1, y-1).isHead();
+                    + this.getCell(x, y-1).isHead() + this.getCell(x-1, y+1).isHead()
+                    + this.getCell(x, y+1).isHead();
         }
 
         return headsNumber;
+    }
+
+
+    public Board copyBoard(){
+        Board newBoard = new Board(this.width, this.height);
+        for(ArrayList<Cell> array : this.board){
+            for(Cell cell : array){
+                newBoard.addCell(cell);
+            }
+        }
+        return newBoard;
     }
 
     @Override
@@ -131,6 +143,15 @@ public class Board {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    public void printBoard(){
+        for(int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                System.out.print(board.get(i).get(j).getType() + ", ");
+            }
+            System.out.println();
+        }
     }
 
 

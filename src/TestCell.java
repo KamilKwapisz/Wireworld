@@ -17,7 +17,7 @@ public class TestCell {
 
     }
 
-    private static void testTypeChaning(){
+    private static void testTypeChanging(){
         Cell testcell = new Cell(0,0,0);
         testcell.changeToConductor();
         System.out.println(testcell.getType() == 1);
@@ -33,7 +33,7 @@ public class TestCell {
         System.out.println("test1");
         testColor();
         System.out.println("\ntest2");
-        testTypeChaning();
+        testTypeChanging();
     }
 
 }
