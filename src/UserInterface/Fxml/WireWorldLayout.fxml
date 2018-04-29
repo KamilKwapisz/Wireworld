@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -24,7 +25,6 @@
             <items>
               <MenuItem fx:id="fileOpen" mnemonicParsing="false" onAction="#openFile" text="Open..." />
                   <MenuItem fx:id="fileSave" mnemonicParsing="false" onAction="#saveFile" text="Save..." />
-                  <MenuItem fx:id="fileClear" mnemonicParsing="false" onAction="#clearGrid" text="Clear grid" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Insert">
@@ -63,6 +63,18 @@
                   </Menu>
                </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Board">
+               <items>
+                  <MenuItem fx:id="fileClear" mnemonicParsing="false" onAction="#clearGrid" text="Clear grid" />
+                  <Menu mnemonicParsing="false" text="Size of grid">
+                     <items>
+                        <CheckMenuItem fx:id="smallGrid" mnemonicParsing="false" onAction="#setSmallGrid" text="Small" />
+                        <CheckMenuItem fx:id="mediumGrid" mnemonicParsing="false" onAction="#setMediumGrid" text="Medium" />
+                        <CheckMenuItem fx:id="largeGrid" mnemonicParsing="false" onAction="#setLargeGrid" text="Large" />
+                     </items>
+                  </Menu>
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem fx:id="helpMenu" mnemonicParsing="false" onAction="#showHelp" text="About" />

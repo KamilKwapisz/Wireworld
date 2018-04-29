@@ -10,29 +10,42 @@ import javafx.scene.shape.Rectangle;
 
 
 public class GameGrid {
-    private static final int TILE_SIZE = 20;
+    private static int TILE_SIZE = 20;
     private static final int WIDTH = 1280;
     private static final int HEIGHT = 600;
-    private static final int X_TILES = WIDTH / TILE_SIZE;
-    private static final int Y_TILES = HEIGHT / TILE_SIZE;;
+    private static int X_TILES = WIDTH / TILE_SIZE;
+    private static int Y_TILES = HEIGHT / TILE_SIZE;;
+    private Tile[][] grid;
 
-    private Tile[][] grid = new Tile[X_TILES][Y_TILES];
-
+    public GameGrid(int size){
+        setTileSize(size);
+        calculateTilesNumber();
+        grid = new Tile[X_TILES][Y_TILES];
+    }
+    
     public Parent createContent() {
         Pane root = new Pane();
         root.setPrefSize(WIDTH, HEIGHT);
         
         for(int x = 0; x < X_TILES; x++){
             for(int y = 0; y < Y_TILES; y++){
-
                 Tile tile = new Tile(x, y, 0);
-                
                 grid[x][y] = tile;
+                
                 root.getChildren().add(tile);
             }
         }
         
         return root;
+    }
+    
+    private void setTileSize(int size){
+        this.TILE_SIZE = size;
+    }
+    
+    private void calculateTilesNumber(){
+        this.X_TILES = this.WIDTH / this.TILE_SIZE;
+        this.Y_TILES = this.HEIGHT / this.TILE_SIZE;
     }
     
     public void clearGrid(){

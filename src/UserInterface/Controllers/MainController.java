@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -58,7 +59,12 @@ public class MainController implements Initializable {
     private BorderPane wireMenu;
     @FXML
     private MenuItem fileClear;
-
+    @FXML
+    private CheckMenuItem smallGrid;
+    @FXML
+    private CheckMenuItem mediumGrid;
+    @FXML
+    private CheckMenuItem largeGrid;
     
     private GameGrid game;
     
@@ -77,8 +83,8 @@ public class MainController implements Initializable {
         wireMenu.getStylesheets().add(css);
         wireMenu.setCenter(menu);
         
-        game = new GameGrid();
-        
+        game = new GameGrid(20);
+        mediumGrid.setSelected(true);
         wireDisplay.setCenter(game.createContent());
         //wireDisplay.getChildren().add(game.createContent());
     }    
@@ -164,6 +170,58 @@ public class MainController implements Initializable {
     @FXML
     private void clearGrid(ActionEvent event) {
         game.clearGrid();
+    }
+
+    @FXML
+    private void setSmallGrid(ActionEvent event) {
+        if(smallGrid.isSelected() && !mediumGrid.isSelected() && !largeGrid.isSelected()){
+            smallGrid.setSelected(true);
+            mediumGrid.setSelected(false);
+            largeGrid.setSelected(false);
+        } else {
+            smallGrid.setSelected(true);
+            mediumGrid.setSelected(false);
+            largeGrid.setSelected(false);
+            GameGrid small = new GameGrid(40);
+            wireDisplay.getChildren().clear();
+            game = small;
+            wireDisplay.setCenter(game.createContent());
+        }
+    }
+
+    @FXML
+    private void setMediumGrid(ActionEvent event) {
+        if(mediumGrid.isSelected() && !largeGrid.isSelected() && !smallGrid.isSelected()){
+            smallGrid.setSelected(false);
+            mediumGrid.setSelected(true);
+            largeGrid.setSelected(false);
+        } else {
+            smallGrid.setSelected(false);
+            mediumGrid.setSelected(true);
+            largeGrid.setSelected(false);
+            GameGrid medium = new GameGrid(20);
+            wireDisplay.getChildren().clear();
+            game = medium;
+            wireDisplay.setCenter(game.createContent());
+            
+        }
+    }
+
+    @FXML
+    private void setLargeGrid(ActionEvent event) {
+        if(largeGrid.isSelected() && !mediumGrid.isSelected() && !smallGrid.isSelected()){
+            smallGrid.setSelected(false);
+            mediumGrid.setSelected(false);
+            largeGrid.setSelected(true);
+        } else {
+            smallGrid.setSelected(false);
+            mediumGrid.setSelected(false);
+            largeGrid.setSelected(true);
+            GameGrid large = new GameGrid(10);
+            wireDisplay.getChildren().clear();
+            game = large;
+            wireDisplay.setCenter(game.createContent());
+        }
     }
     
 }
