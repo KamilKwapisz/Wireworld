@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import UserInterface.Controllers.GameGrid;
+
 
 public class MainController implements Initializable {
 
@@ -59,7 +59,9 @@ public class MainController implements Initializable {
     @FXML
     private MenuItem fileClear;
 
+    
     private GameGrid game;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -83,10 +85,12 @@ public class MainController implements Initializable {
 
     @FXML
     private void openFile(ActionEvent event) {
+        OpenFileController openFileController = new OpenFileController();
     }
 
     @FXML
     private void saveFile(ActionEvent event) {
+        SaveFileController saveFileController = new SaveFileController(game);
     }
 
     @FXML
