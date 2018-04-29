@@ -16,32 +16,41 @@ public class SaveFileController {
     private WritableImage image;
     private FileChooser fileChooser;
     private final PixelWriter writer;
+    
     public SaveFileController(GameGrid grid){
         image = new WritableImage(grid.getXTiles(), grid.getYTiles());
         writer = image.getPixelWriter();
         
         for(int x = 0; x < grid.getXTiles(); x++){
             for(int y = 0; y < grid.getYTiles(); y++){
-                if(grid.getGridState(x, y) == 0){
-                    writer.setColor(x, y, Color.BLACK);
-                } else if(grid.getGridState(x, y) == 1){
-                    writer.setColor(x, y, Color.YELLOW);
-                } else if(grid.getGridState(x, y) == 2){
-                    writer.setColor(x, y, Color.BLUE);
-                } else if(grid.getGridState(x, y) == 3){
-                    writer.setColor(x, y, Color.RED);
+                switch (grid.getGridState(x, y)) {
+                    case 0:
+                        writer.setColor(x, y, Color.BLACK);
+                        break;
+                    case 1:
+                        writer.setColor(x, y, Color.YELLOW);
+                        break;
+                    case 2:
+                        writer.setColor(x, y, Color.BLUE);
+                        break;
+                    case 3:
+                        writer.setColor(x, y, Color.RED);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
-        createFileChooser();
+        createFileChooserToSaveFile();
     }
     
-    private void createFileChooser(){
+    private void createFileChooserToSaveFile(){
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new ExtensionFilter("PNG files", "*.png"),
                 new ExtensionFilter("JPG files", "*.jpg"),
-                new ExtensionFilter("BMP files", "*.bmp"));
+                new ExtensionFilter("BMP files", "*.bmp"),
+                new ExtensionFilter("JPEG files", "*.jpeg"));
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.setTitle("Save generation");
         fileChooser.setInitialFileName("generacja");
@@ -56,9 +65,8 @@ public class SaveFileController {
         }
         
         /* Test print */
-        if(savedFile != null){
-            System.out.println("File path:" +  savedFile);
-        }
+        System.out.println("File path:" +  savedFile);
+        
         
     }
 }

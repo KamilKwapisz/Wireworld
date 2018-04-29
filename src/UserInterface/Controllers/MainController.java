@@ -85,7 +85,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void openFile(ActionEvent event) {
-        OpenFileController openFileController = new OpenFileController();
+        OpenFileController openFileController = new OpenFileController(game);
     }
 
     @FXML

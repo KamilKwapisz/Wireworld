@@ -62,6 +62,19 @@ public class GameGrid {
         return grid[x][y].getState();
     }
     
+    public void setBlack(int x, int y){
+        grid[x][y].blackTile();
+    }
+    public void setYellow(int x, int y){
+        grid[x][y].yellowTile();
+    }
+    public void setBlue(int x, int y){
+        grid[x][y].blueTile();
+    }
+    public void setRed(int x, int y){
+        grid[x][y].redTile();
+    }
+    
     private class Tile extends StackPane{
         private int x, y;
         private int state;
