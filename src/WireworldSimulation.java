@@ -28,7 +28,6 @@ public class WireworldSimulation {
     public static void changeCellType(Cell cell, Board board){
         int neighbours = board.countElectronHeadsNeighbours(cell);
         if( cell.getType() != 3 && (neighbours == 1 || neighbours == 2) ){
-            System.out.println(cell.getX() +" "+ cell.getY());
             // if cell has 1 or 2 electron's head neighbours it also become electron's head
             cell.changeToHead();
         } else if( cell.getType() == 3 ) {  // if cell was electron's head it become electron's tail
@@ -42,6 +41,7 @@ public class WireworldSimulation {
     }
 
     public void runSimulation(Board board){
+        this.isPaused = false;
         int currentGenerationNumber = 1;
 
         while( currentGenerationNumber < this.n ){
@@ -91,7 +91,6 @@ public class WireworldSimulation {
         board.printBoard();
 
         WireworldSimulation ws = new WireworldSimulation(4, 1.0);
-        ws.start();
         ws.runSimulation(board);
 
 
