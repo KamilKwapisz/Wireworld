@@ -41,9 +41,25 @@ public class GameGrid {
     public void clearGrid(){
         for(int x = 0; x < X_TILES; x++){
             for(int y = 0; y < Y_TILES; y++){
-                grid[x][y].clearTile();
+                grid[x][y].blackTile();
             }
         }
+    }
+    
+    public Tile[][] getGrid(){
+        return grid;
+    }
+    
+    public int getXTiles(){
+        return X_TILES;
+    }
+    
+    public int getYTiles(){
+        return Y_TILES;
+    }
+    
+    public int getGridState(int x, int y){
+        return grid[x][y].getState();
     }
     
     private class Tile extends StackPane{
@@ -98,34 +114,39 @@ public class GameGrid {
             return this.state;
         }
         
-        public void setState(int state){
-            this.state = state;
-        }
-        public void clearTile(){
+
+        public void blackTile(){
             this.state = 0;
             border.setFill(Color.BLACK);
         }
+        public void yellowTile(){
+            this.state = 1;
+            border.setFill(Color.YELLOW);
+        }
+        public void blueTile(){
+            this.state = 2;
+            border.setFill(Color.BLUE);
+        }
+        public void redTile(){
+            this.state = 3;
+            border.setFill(Color.RED);
+        }
         
         
-        public void changeState(MouseEvent e, int currentState){
+        private void changeState(MouseEvent e, int currentState){
             if(e.isPrimaryButtonDown()){
                 if(currentState == 1){
-                    setState(0);
-                    border.setFill(Color.BLACK);
+                    blackTile();
                 } else{
-                    setState(1);
-                    border.setFill(Color.YELLOW);
+                    yellowTile();
                 }
             } else if(e.isSecondaryButtonDown()){
-                if(currentState == 4){
-                    setState(0);
-                    border.setFill(Color.BLACK);
-                } else if(currentState == 3){
-                    setState(4);
-                    border.setFill(Color.RED);
+                if(currentState == 3){
+                    blackTile();
+                } else if(currentState == 2){
+                    redTile();
                 } else{
-                    setState(3);
-                    border.setFill(Color.BLUE);
+                    blueTile();
                 }
             }
         } 
