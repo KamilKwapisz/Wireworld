@@ -27,7 +27,7 @@ public class WireWorld extends Application {
         primaryStage.getIcons().add(new Image("UserInterface/launcher.png"));
         primaryStage.setResizable(false);
         primaryStage.show();
-
+/*
         WireworldSimulation simulation = new WireworldSimulation(110, 1.0, mainController.getGame());
 //        simulation.start();
 
@@ -50,6 +50,7 @@ public class WireWorld extends Application {
 //
 //        }
         simulation.runSimulation(board);
+        */
     }
 
     /**
