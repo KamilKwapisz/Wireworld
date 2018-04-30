@@ -50,15 +50,15 @@ class OpenFileController {
             for(int y = 0; y < image.getHeight() && y < grid.getYTiles(); y++){
                 Color color = reader.getColor(x, y);
                 if(color.equals(Color.BLACK)){
-                    grid.setBlack(x, y);
+                    grid.changeState(x, y, 0);
                 } else if(color.equals(Color.YELLOW)){
-                    grid.setYellow(x, y);
+                    grid.changeState(x, y, 1);
                 } else if(color.equals(Color.BLUE)){
-                    grid.setBlue(x, y);
+                    grid.changeState(x, y, 3);
                 } else if(color.equals(Color.RED)){
-                    grid.setRed(x, y);
+                    grid.changeState(x, y, 2);
                 } else{
-                    grid.setBlack(x, y);
+                    grid.changeState(x, y, 0);
                 }
             }
         }

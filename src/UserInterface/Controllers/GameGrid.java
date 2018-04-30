@@ -51,7 +51,8 @@ public class GameGrid {
     public void clearGrid(){
         for(int x = 0; x < X_TILES; x++){
             for(int y = 0; y < Y_TILES; y++){
-                grid[x][y].blackTile();
+                changeState(x, y, 0);
+                //grid[x][y].blackTile();
             }
         }
     }
@@ -72,19 +73,26 @@ public class GameGrid {
         return grid[x][y].getState();
     }
     
-    public void setBlack(int x, int y){
-        grid[x][y].blackTile();
-    }
-    public void setYellow(int x, int y){
-        grid[x][y].yellowTile();
-    }
-    public void setBlue(int x, int y){
-        grid[x][y].blueTile();
-    }
-    public void setRed(int x, int y){
-        grid[x][y].redTile();
-    }
     
+    public void changeState(int x, int y, int newState){
+        switch (newState) {
+            case 0:
+                grid[x][y].blackTile();
+                break;
+            case 1:
+                grid[x][y].yellowTile();
+                break;
+            case 2:
+                grid[x][y].redTile();
+                break;
+            case 3:
+                grid[x][y].blueTile();
+                break;
+            default:
+                break;
+        }
+    }
+
     private class Tile extends StackPane{
         private int x, y;
         private int state;
