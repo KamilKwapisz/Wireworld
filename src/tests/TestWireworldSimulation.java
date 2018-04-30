@@ -1,3 +1,6 @@
+package tests;
+
+import core.*;
 public class TestWireworldSimulation {
 
     public static void main(String[] args) {

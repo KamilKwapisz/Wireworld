@@ -1,5 +1,6 @@
-//import static org.assertj.core.api.Assertions.*;
+package tests;//import static org.assertj.core.api.Assertions.*;
 
+import core.*;
 import java.awt.*;
 
 public class TestCell {

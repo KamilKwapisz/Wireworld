@@ -1,4 +1,7 @@
+package tests;
+
 import java.util.ArrayList;
+import core.*;
 
 public class TestBoard {
 
