@@ -1,6 +1,8 @@
 package UserInterface.Controllers;
 
 import java.util.Random;
+
+import core.WireworldSimulation;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -35,7 +37,7 @@ public class GameGrid {
                 root.getChildren().add(tile);
             }
         }
-        
+
         return root;
     }
     

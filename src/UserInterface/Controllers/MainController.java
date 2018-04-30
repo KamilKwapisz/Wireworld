@@ -3,6 +3,10 @@ package UserInterface.Controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import core.Board;
+import core.Cell;
+import core.WireworldSimulation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,6 +91,8 @@ public class MainController implements Initializable {
         mediumGrid.setSelected(true);
         wireDisplay.setCenter(game.createContent());
         //wireDisplay.getChildren().add(game.createContent());
+
+
     }    
 
     @FXML
@@ -225,5 +231,11 @@ public class MainController implements Initializable {
             wireDisplay.setCenter(game.createContent());
         }
     }
+
+    public GameGrid getGame() {
+        return game;
+    }
+//
+
     
 }

@@ -40,10 +40,13 @@ public class MenuController implements Initializable {
         delaySlider.setValue(1);
         delayValue.setText(new Double(1).toString());
         delayValue.textProperty().bindBidirectional(delaySlider.valueProperty(), NumberFormat.getNumberInstance());
+
+        playB.setOnAction(e->simulation.run());
     }    
 
     @FXML
     private void changeNumOfGen(InputMethodEvent event) {
     }
-    
+
+
 }
