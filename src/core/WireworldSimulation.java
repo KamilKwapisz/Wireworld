@@ -97,11 +97,11 @@ public class WireworldSimulation {
                 System.out.println();
 
                 currentGenerationNumber++;
-                try{
-                    Thread.sleep(500);
-                } catch (Exception e){
-                    System.out.println(e);
-                }
+//                try{
+//                    Thread.sleep(500);
+//                } catch (Exception e){
+//                    System.out.println(e);
+//                }
             }
         }
     }

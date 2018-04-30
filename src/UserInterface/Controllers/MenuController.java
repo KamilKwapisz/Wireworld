@@ -41,7 +41,7 @@ public class MenuController implements Initializable {
         delayValue.setText(new Double(1).toString());
         delayValue.textProperty().bindBidirectional(delaySlider.valueProperty(), NumberFormat.getNumberInstance());
 
-        playB.setOnAction(e->simulation.run());
+//        playB.setOnAction(e->simulation.run());
     }    
 
     @FXML
