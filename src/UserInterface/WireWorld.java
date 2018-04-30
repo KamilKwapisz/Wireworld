@@ -20,6 +20,7 @@ public class WireWorld extends Application {
         primaryStage.setTitle("WireWorld");
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("UserInterface/launcher.png"));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

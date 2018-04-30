@@ -1,7 +1,9 @@
 #menuPane {
     -fx-background-color: #141111;
 }
-
+#layout {
+    -fx-background-color: #141111;
+}
 .label {
     -fx-text-fill: #a6acad;
     -fx-font-weight: 900;
@@ -14,6 +16,15 @@
     -fx-border-width: 1px;
     -fx-border-color: #a6acad;
     -fx-border-radius: 10px;
+}
+
+#closeButton {
+    -fx-text-fill: #a6acad;
+    -fx-background-color: #141111;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-color: #a6acad;
+    -fx-border-radius: 12px;
 }
 
 #playB {

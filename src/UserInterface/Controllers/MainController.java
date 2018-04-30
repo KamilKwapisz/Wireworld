@@ -165,6 +165,8 @@ public class MainController implements Initializable {
 
     @FXML
     private void showHelp(ActionEvent event) {
+        HelpController helpController = new HelpController();
+        helpController.display("Help");
     }
 
     @FXML
