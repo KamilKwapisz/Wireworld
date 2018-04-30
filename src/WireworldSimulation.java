@@ -27,7 +27,7 @@ public class WireworldSimulation {
 
     public static void changeCellType(Cell cell, Board board){
         int neighbours = board.countElectronHeadsNeighbours(cell);
-        if( cell.getType() != 3 && (neighbours == 1 || neighbours == 2) ){
+        if( cell.getType() == 1 && (neighbours == 1 || neighbours == 2) ){
             // if cell has 1 or 2 electron's head neighbours it also become electron's head
             cell.changeToHead();
         } else if( cell.getType() == 3 ) {  // if cell was electron's head it become electron's tail
