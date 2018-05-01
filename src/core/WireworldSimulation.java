@@ -1,10 +1,14 @@
 package core;
 
 import UserInterface.Controllers.GameGrid;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
-public class WireworldSimulation {
+public class WireworldSimulation extends Thread{
 
     private int n; // number of generations to create
     private double delay;
@@ -29,24 +33,38 @@ public class WireworldSimulation {
     public boolean isPaused() { return isPaused; }
 
     public void pause() { isPaused = true; }
-    public void start() { isPaused = false; }
+    public void unpause() { isPaused = false; }
 
     public void changeCellType(Cell cell, Board board){
         int neighbours = board.countElectronHeadsNeighbours(cell);
+        int newState;
         if( cell.getType() == 1 && (neighbours == 1 || neighbours == 2) ){
             // if cell has 1 or 2 electron's head neighbours it also become electron's head
             cell.changeToHead();
-            this.grid.changeState(cell.getX(), cell.getY(), 3);
+            newState = 3;
         } else if( cell.getType() == 3 ) {  // if cell was electron's head it become electron's tail
             cell.changeToTail();
-            this.grid.changeState(cell.getX(), cell.getY(), 2);
+            newState = 2;
         } else if( cell.getType() == 2 ) { // if cell was electron's tail it become conductor
             cell.changeToConductor();
-            this.grid.changeState(cell.getX(), cell.getY(), 1);
+            newState = 1;
         } else {
             cell.changeToConductor();
-            this.grid.changeState(cell.getX(), cell.getY(), 1);
+            newState = 1;
         }
+//        Platform.runLater(() -> {
+////                Platform.setImplicitExit(false);
+//                grid.changeState(cell.getX(), cell.getY(), newState);
+//        });
+        Task task = new Task<Void>() {
+            @Override public Void call() {
+                grid.changeState(cell.getX(), cell.getY(), newState);
+                return null;
+            }
+        };
+        new Thread(task).start();
+
+
 
     }
 
@@ -74,14 +92,13 @@ public class WireworldSimulation {
         this.isPaused = false;
         int currentGenerationNumber = 1;
 
+
         while( currentGenerationNumber < this.n ){
             if( !isPaused ) {
                 ArrayList<Cell> notEmptyCells = board.getNotEmptyCells();
-                // we can work on not empty cells only because empty call will remain empty
+                // we can work on not empty cells only because empty cell will remain empty
                 // TODO board copy should be replaced with frontend grid array
                 Board oldBoard = board.copyBoard(); // creating board copy to determine how cells should be changed
-
-//                GameGrid copy = getGrid();
 
                 for (Cell cell : notEmptyCells) {
                     changeCellType(cell, oldBoard);
@@ -92,16 +109,18 @@ public class WireworldSimulation {
                     cell.changeType();
                 }
 
+                // printing out generation
                 System.out.println();
                 board.printBoard();
                 System.out.println();
 
                 currentGenerationNumber++;
-//                try{
-//                    Thread.sleep(500);
-//                } catch (Exception e){
-//                    System.out.println(e);
-//                }
+                this.grid.changeState(10, 10, (currentGenerationNumber % 3) + 1);
+                try{
+                    sleep(200);
+                } catch (InterruptedException e){
+                    e.printStackTrace();
+                }
             }
         }
     }

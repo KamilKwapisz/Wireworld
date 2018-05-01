@@ -27,11 +27,11 @@ public class Cell {
         if( type == 1)
             setColor(Color.YELLOW);
         else if(type == 2)
-            setColor(255,0,0);
+            setColor(Color.RED);
         else if(type == 3)
-            setColor(0,0,255);
+            setColor(Color.BLUE);
         else
-            setColor(0,0,0);
+            setColor(Color.BLACK);
     }
 
 
@@ -45,21 +45,19 @@ public class Cell {
 
     public void changeToConductor(){
         this.nextType = 1;
-        setColor(Color.YELLOW);
     }
 
     public void changeToTail(){
         this.nextType = 2;
-        setColor(255,0,0);
     }
 
     public void changeToHead(){
         this.nextType = 3;
-        setColor(0,0,255);
     }
 
     public void changeType(){
         this.type = nextType;
+        setCellColor(nextType);
     }
 
     public boolean isEmpty(){
@@ -71,11 +69,6 @@ public class Cell {
 
     public Color getColor() {
         return color;
-    }
-
-    private void setColor(int r, int g, int b) {
-        Color c = new Color(r,g,b);
-        this.color = c;
     }
 
     private void setColor(Color color) {

@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import core.Board;
 import core.Cell;
 import core.WireworldSimulation;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -107,7 +108,10 @@ public class MainController implements Initializable {
 
     @FXML
     private void placeAndTop(ActionEvent event) {
-                WireworldSimulation simulation = new WireworldSimulation(110, 1.0, this.getGame());
+        Platform.runLater(() -> {
+            game.changeState(10, 12, 3);
+        });
+        WireworldSimulation simulation = new WireworldSimulation(14, 1.0, this.getGame());
 //        simulation.start();
 
         Board board = new Board(3,3);
@@ -128,7 +132,10 @@ public class MainController implements Initializable {
 //        } catch (Exception e){
 //
 //        }
+
         simulation.runSimulation(board);
+
+        this.game.changeState(15, 15, 3);
     }
 
     @FXML
