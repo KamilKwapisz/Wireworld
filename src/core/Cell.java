@@ -8,12 +8,12 @@ public class Cell {
     private int type; // 0 - empty | 1 - conductor | 2 - electron tail | 3 - electron head
     private int nextType; // type which cell will have after change
     private Color color;
-    private Coordinate coordinate;
-
+    private int x;
+    private int y;
 
     public Cell(int x, int y){
         this.type = 0;
-        setColor(0,0,0);
+        setColor(Color.BLACK);
         setCellCoordinate(x, y);
     }
 
@@ -27,16 +27,21 @@ public class Cell {
         if( type == 1)
             setColor(Color.YELLOW);
         else if(type == 2)
-            setColor(255,0,0);
+            setColor(Color.RED);
         else if(type == 3)
-            setColor(0,0,255);
+            setColor(Color.BLUE);
         else
-            setColor(0,0,0);
+            setColor(Color.BLACK);
     }
 
+    public int getX(){ return this.x;}
+    public int getY(){ return this.y;}
 
     public int getType() {
         return type;
+    }
+    public int getNextType() {
+        return nextType;
     }
 
     public void changeToEmpty(){
@@ -45,21 +50,19 @@ public class Cell {
 
     public void changeToConductor(){
         this.nextType = 1;
-        setColor(Color.YELLOW);
     }
 
     public void changeToTail(){
         this.nextType = 2;
-        setColor(255,0,0);
     }
 
     public void changeToHead(){
         this.nextType = 3;
-        setColor(0,0,255);
     }
 
     public void changeType(){
         this.type = nextType;
+        setCellColor(nextType);
     }
 
     public boolean isEmpty(){
@@ -73,30 +76,15 @@ public class Cell {
         return color;
     }
 
-    private void setColor(int r, int g, int b) {
-        Color c = new Color(r,g,b);
-        this.color = c;
-    }
-
     private void setColor(Color color) {
         Color c = color;
         this.color = c;
     }
 
-    public Coordinate getCoordinate() {
-        return coordinate;
-    }
-
-    public int getX(){
-        return coordinate.getX();
-    }
-
-    public int getY(){
-        return coordinate.getY();
-    }
 
     public void setCellCoordinate(int x, int y) {
-        this.coordinate = new Coordinate(x, y);
+        this.x = x;
+        this.y = y;
     }
 
     public int isHead(){
@@ -113,9 +101,9 @@ public class Cell {
     public String toString(){
         // (x, y)[type]
         StringBuilder sb = new StringBuilder("");
-        sb.append("(").append(coordinate.getX())
+        sb.append("(").append(getX())
                 .append(", ")
-                .append(coordinate.getY()).append(")[")
+                .append(getY()).append(")[")
                 .append(this.type).append("]");
         return sb.toString();
     }

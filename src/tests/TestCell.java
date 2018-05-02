@@ -1,4 +1,5 @@
-package tests;//import static org.assertj.core.api.Assertions.*;
+package tests;
+import static org.assertj.core.api.Assertions.*;
 
 import core.*;
 import java.awt.*;
@@ -11,30 +12,48 @@ public class TestCell {
         Cell cell2 = new Cell(0,0, 2);
         Cell cell3 = new Cell(0,0, 3);
 
-        System.out.println(cell0.getColor().equals(Color.BLACK));
-        System.out.println(cell1.getColor().equals(Color.YELLOW));
-        System.out.println(cell2.getColor().equals(Color.RED));
-        System.out.println(cell3.getColor().equals(Color.BLUE));
+        assertThat(cell0.getColor()).as("check cell type 0 color").isEqualTo(Color.BLACK);
+        assertThat(cell1.getColor()).as("check cell type 1 color").isEqualTo(Color.YELLOW);
+        assertThat(cell2.getColor()).as("check cell type 2 color").isEqualTo(Color.RED);
+        assertThat(cell3.getColor()).as("check cell type 3 color").isEqualTo(Color.BLUE);
 
     }
 
     private static void testTypeChanging(){
         Cell testcell = new Cell(0,0,0);
+        assertThat(testcell.getType()).as("check cell type").isEqualTo(0);
+
         testcell.changeToConductor();
-        System.out.println(testcell.getType() == 1);
+        assertThat(testcell.getNextType()).as("check conductor cell type").isEqualTo(1);
+
         testcell.changeToEmpty();
-        System.out.println(testcell.isEmpty());
+        assertThat(testcell.getNextType()).as("check empty cell type").isEqualTo(0);
+
         testcell.changeToHead();
-        System.out.println(testcell.isHead() == 1);
+        assertThat(testcell.getNextType()).as("check head cell type").isEqualTo(3);
+        testcell.changeType();
+        assertThat(testcell.isHead()).as("check if cell is head").isEqualTo(1);
+
         testcell.changeToTail();
-        System.out.println(testcell.getType() == 2);
+        assertThat(testcell.getNextType()).as("check tail cell type").isEqualTo(2);
+
     }
 
+    private static void testCellCoordinates(){
+        Cell testcell = new Cell(1,3,0);
+        assertThat(testcell.getX()).as("checking cell X coordinate").isEqualTo(1);
+        assertThat(testcell.getY()).as("checking cell Y coordinate").isEqualTo(3);
+
+        testcell.setCellCoordinate(3, 10);
+        assertThat(testcell.getX()).as("checking cell X coordinate").isEqualTo(3);
+        assertThat(testcell.getY()).as("checking cell Y coordinate").isEqualTo(10);
+    }
+
+
     public static void main(String[] args) {
-        System.out.println("test1");
         testColor();
-        System.out.println("\ntest2");
         testTypeChanging();
+        testCellCoordinates();
     }
 
 }

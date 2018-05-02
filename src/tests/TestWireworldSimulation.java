@@ -1,5 +1,6 @@
 package tests;
 
+import UserInterface.Controllers.GameGrid;
 import core.*;
 public class TestWireworldSimulation {
 
@@ -23,8 +24,9 @@ public class TestWireworldSimulation {
          *   1   2   3          3   1   2        2   3   1        1   2   3
          */
         board.printBoard();
-
-//        WireworldSimulation ws = new WireworldSimulation(4, 1.0);
+//        GameGrid grid = new GameGrid(9);
+//
+//        WireworldSimulation ws = new WireworldSimulation(4, 1.0, grid);
 //        ws.runSimulation(board);
     }
 
