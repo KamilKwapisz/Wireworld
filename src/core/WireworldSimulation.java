@@ -4,9 +4,7 @@ import UserInterface.Controllers.GameGrid;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 
 public class WireworldSimulation extends Thread{
 
@@ -35,7 +33,7 @@ public class WireworldSimulation extends Thread{
     public void pause() { isPaused = true; }
     public void unpause() { isPaused = false; }
 
-    public void changeCellType(Cell cell, Board board){
+    private void changeCellType(Cell cell, Board board){
         int neighbours = board.countElectronHeadsNeighbours(cell);
         int newState;
         if( cell.getType() == 1 && (neighbours == 1 || neighbours == 2) ){
@@ -63,8 +61,6 @@ public class WireworldSimulation extends Thread{
             }
         };
         new Thread(task).start();
-
-
 
     }
 
@@ -124,6 +120,8 @@ public class WireworldSimulation extends Thread{
             }
         }
     }
+
+    public GameGrid getGrid() { return grid; }
 
     public static void main(String[] args) {
         Board board = new Board(3,3);

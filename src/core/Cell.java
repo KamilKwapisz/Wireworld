@@ -13,7 +13,7 @@ public class Cell {
 
     public Cell(int x, int y){
         this.type = 0;
-        setColor(0,0,0);
+        setColor(Color.BLACK);
         setCellCoordinate(x, y);
     }
 
