@@ -143,9 +143,9 @@ public class WireworldSimulation extends Thread{
          *  3    1   3
          */
         board.printBoard();
-
-//        WireworldSimulation ws = new WireworldSimulation(4, 1.0);
-//        ws.runSimulation(board);
+        GameGrid grid = new GameGrid(20);
+        WireworldSimulation ws = new WireworldSimulation(4, 1.0, grid);
+        ws.runSimulation(board);
 
 
     }

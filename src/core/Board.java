@@ -15,7 +15,7 @@ public class Board {
         for(int i = 0; i < height; i++)  {
             board.add(new ArrayList<Cell>());
             for(int j = 0; j < width; j++){
-                board.get(i).add(new Cell(i, j));
+                board.get(i).add(new Cell(j, i));
             }
         }
     }
@@ -63,6 +63,8 @@ public class Board {
     public int getHeight() {
         return this.height;
     }
+
+    public ArrayList<ArrayList<Cell>> getBoard() { return board; }
 
     private int getCellsNumber() {
         return (this.height * this.width);

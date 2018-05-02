@@ -24,6 +24,10 @@ public class GameGrid {
         calculateTilesNumber();
         grid = new Tile[X_TILES][Y_TILES];
     }
+
+    public GameGrid(){
+        grid = new Tile[X_TILES][Y_TILES];
+    }
     
     public Parent createContent() {
         Pane root = new Pane();

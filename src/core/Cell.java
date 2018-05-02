@@ -40,6 +40,9 @@ public class Cell {
     public int getType() {
         return type;
     }
+    public int getNextType() {
+        return nextType;
+    }
 
     public void changeToEmpty(){
         this.nextType = 0;
