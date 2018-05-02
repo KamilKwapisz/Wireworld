@@ -1,5 +1,6 @@
 package UserInterface.Controllers;
 
+import static UserInterface.Controllers.InsertionFlag.*;
 import java.util.Random;
 
 import core.WireworldSimulation;
@@ -19,6 +20,13 @@ public class GameGrid {
     private static int Y_TILES = HEIGHT / TILE_SIZE;;
     private Tile[][] grid;
 
+    private int insertionflag = 0;
+    private InsertionFlag insertionFlag;
+    
+    public void setInsertionFlag(InsertionFlag flag){
+        this.insertionFlag = flag;
+    }
+    
     public GameGrid(int size){
         setTileSize(size);
         calculateTilesNumber();
@@ -95,24 +103,29 @@ public class GameGrid {
         }
     }
 
-    private class Tile extends StackPane{
+    public class Tile extends StackPane{
         private int x, y;
         private int state;
         private Rectangle border = new Rectangle(TILE_SIZE, TILE_SIZE);
+        private Color color = Color.BLACK;
         
         public Tile(int x, int y, int state){
             this.x = x;
             this.y = y;
             this.state = state;
             
-            border.setStroke(Color.web("202020"));
-            border.setFill(Color.BLACK);
+            border.setStroke(Color.web("262626"));
+            border.setFill(color);
             
             getChildren().addAll(border);
             setTranslateX(x * TILE_SIZE);
             setTranslateY(y * TILE_SIZE);
             
             setOnMousePressed(e ->changeState(e, this.state));
+            setOnMouseEntered(en ->placeIsAllowed());
+            setOnMouseExited(ex->placeExit());
+
+            
 
         }
         
@@ -129,41 +142,191 @@ public class GameGrid {
         }
         
 
-        public void blackTile(){
+        private void blackTile(){
             this.state = 0;
-            border.setFill(Color.BLACK);
+            this.color = Color.BLACK;
+            border.setFill(color);
         }
-        public void yellowTile(){
+        private void yellowTile(){
             this.state = 1;
-            border.setFill(Color.YELLOW);
+            this.color = Color.YELLOW;
+            border.setFill(color);
         }
-        public void blueTile(){
+        private void blueTile(){
             this.state = 3;
-            border.setFill(Color.BLUE);
+            this.color = Color.BLUE;
+            border.setFill(color);
         }
-        public void redTile(){
+        private void redTile(){
             this.state = 2;
-            border.setFill(Color.RED);
+            this.color = Color.RED;
+            border.setFill(color);
         }
         
-        
-        private void changeState(MouseEvent e, int currentState){
-            if(e.isPrimaryButtonDown()){
-                if(currentState == 1){
-                    blackTile();
-                } else{
-                    yellowTile();
+        private void placeIsAllowed(){
+            if(insertionFlag == AND_TOP){
+                if(this.x >= 3 && this.x <= X_TILES - 6 && this.y >= 17){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
                 }
-            } else if(e.isSecondaryButtonDown()){
-                if(currentState == 2){
-                    blackTile();
-                } else if(currentState == 3){
-                    redTile();
-                } else{
-                    blueTile();
+            } else if(insertionFlag == AND_BOT){
+                if(this.x >= 5 && this.x <= X_TILES - 4 && this.y <= Y_TILES - 18){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
                 }
+            } else if(insertionFlag == AND_LEFT){
+                if(this.x >= 17 && this.y >= 5 && this.y <= Y_TILES - 4){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == AND_RIGHT){
+                if(this.x <= X_TILES - 18 && this.y >= 3 && this.y <= Y_TILES - 6){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == OR_TOP){
+                if(this.x >= 1 && this.x <= X_TILES - 4 && this.y >= 8){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == OR_BOT){
+                if(this.x >= 3 && this.x <= X_TILES - 2 && this.y <= Y_TILES - 9){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == OR_LEFT){
+                if(this.x >= 8 && this.y >= 3 && this.y <= Y_TILES - 2){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == OR_RIGHT){
+                if(this.x <= X_TILES - 9 && this.y >= 1 && this.y <= Y_TILES - 4){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == XOR_TOP){
+                if(this.x >= 2 && this.x <= X_TILES - 4 && this.y >= 10){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == XOR_BOT){
+                if(this.x >= 4 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 11){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == XOR_LEFT){
+                if(this.x >= 10 && this.y >= 4 && this.y <= Y_TILES - 3){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == XOR_RIGHT){
+                if(this.x <= X_TILES - 11 && this.y >= 2 && this.y <= Y_TILES - 5){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == NAND_TOP){
+                if(this.x >= 5 && this.x <= X_TILES - 8 && this.y >= 13){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == NAND_BOT){
+                if(this.x >= 7 && this.x <= X_TILES - 6 && this.y <= Y_TILES - 14){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == NAND_LEFT){
+                if(this.x >= 13 && this.y >= 7 && this.y <= Y_TILES - 6){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == NAND_RIGHT){
+                if(this.x <= X_TILES - 14 && this.y >= 5 && this.y <= Y_TILES - 8){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else{
+                
             }
+        }
+        private void placeExit(){
+            if(insertionFlag == NORMAL){
+                
+            } else{
+                border.setFill(this.color);
+            }
+        }
+                
+                
+        private void changeState(MouseEvent e, int currentState){
+            if(insertionflag == 0){
+                if(e.isPrimaryButtonDown()){
+                    if(currentState == 1){
+                        blackTile();
+                    } else{
+                      yellowTile();
+                    }
+                } else if(e.isSecondaryButtonDown()){
+                    if(currentState == 2){
+                        blackTile();
+                     } else if(currentState == 3){
+                        redTile();
+                    } else{
+                        blueTile();
+                    }
+                }
+            } else{
+                if(e.isPrimaryButtonDown()){
+                    blueTile(); 
+                }
+            }    
         } 
-        
     }
 }

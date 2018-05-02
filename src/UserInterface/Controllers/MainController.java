@@ -1,5 +1,6 @@
 package UserInterface.Controllers;
 
+import static UserInterface.Controllers.InsertionFlag.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -107,6 +108,9 @@ public class MainController implements Initializable {
 
     @FXML
     private void placeAndTop(ActionEvent event) {
+        game.setInsertionFlag(AND_TOP);
+        
+        
                 WireworldSimulation simulation = new WireworldSimulation(110, 1.0, this.getGame());
 //        simulation.start();
 
@@ -133,62 +137,77 @@ public class MainController implements Initializable {
 
     @FXML
     private void placeAndBottom(ActionEvent event) {
+        game.setInsertionFlag(AND_BOT);
     }
 
     @FXML
     private void placeAndLeft(ActionEvent event) {
+        game.setInsertionFlag(AND_LEFT);
     }
 
     @FXML
     private void placeAndRight(ActionEvent event) {
+        game.setInsertionFlag(AND_RIGHT);
     }
 
     @FXML
     private void placeOrTop(ActionEvent event) {
+        game.setInsertionFlag(OR_TOP);
     }
 
     @FXML
     private void placeOrBottom(ActionEvent event) {
+        game.setInsertionFlag(OR_BOT);
     }
 
     @FXML
     private void placeOrLeft(ActionEvent event) {
+        game.setInsertionFlag(OR_LEFT);
     }
 
     @FXML
     private void placeOrRight(ActionEvent event) {
+        game.setInsertionFlag(OR_RIGHT);
     }
 
     @FXML
     private void placeXorTop(ActionEvent event) {
+        game.setInsertionFlag(XOR_TOP);
     }
 
     @FXML
     private void placeXorBottom(ActionEvent event) {
+        game.setInsertionFlag(XOR_BOT);
     }
 
     @FXML
     private void placeXorLeft(ActionEvent event) {
+        game.setInsertionFlag(XOR_LEFT);
     }
 
     @FXML
     private void placeXorRight(ActionEvent event) {
+        game.setInsertionFlag(XOR_RIGHT);
     }
 
     @FXML
     private void placeNandTop(ActionEvent event) {
+        game.setInsertionFlag(NAND_TOP);
     }
 
     @FXML
     private void placeNandBottom(ActionEvent event) {
+        game.setInsertionFlag(NAND_BOT);
     }
 
     @FXML
     private void placeNandLeft(ActionEvent event) {
+        game.setInsertionFlag(NAND_LEFT);
     }
 
     @FXML
     private void placeNandRight(ActionEvent event) {
+        game.setInsertionFlag(NAND_RIGHT);
     }
 
     @FXML
