@@ -8,8 +8,8 @@ public class Cell {
     private int type; // 0 - empty | 1 - conductor | 2 - electron tail | 3 - electron head
     private int nextType; // type which cell will have after change
     private Color color;
-    private Coordinate coordinate;
-
+    private int x;
+    private int y;
 
     public Cell(int x, int y){
         this.type = 0;
@@ -34,6 +34,8 @@ public class Cell {
             setColor(Color.BLACK);
     }
 
+    public int getX(){ return this.x;}
+    public int getY(){ return this.y;}
 
     public int getType() {
         return type;
@@ -76,20 +78,10 @@ public class Cell {
         this.color = c;
     }
 
-    public Coordinate getCoordinate() {
-        return coordinate;
-    }
-
-    public int getX(){
-        return coordinate.getX();
-    }
-
-    public int getY(){
-        return coordinate.getY();
-    }
 
     public void setCellCoordinate(int x, int y) {
-        this.coordinate = new Coordinate(x, y);
+        this.x = x;
+        this.y = y;
     }
 
     public int isHead(){
@@ -106,9 +98,9 @@ public class Cell {
     public String toString(){
         // (x, y)[type]
         StringBuilder sb = new StringBuilder("");
-        sb.append("(").append(coordinate.getX())
+        sb.append("(").append(getX())
                 .append(", ")
-                .append(coordinate.getY()).append(")[")
+                .append(getY()).append(")[")
                 .append(this.type).append("]");
         return sb.toString();
     }
