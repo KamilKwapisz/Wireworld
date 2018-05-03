@@ -3,6 +3,7 @@ package UserInterface.Controllers;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -46,6 +47,22 @@ public class MenuController implements Initializable {
 
     @FXML
     private void changeNumOfGen(InputMethodEvent event) {
+    }
+
+    @FXML
+    private void backGeneration(ActionEvent event) {
+    }
+
+    @FXML
+    private void pauseSimulation(ActionEvent event) {
+    }
+
+    @FXML
+    private void playSimulation(ActionEvent event) {
+    }
+
+    @FXML
+    private void nextGeneration(ActionEvent event) {
     }
 
 
