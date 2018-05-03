@@ -24,10 +24,10 @@ public class TestWireworldSimulation {
          *   1   2   3          3   1   2        2   3   1        1   2   3
          */
         board.printBoard();
-//        GameGrid grid = new GameGrid(9);
-//
-//        WireworldSimulation ws = new WireworldSimulation(4, 1.0, grid);
-//        ws.runSimulation(board);
+        GameGrid grid = new GameGrid(9);
+
+        WireworldSimulation ws = new WireworldSimulation(4, 1.0, grid);
+        ws.runSimulation(board);
     }
 
 }

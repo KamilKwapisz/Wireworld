@@ -117,7 +117,7 @@ public class MainController implements Initializable {
         Platform.runLater(() -> {
             game.changeState(10, 12, 3);
         });
-        WireworldSimulation simulation = new WireworldSimulation(14, 1.0, this.getGame());
+        WireworldSimulation simulation = new WireworldSimulation(50, 1.0, this.getGame());
 
 //        simulation.start();
 
@@ -141,6 +141,7 @@ public class MainController implements Initializable {
 //        }
 
         simulation.runSimulation(board);
+//        simulation.foo();
 
         this.game.changeState(15, 15, 3);
     }
