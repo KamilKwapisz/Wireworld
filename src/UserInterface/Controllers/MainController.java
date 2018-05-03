@@ -89,7 +89,7 @@ public class MainController implements Initializable {
         wireMenu.getStylesheets().add(css);
         wireMenu.setCenter(menu);
         
-        game = new GameGrid(20);
+        game = new GameGrid();
         mediumGrid.setSelected(true);
         wireDisplay.setCenter(game.createContent());
         //wireDisplay.getChildren().add(game.createContent());

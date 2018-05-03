@@ -32,10 +32,10 @@
             <Insets />
          </GridPane.margin>
          <children>
-            <Button fx:id="backwardB" mnemonicParsing="false" />
-            <Button fx:id="pauseB" mnemonicParsing="false" />
-            <Button fx:id="playB" mnemonicParsing="false" />
-            <Button fx:id="forwardB" mnemonicParsing="false" />
+            <Button fx:id="backwardB" mnemonicParsing="false" onAction="#backGeneration" />
+            <Button fx:id="pauseB" mnemonicParsing="false" onAction="#pauseSimulation" />
+            <Button fx:id="playB" mnemonicParsing="false" onAction="#playSimulation" />
+            <Button fx:id="forwardB" mnemonicParsing="false" onAction="#nextGeneration" />
          </children>
       </HBox>
       <HBox alignment="CENTER">
