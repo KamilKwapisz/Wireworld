@@ -75,7 +75,7 @@ public class WireworldSimulation extends Thread{
 
         this.isPaused = false;
         int genMaxNumber = this.n;
-        int DelayValue = (int)(this.delay * 1000); // delay value in miliseconds
+        int DelayValue = (int)(this.delay * 1000); // delay value in milliseconds
 
         Service<Void> backgroundThread;
         backgroundThread = new Service<Void>(){

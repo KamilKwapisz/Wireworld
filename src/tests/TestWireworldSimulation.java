@@ -2,6 +2,11 @@ package tests;
 
 import UserInterface.Controllers.GameGrid;
 import core.*;
+import javafx.embed.swing.JFXPanel;
+
+import javax.swing.*;
+import java.util.concurrent.CountDownLatch;
+
 public class TestWireworldSimulation {
 
     public static void main(String[] args) {
@@ -25,9 +30,21 @@ public class TestWireworldSimulation {
          */
         board.printBoard();
         GameGrid grid = new GameGrid(9);
-
+        final CountDownLatch latch = new CountDownLatch(1);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new JFXPanel(); // initializes JavaFX environment
+                latch.countDown();
+            }
+        });
+        try {
+            latch.await();
+        } catch (Exception e){
+            ;
+        }
         WireworldSimulation ws = new WireworldSimulation(4, 1.0, grid);
         ws.runSimulation(board);
+        ws.nextGeneration(board);
     }
 
 }

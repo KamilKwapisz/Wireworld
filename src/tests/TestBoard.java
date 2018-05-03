@@ -5,6 +5,18 @@ import core.*;
 
 public class TestBoard {
 
+    private static void testGetCell(){
+        Board board = new Board(3,3);
+        assertThatThrownBy(() -> board.getCell(-2, -2))
+                .as("Checking exception thrown by getting cell with negative coordinates")
+                .isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessage("Cell's coordinates mustn't be negative.");
+        assertThatThrownBy(() -> board.getCell(10, 12))
+                .as("Checking exception thrown by getting cell with coordinates out of board")
+                .isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessage("Board is smaller than given coordinates.");
+    }
+
     private static void testCountElectronHeadsNeighbours(){
         // temporarily, it will be replaced with AssertJ tests
         Board board = new Board(3,3);
@@ -63,34 +75,57 @@ public class TestBoard {
         board.setSize(100, 300);
         assertThat(board.getWidth() ).as("checking width set in setSize").isEqualTo(100);
         assertThat(board.getHeight() ).as("checking height set in setSize").isEqualTo(300);
+
+        assertThatThrownBy(() -> board.setSize(-100, 0))
+                .as("Checking exception thrown by setting board's size with negative values")
+                .isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessage("Board's width and height have to be positive numbers.");
+
     }
 
-    private static void testAddCellAndReturnedBoard(){
-        Cell cell = new Cell(0,0, 1);
-        Cell cell2 = new Cell(1,0, 3);
-        Cell cell3 = new Cell(2,2, 2);
+    private static void testAddCell() {
+        Cell cell = new Cell(0, 0, 1);
+        Cell cell2 = new Cell(1, 0, 3);
+        Cell cell3 = new Cell(2, 2, 2);
 
         Board board = new Board(3, 3);
         board.addCell(cell);
         board.addCell(cell2);
         board.addCell(cell3);
 
-        assertThat( board.getCell(0,0) )
+        assertThat(board.getCell(0, 0))
                 .as("checking if cell objects is equal to added one")
                 .isEqualTo(cell);
-        assertThat( board.getCell(1,0) )
+        assertThat(board.getCell(1, 0))
                 .as("checking if cell objects is equal to added one")
                 .isEqualTo(cell2);
-        assertThat(board.getCell(1,1).getType())
+        assertThat(board.getCell(1, 1).getType())
                 .as("checking current type of added cell")
                 .isEqualTo(0);
-        assertThat(board.getCell(1,0).getType())
+        assertThat(board.getCell(1, 0).getType())
                 .as("checking current type of added cell")
                 .isEqualTo(3);
-        assertThat(board.getCell(1,2).getType())
+        assertThat(board.getCell(1, 2).getType())
                 .as("checking current type of added cell")
                 .isEqualTo(0);
 
+        Cell cell4 = new Cell(5, 3, 2);
+
+        assertThatThrownBy(() -> board.addCell(cell4))
+                .as("Checking exception thrown by adding cell with coordinates higher than board size")
+                .isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessage("Board is too small for this cell.");
+
+    }
+    private static void testGetBoard() {
+        Cell cell = new Cell(0, 0, 1);
+        Cell cell2 = new Cell(1, 0, 3);
+        Cell cell3 = new Cell(2, 2, 2);
+
+        Board board = new Board(3, 3);
+        board.addCell(cell);
+        board.addCell(cell2);
+        board.addCell(cell3);
         assertThat(board.getBoard().get(0))
                 .as("checking if returned board contains all cells added to it in the right row")
                 .contains(cell, cell2)
@@ -106,10 +141,10 @@ public class TestBoard {
                 .extracting(Cell::getY)
                 .containsOnly(0);
 
-        assertThat(board.getBoard().get(2))
+        assertThat(board.getBoard().get(1))
                 .as("checking whether third row contains only y=0 cells")
                 .extracting(Cell::getY)
-                .containsOnly(2);
+                .containsOnly(1);
 
         assertThat(board.getBoard().get(1))
                 .as("checking whether second row contains columns number 0, 1 and 2")
@@ -131,10 +166,10 @@ public class TestBoard {
 
     private static void testGetNotEmptyCells(){
         Cell cell = new Cell(0,0, 1);
-        Cell cell2 = new Cell(1,1, 3);
-        Cell cell3 = new Cell(2,2, 2);
+        Cell cell2 = new Cell(1,1, 1);
+        Cell cell3 = new Cell(2,2, 1);
 
-        Board board = new Board(3, 3);
+        Board board = new Board(4, 4);
         board.addCell(cell);
         board.addCell(cell2);
         board.addCell(cell3);
@@ -149,11 +184,19 @@ public class TestBoard {
         Cell cell = new Cell(0,0, 1);
         Cell cell2 = new Cell(1,1, 3);
         Cell cell3 = new Cell(2,2, 2);
+        Cell cell4 = new Cell(3,3, 2);
+        Cell cell5 = new Cell(4,4, 2);
+        Cell cell6 = new Cell(4,2, 2);
+        Cell cell7 = new Cell(1,4, 2);
 
-        Board board = new Board(3, 3);
+        Board board = new Board(5, 5);
         board.addCell(cell);
         board.addCell(cell2);
         board.addCell(cell3);
+        board.addCell(cell4);
+        board.addCell(cell5);
+        board.addCell(cell6);
+        board.addCell(cell7);
 
         Board newBoard = board.copyBoard();
         assertThat(newBoard)
@@ -163,9 +206,11 @@ public class TestBoard {
 
 
     public static void main(String[] args) {
+        testGetCell();
         testCountElectronHeadsNeighbours();
         testSetSize();
-        testAddCellAndReturnedBoard();
+        testAddCell();
+        testGetBoard();
         testGetNotEmptyCells();
         testCopyBoard();
     }

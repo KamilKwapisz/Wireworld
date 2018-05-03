@@ -9,8 +9,7 @@ public class Board {
     private ArrayList<ArrayList<Cell>> board; // 2d cells list
 
     public Board(int width, int height){
-        this.width = width;
-        this.height = height;
+        setSize(width, height);
         board = new ArrayList<ArrayList<Cell>>();
         for(int i = 0; i < height; i++)  {
             board.add(new ArrayList<Cell>());
@@ -18,6 +17,32 @@ public class Board {
                 board.get(i).add(new Cell(j, i));
             }
         }
+    }
+
+    public Cell getCell(int x, int y) throws IndexOutOfBoundsException{
+        try {
+            return board.get(y).get(x);
+        } catch (IndexOutOfBoundsException e){
+            if(x < 0 || y < 0)
+                throw new IndexOutOfBoundsException("Cell's coordinates mustn't be negative.");
+            else
+                throw new IndexOutOfBoundsException("Board is smaller than given coordinates.");
+        }
+    }
+
+    public void setSize(int width, int height) throws IndexOutOfBoundsException{
+        if(width < 0 || height < 0)
+            throw new IndexOutOfBoundsException("Board's width and height have to be positive numbers.");
+        this.width = width;
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
     }
 
     public ArrayList<Cell> getNotEmptyCells(){
@@ -35,34 +60,17 @@ public class Board {
         return newList;
     }
 
-    public void addCell(Cell cell){
+    public void addCell(Cell cell) throws IndexOutOfBoundsException{
         // Function add Cell given as a parameter to a board.
         // this function get x, y and coordinates directly from cell fields
-        board.get(cell.getY()).set(cell.getX(), cell);
+        try {
+            board.get(cell.getY()).set(cell.getX(), cell);
+        } catch (IndexOutOfBoundsException ex){
+                throw new IndexOutOfBoundsException("Board is too small for this cell.");
+        }
     }
 
-    public void addCell(Cell cell, int x, int y){
-        // Function add Cell given as a parameter to a board.
-        // this function gets x and y explicitly as a parameters.
-        board.get(y).set(x, cell);
-    }
 
-    public Cell getCell(int x, int y){
-        return board.get(y).get(x);
-    }
-
-    public void setSize(int width, int height){
-        this.width = width;
-        this.height = height;
-    }
-
-    public int getWidth() {
-        return this.width;
-    }
-
-    public int getHeight() {
-        return this.height;
-    }
 
     public ArrayList<ArrayList<Cell>> getBoard() { return board; }
 
@@ -71,6 +79,7 @@ public class Board {
     }
 
     public int countElectronHeadsNeighbours(Cell cell){
+
         int x = cell.getX();
         int y = cell.getY();
         int headsNumber = 0;
@@ -156,6 +165,11 @@ public class Board {
             }
             System.out.println();
         }
+    }
+
+    public static void main(String[] args) {
+        Board b = new Board(2, 2);
+        b.addCell(new Cell(3, 3,1));
     }
 
 

@@ -1,37 +1,29 @@
 package core;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 public class Cell {
 
     private int type; // 0 - empty | 1 - conductor | 2 - electron tail | 3 - electron head
     private int nextType; // type which cell will have after change
-    private Color color;
     private int x;
     private int y;
 
     public Cell(int x, int y){
-        this.type = 0;
-        setColor(Color.BLACK);
+        setType(0);
         setCellCoordinate(x, y);
     }
 
     public Cell(int x, int y, int type){
-        this.type = type;
-        setCellColor(type);
+        setType(type);
         setCellCoordinate(x, y);
     }
 
-    public void setCellColor(int type){
-        if( type == 1)
-            setColor(Color.YELLOW);
-        else if(type == 2)
-            setColor(Color.RED);
-        else if(type == 3)
-            setColor(Color.BLUE);
+    private void setType(int type) throws IllegalStateException {
+        if(type >= 0 && type <= 3)
+            this.type = type;
         else
-            setColor(Color.BLACK);
+            throw new IllegalStateException("Incorrect cell type.");
     }
 
     public int getX(){ return this.x;}
@@ -62,7 +54,6 @@ public class Cell {
 
     public void changeType(){
         this.type = nextType;
-        setCellColor(nextType);
     }
 
     public boolean isEmpty(){
@@ -72,17 +63,9 @@ public class Cell {
             return false;
     }
 
-    public Color getColor() {
-        return color;
-    }
-
-    private void setColor(Color color) {
-        Color c = color;
-        this.color = c;
-    }
-
-
-    public void setCellCoordinate(int x, int y) {
+    public void setCellCoordinate(int x, int y) throws NegativeArraySizeException{
+        if( x < 0 || y < 0)
+                throw new NegativeArraySizeException("Both cell coordinates have to be greater or equal 0.");
         this.x = x;
         this.y = y;
     }
