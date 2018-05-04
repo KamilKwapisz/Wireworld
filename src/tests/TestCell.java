@@ -40,8 +40,8 @@ public class TestCell {
     private static void testIncorrectCells(){
         assertThatThrownBy(() -> new Cell(-2, -3, 3))
                 .as("Checking exception thrown by creating cell with coordinates lower than 0")
-                .isInstanceOf(NegativeArraySizeException.class)
-                .hasMessage("Both cell coordinates have to be greater or equal 0.");
+                .isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessage("Cell's coordinates mustn't be negative numbers.");
 
         assertThatThrownBy(() -> new Cell(1, 2, 13))
                 .as("Checking exception thrown by creating cell with incorrect type")
