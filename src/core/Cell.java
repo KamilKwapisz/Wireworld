@@ -1,5 +1,7 @@
 package core;
 
+import UserInterface.Controllers.GameGrid;
+
 import java.util.ArrayList;
 
 public class Cell {
@@ -12,6 +14,11 @@ public class Cell {
     public Cell(int x, int y){
         setType(0);
         setCellCoordinate(x, y);
+    }
+
+    public Cell(GameGrid.Tile tile){
+        setType(tile.getState());
+        setCellCoordinate(tile.getX(), tile.getY());
     }
 
     public Cell(int x, int y, int type){

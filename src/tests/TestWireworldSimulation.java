@@ -43,8 +43,8 @@ public class TestWireworldSimulation {
             ;
         }
         WireworldSimulation ws = new WireworldSimulation(4, 1.0, grid);
-        ws.runSimulation(board);
-        ws.nextGeneration(board);
+//        ws.runSimulation(board);
+//        ws.nextGeneration(board);
     }
 
 }
