@@ -1,4 +1,4 @@
-package UserInterface.Controllers;
+package UserInterface.Insertion;
 
 public enum InsertionFlag {
     NORMAL(0),

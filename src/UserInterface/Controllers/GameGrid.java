@@ -1,6 +1,8 @@
 package UserInterface.Controllers;
 
-import static UserInterface.Controllers.InsertionFlag.*;
+import UserInterface.Insertion.InsertionFlag;
+import static UserInterface.Insertion.InsertionFlag.*;
+import UserInterface.Insertion.XorInsertion;
 import java.util.Random;
 
 import core.WireworldSimulation;
@@ -20,8 +22,7 @@ public class GameGrid {
     private static int Y_TILES = HEIGHT / TILE_SIZE;;
     private Tile[][] grid;
 
-    private int insertionflag = 0;
-    private InsertionFlag insertionFlag;
+    private InsertionFlag insertionFlag = NORMAL;
     
     public void setInsertionFlag(InsertionFlag flag){
         this.insertionFlag = flag;
@@ -151,7 +152,7 @@ public class GameGrid {
             this.color = Color.BLACK;
             border.setFill(color);
         }
-        private void yellowTile(){
+        public void yellowTile(){
             this.state = 1;
             this.color = Color.YELLOW;
             border.setFill(color);
@@ -310,7 +311,7 @@ public class GameGrid {
                 
                 
         private void changeState(MouseEvent e, int currentState){
-            if(insertionflag == 0){
+            if(insertionFlag == NORMAL){
                 if(e.isPrimaryButtonDown()){
                     if(currentState == 1){
                         blackTile();
@@ -327,8 +328,10 @@ public class GameGrid {
                     }
                 }
             } else{
+                XorInsertion xorInsertion = new XorInsertion();
                 if(e.isPrimaryButtonDown()){
-                    blueTile(); 
+                    xorInsertion.insertTop(grid, x, y);
+                    insertionFlag = NORMAL;
                 }
             }    
         } 

@@ -1,6 +1,6 @@
 package UserInterface.Controllers;
 
-import static UserInterface.Controllers.InsertionFlag.*;
+import static UserInterface.Insertion.InsertionFlag.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
