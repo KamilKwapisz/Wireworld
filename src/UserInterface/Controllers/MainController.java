@@ -112,30 +112,7 @@ public class MainController implements Initializable {
 
         game.setInsertionFlag(AND_TOP);
         
-
-
-        Platform.runLater(() -> {
-            game.changeState(10, 12, 3);
-        });
         WireworldSimulation simulation = new WireworldSimulation(50, 0.5, this.getGame());
-
-//        simulation.start();
-
-        Board board = new Board(3,3);
-
-        board.addCell(new Cell(0, 0, 1));
-        board.addCell(new Cell(1, 0, 3));
-        board.addCell(new Cell(2, 0, 2));
-
-        board.addCell(new Cell(0, 1, 3));
-        board.addCell(new Cell(1, 1, 2));
-        board.addCell(new Cell(2, 1, 1));
-
-        board.addCell(new Cell(0, 2, 1));
-        board.addCell(new Cell(1, 2, 2));
-        board.addCell(new Cell(2, 2, 3));
-
-//
         simulation.runSimulation();
         try{
             Thread.sleep(1000);
@@ -146,7 +123,6 @@ public class MainController implements Initializable {
 
         }
 
-        this.game.changeState(15, 15, 3);
     }
 
     @FXML
