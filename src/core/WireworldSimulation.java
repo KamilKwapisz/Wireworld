@@ -73,7 +73,6 @@ public class WireworldSimulation extends Thread{
     public void nextGeneration(){
         // method creates one next generation
         ArrayList<Cell> notEmptyCells = this.board.getNotEmptyCells();
-//        Board oldBoard = board.copyBoard(); // creating board copy to determine how cells should be changed
         for (Cell cell : notEmptyCells) {
             changeCellType(cell, this.board);
         }
@@ -88,7 +87,6 @@ public class WireworldSimulation extends Thread{
     }
 
 
-//    public void runSimulation(Board board){
     public void runSimulation(){
 
         initializeBoardFromGrid(); // initializing board with size of the GUI grid
@@ -107,11 +105,11 @@ public class WireworldSimulation extends Thread{
                     protected Void call() throws Exception {
                         int currentGenerationNumber = 1;
                         while( currentGenerationNumber < genMaxNumber ){
-                            getCellsFromGrid();
                             if( !isPaused ) {
-                                nextGeneration();
-
+                                getCellsFromGrid(); // get the most recent grid board setup
+                                nextGeneration(); // create next generation
                                 currentGenerationNumber++;
+
                                 try{
                                     sleep(DelayValue);
                                 } catch (InterruptedException e){

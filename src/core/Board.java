@@ -24,15 +24,15 @@ public class Board {
             return board.get(y).get(x);
         } catch (IndexOutOfBoundsException e){
             if(x < 0 || y < 0)
-                throw new IndexOutOfBoundsException("Cell's coordinates mustn't be negative.");
+                throw new IndexOutOfBoundsException("Cell's coordinates mustn't be negative numbers.");
             else
                 throw new IndexOutOfBoundsException("Board is smaller than given coordinates.");
         }
     }
 
-    public void setSize(int width, int height) throws IndexOutOfBoundsException{
+    public void setSize(int width, int height) throws NegativeArraySizeException{
         if(width < 0 || height < 0)
-            throw new IndexOutOfBoundsException("Board's width and height have to be positive numbers.");
+            throw new NegativeArraySizeException("Board's width and height have to be positive numbers.");
         this.width = width;
         this.height = height;
     }
@@ -133,17 +133,6 @@ public class Board {
         }
 
         return headsNumber;
-    }
-
-
-    public Board copyBoard(){
-        Board newBoard = new Board(this.width, this.height);
-        for(ArrayList<Cell> array : this.board){
-            for(Cell cell : array){
-                newBoard.addCell(cell);
-            }
-        }
-        return newBoard;
     }
 
     @Override

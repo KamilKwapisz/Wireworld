@@ -70,9 +70,9 @@ public class Cell {
             return false;
     }
 
-    public void setCellCoordinate(int x, int y) throws NegativeArraySizeException{
+    public void setCellCoordinate(int x, int y) throws IndexOutOfBoundsException{
         if( x < 0 || y < 0)
-                throw new NegativeArraySizeException("Both cell coordinates have to be greater or equal 0.");
+                throw new IndexOutOfBoundsException("Cell's coordinates mustn't be negative numbers.");
         this.x = x;
         this.y = y;
     }
