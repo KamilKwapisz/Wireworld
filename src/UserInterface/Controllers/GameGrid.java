@@ -311,7 +311,7 @@ public class GameGrid {
                 
                 
         private void changeState(MouseEvent e, int currentState){
-            if(insertionFlag == NORMAL){
+            if(insertionFlag == NORMAL || insertionFlag == AND_TOP){
                 if(e.isPrimaryButtonDown()){
                     if(currentState == 1){
                         blackTile();
@@ -327,13 +327,51 @@ public class GameGrid {
                         blueTile();
                     }
                 }
-            } else{
-                XorInsertion xorInsertion = new XorInsertion();
-                if(e.isPrimaryButtonDown()){
-                    xorInsertion.insertTop(grid, x, y);
-                    insertionFlag = NORMAL;
+            } 
+            //else if(insertionFlag == AND_TOP){
+                
+            //} 
+                else if(insertionFlag == AND_BOT){
+                
+            } else if(insertionFlag == AND_LEFT){
+                
+            } else if(insertionFlag == AND_RIGHT){
+                
+            } else if(insertionFlag == OR_TOP){
+                
+            } else if(insertionFlag == OR_BOT){
+                
+            } else if(insertionFlag == OR_LEFT){
+                
+            } else if(insertionFlag == OR_RIGHT){
+                
+            } else if(insertionFlag == XOR_TOP){
+                if(this.x >= 2 && this.x <= X_TILES - 4 && this.y >= 10){
+                    XorInsertion xorInsertion = new XorInsertion();
+                    if(e.isPrimaryButtonDown()){
+                        xorInsertion.insertTop(grid, x, y);
+                        insertionFlag = NORMAL;
+                    } else if(e.isSecondaryButtonDown()){
+                        /* Cancel inserting */
+                        border.setFill(this.color);
+                        insertionFlag = NORMAL;
+                    }
                 }
-            }    
-        } 
+            } else if(insertionFlag == XOR_BOT){
+                
+            } else if(insertionFlag == XOR_LEFT){
+                
+            } else if(insertionFlag == XOR_RIGHT){
+                
+            } else if(insertionFlag == NAND_TOP){
+                
+            } else if(insertionFlag == NAND_BOT){
+                
+            } else if(insertionFlag == NAND_LEFT){
+                
+            } else if(insertionFlag == NAND_RIGHT){
+                
+            }
+        }  
     }
 }
