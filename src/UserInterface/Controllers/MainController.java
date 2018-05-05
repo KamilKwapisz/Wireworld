@@ -114,14 +114,14 @@ public class MainController implements Initializable {
         
         WireworldSimulation simulation = new WireworldSimulation(50, 0.5, this.getGame());
         simulation.runSimulation();
-        try{
-            Thread.sleep(1000);
-            simulation.pause();
-            Thread.sleep(1500);
-            simulation.unpause();
-        } catch (Exception e){
-
-        }
+//        try{
+////            Thread.sleep(1000);
+////            simulation.pause();
+////            Thread.sleep(1500);
+////            simulation.unpause();
+////        } catch (Exception e){
+////
+////        }
 
     }
 

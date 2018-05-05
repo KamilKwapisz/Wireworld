@@ -14,19 +14,28 @@ public class WireworldSimulation extends Thread{
     private Board board;
 
     public WireworldSimulation(int gen_number, double delay, GameGrid game){
-        this.n = gen_number;
-        this.delay = delay;
+        setN(gen_number);
+        setDelay(delay);
         this.isPaused = true;
         this.grid = game;
     }
 
     public int getN() { return n; }
 
-    public void setN(int n) { this.n = n; }
+    public void setN(int n) throws IllegalStateException {
+        if( n < 0)
+            throw new IllegalStateException("Generation number must not be a negative number.");
+        this.n = n;
+    }
 
     public double getDelay() { return delay; }
 
-    public void setDelay(double delay) { this.delay = delay; }
+    public void setDelay(double delay) throws IllegalStateException{
+        if(delay <= 2.0 && delay >= 0.5)
+            this.delay = delay;
+        else
+            throw new IllegalStateException("Delay value must be between 0.5s and 2.0s.");
+    }
 
     public boolean isPaused() { return isPaused; }
 
@@ -50,8 +59,8 @@ public class WireworldSimulation extends Thread{
         }
     }
 
-    private void changeCellType(Cell cell, Board board){
-        int neighbours = board.countElectronHeadsNeighbours(cell);
+    private void changeCellType(Cell cell){
+        int neighbours = this.board.countElectronHeadsNeighbours(cell);
         if( cell.getType() == 1 && (neighbours == 1 || neighbours == 2) ){
             // if cell has 1 or 2 electron's head neighbours it also become electron's head
             cell.changeToHead();
@@ -74,7 +83,7 @@ public class WireworldSimulation extends Thread{
         // method creates one next generation
         ArrayList<Cell> notEmptyCells = this.board.getNotEmptyCells();
         for (Cell cell : notEmptyCells) {
-            changeCellType(cell, this.board);
+            changeCellType(cell);
         }
         changeCellsColors(notEmptyCells);
         // when we finally determined what will be next cells types we can change all of them
@@ -127,5 +136,6 @@ public class WireworldSimulation extends Thread{
     }
 
     public GameGrid getGrid() { return grid; }
+    public Board getBoard() { return board; }
 
 }

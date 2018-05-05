@@ -55,6 +55,7 @@ public class MenuController implements Initializable {
 
     @FXML
     private void pauseSimulation(ActionEvent event) {
+        System.out.println("test");
     }
 
     @FXML
