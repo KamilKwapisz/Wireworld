@@ -70,12 +70,64 @@ public class XorInsertion implements Insertion{
 
     @Override
     public void insertLeft(GameGrid.Tile[][] grid, int x, int y) {
-        
+        grid[x][y].yellowTile();
+        grid[x][y-2].yellowTile();
+        grid[x-1][y].yellowTile();
+        grid[x-1][y-2].yellowTile();
+        grid[x-2][y].yellowTile();
+        grid[x-2][y-2].yellowTile();
+        grid[x-3][y+1].yellowTile();
+        grid[x-3][y-3].yellowTile();
+        grid[x-4][y+2].yellowTile();
+        grid[x-4][y-4].yellowTile();
+        grid[x-5][y+2].yellowTile();
+        grid[x-5][y-4].yellowTile();
+        grid[x-5][y].yellowTile();
+        grid[x-5][y-1].yellowTile();
+        grid[x-5][y-2].yellowTile();
+        grid[x-6][y+1].yellowTile();
+        grid[x-6][y].yellowTile();
+        grid[x-6][y-2].yellowTile();
+        grid[x-6][y-3].yellowTile();
+        grid[x-7][y].yellowTile();
+        grid[x-7][y-1].yellowTile();
+        grid[x-7][y-2].yellowTile();
+        grid[x-8][y].yellowTile();
+        grid[x-8][y-1].yellowTile();
+        grid[x-8][y-2].yellowTile();
+        grid[x-9][y-1].yellowTile();
+        grid[x-10][y-1].yellowTile();
     }
 
     @Override
     public void insertRight(GameGrid.Tile[][] grid, int x, int y) {
-        
+        grid[x][y].yellowTile();
+        grid[x][y+2].yellowTile();
+        grid[x+1][y].yellowTile();
+        grid[x+1][y+2].yellowTile();
+        grid[x+2][y].yellowTile();
+        grid[x+2][y+2].yellowTile();
+        grid[x+3][y-1].yellowTile();
+        grid[x+3][y+3].yellowTile();
+        grid[x+4][y-2].yellowTile();
+        grid[x+4][y+4].yellowTile();
+        grid[x+5][y-2].yellowTile();
+        grid[x+5][y+4].yellowTile();
+        grid[x+5][y].yellowTile();
+        grid[x+5][y+1].yellowTile();
+        grid[x+5][y+2].yellowTile();
+        grid[x+6][y-1].yellowTile();
+        grid[x+6][y].yellowTile();
+        grid[x+6][y+2].yellowTile();
+        grid[x+6][y+3].yellowTile();
+        grid[x+7][y].yellowTile();
+        grid[x+7][y+1].yellowTile();
+        grid[x+7][y+2].yellowTile();
+        grid[x+8][y].yellowTile();
+        grid[x+8][y+1].yellowTile();
+        grid[x+8][y+2].yellowTile();
+        grid[x+9][y+1].yellowTile();
+        grid[x+10][y+1].yellowTile();
     }
     
 }
