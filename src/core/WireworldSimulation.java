@@ -31,10 +31,7 @@ public class WireworldSimulation extends Thread{
     public double getDelay() { return delay; }
 
     public void setDelay(double delay) throws IllegalStateException{
-        if(delay <= 2.0 && delay >= 0.5)
-            this.delay = delay;
-        else
-            throw new IllegalStateException("Delay value must be between 0.5s and 2.0s.");
+        this.delay = delay;
     }
 
     public boolean isPaused() { return isPaused; }
@@ -113,7 +110,7 @@ public class WireworldSimulation extends Thread{
                     @Override
                     protected Void call() throws Exception {
                         int currentGenerationNumber = 1;
-                        while( currentGenerationNumber < genMaxNumber ){
+                        while( ( currentGenerationNumber < genMaxNumber ) || genMaxNumber == 0){
                             getCellsFromGrid(); // get the most recent grid board setup
                             if( !isPaused ) {
 

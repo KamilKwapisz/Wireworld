@@ -3,6 +3,8 @@ package UserInterface.Controllers;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ResourceBundle;
+
+import core.WireworldSimulation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,6 +37,8 @@ public class MenuController implements Initializable {
     @FXML
     private Label delayValue;
 
+    private WireworldSimulation simulation;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -55,15 +59,22 @@ public class MenuController implements Initializable {
 
     @FXML
     private void pauseSimulation(ActionEvent event) {
-        System.out.println("test");
+        simulation.pause();
     }
 
     @FXML
     private void playSimulation(ActionEvent event) {
+        simulation.unpause();
     }
 
     @FXML
     private void nextGeneration(ActionEvent event) {
+        simulation.nextGeneration();
+    }
+
+    public void loadSimulation(WireworldSimulation w_simulation){
+        this.simulation = w_simulation;
+
     }
 
 

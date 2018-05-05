@@ -73,6 +73,7 @@ public class MainController implements Initializable {
     private CheckMenuItem largeGrid;
     
     private GameGrid game;
+    private WireworldSimulation simulation;
     
     
     @Override
@@ -94,6 +95,12 @@ public class MainController implements Initializable {
         wireDisplay.setCenter(game.createContent());
         //wireDisplay.getChildren().add(game.createContent());
 
+        // initializing simulation with default values
+        simulation = new WireworldSimulation(0, 0.1, this.getGame());
+
+        MenuController menuController = botMenu.getController();
+        menuController.loadSimulation(simulation);
+
 
     }    
 
@@ -112,7 +119,7 @@ public class MainController implements Initializable {
 
         game.setInsertionFlag(AND_TOP);
         
-        WireworldSimulation simulation = new WireworldSimulation(50, 0.5, this.getGame());
+
         simulation.runSimulation();
 //        try{
 ////            Thread.sleep(1000);
