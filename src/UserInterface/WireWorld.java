@@ -22,6 +22,7 @@ public class WireWorld extends Application {
 	    GridPane pane = loader.load();
 	    Scene scene = new Scene(pane);
         MainController mainController = loader.getController();
+        mainController.setStage(primaryStage);
         primaryStage.setTitle("WireWorld");
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("UserInterface/launcher.png"));

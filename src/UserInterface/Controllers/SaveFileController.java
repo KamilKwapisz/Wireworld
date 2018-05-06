@@ -9,6 +9,8 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 
@@ -17,7 +19,7 @@ public class SaveFileController {
     private FileChooser fileChooser;
     private final PixelWriter writer;
     
-    public SaveFileController(GameGrid grid){
+    public SaveFileController(GameGrid grid, Stage stage){
         image = new WritableImage(grid.getXTiles(), grid.getYTiles());
         writer = image.getPixelWriter();
         
@@ -31,20 +33,20 @@ public class SaveFileController {
                         writer.setColor(x, y, Color.YELLOW);
                         break;
                     case 2:
-                        writer.setColor(x, y, Color.BLUE);
+                        writer.setColor(x, y, Color.RED);
                         break;
                     case 3:
-                        writer.setColor(x, y, Color.RED);
+                        writer.setColor(x, y, Color.BLUE);
                         break;
                     default:
                         break;
                 }
             }
         }
-        createFileChooserToSaveFile();
+        createFileChooserToSaveFile(stage);
     }
     
-    private void createFileChooserToSaveFile(){
+    private void createFileChooserToSaveFile(Stage stage){
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new ExtensionFilter("PNG files", "*.png"),
@@ -54,7 +56,7 @@ public class SaveFileController {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.setTitle("Save generation");
         fileChooser.setInitialFileName("generation");
-        File savedFile = fileChooser.showSaveDialog(null);
+        File savedFile = fileChooser.showSaveDialog(stage);
         
         if(savedFile != null){
             BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
