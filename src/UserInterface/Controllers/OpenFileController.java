@@ -6,7 +6,6 @@ import java.io.IOException;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
@@ -33,7 +32,7 @@ class OpenFileController {
                 new FileChooser.ExtensionFilter("JPG files", "*.jpg"),
                 new FileChooser.ExtensionFilter("BMP files", "*.bmp"),
                 new FileChooser.ExtensionFilter("JPEG files", "*.jpeg"));
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.setTitle("Load generation");
         fileChooser.setInitialFileName("generacja");
         File openedFile = fileChooser.showOpenDialog(null);
