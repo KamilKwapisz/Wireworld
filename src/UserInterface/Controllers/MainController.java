@@ -17,6 +17,7 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 
 public class MainController implements Initializable {
@@ -74,7 +75,7 @@ public class MainController implements Initializable {
     
     private GameGrid game;
     private WireworldSimulation simulation;
-    
+    private Stage stage;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -106,12 +107,12 @@ public class MainController implements Initializable {
 
     @FXML
     private void openFile(ActionEvent event) {
-        OpenFileController openFileController = new OpenFileController(game);
+        OpenFileController openFileController = new OpenFileController(game, stage);
     }
 
     @FXML
     private void saveFile(ActionEvent event) {
-        SaveFileController saveFileController = new SaveFileController(game);
+        SaveFileController saveFileController = new SaveFileController(game, stage);
     }
 
     @FXML
@@ -275,6 +276,10 @@ public class MainController implements Initializable {
 
     public GameGrid getGame() {
         return game;
+    }
+    
+    public void setStage(Stage stage){
+        this.stage = stage;
     }
 //
 

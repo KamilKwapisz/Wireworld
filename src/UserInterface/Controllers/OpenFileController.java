@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 
@@ -16,8 +17,8 @@ class OpenFileController {
     private FileChooser fileChooser;
     private PixelReader reader;
 
-    public OpenFileController(GameGrid grid){
-        createFileChooserToOpenFile();
+    public OpenFileController(GameGrid grid, Stage stage){
+        createFileChooserToOpenFile(stage);
         try{
             reader = image.getPixelReader();
             System.out.println(grid.getXTiles() + "\n" + grid.getYTiles());
@@ -28,7 +29,7 @@ class OpenFileController {
         }
     }
 
-    private void createFileChooserToOpenFile(){
+    private void createFileChooserToOpenFile(Stage stage){
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG files", "*.png"),
@@ -38,7 +39,7 @@ class OpenFileController {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.setTitle("Load generation");
         fileChooser.setInitialFileName("generation");
-        File openedFile = fileChooser.showOpenDialog(null);
+        File openedFile = fileChooser.showOpenDialog(stage);
         if(openedFile != null){
             try{
                 BufferedImage bImage = ImageIO.read(openedFile);
