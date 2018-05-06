@@ -11,7 +11,7 @@ public class WireworldSimulation extends Thread{
     private double delay;
     private boolean isPaused;
     private GameGrid grid;
-    private Board board;
+    private Board board = null;
 
     public WireworldSimulation(int gen_number, double delay, GameGrid game){
         setN(gen_number);
@@ -77,6 +77,7 @@ public class WireworldSimulation extends Thread{
     }
 
     public void nextGeneration(){
+        getCellsFromGrid(); // get the most recent grid board setup
         // method creates one next generation
         ArrayList<Cell> notEmptyCells = this.board.getNotEmptyCells();
         for (Cell cell : notEmptyCells) {
@@ -111,9 +112,8 @@ public class WireworldSimulation extends Thread{
                     protected Void call() throws Exception {
                         int currentGenerationNumber = 1;
                         while( ( currentGenerationNumber < genMaxNumber ) || genMaxNumber == 0){
-                            getCellsFromGrid(); // get the most recent grid board setup
+//                            getCellsFromGrid(); // get the most recent grid board setup
                             if( !isPaused ) {
-
                                 nextGeneration(); // create next generation
                                 currentGenerationNumber++;
 

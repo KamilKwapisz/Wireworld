@@ -65,6 +65,7 @@ public class MenuController implements Initializable {
     @FXML
     private void playSimulation(ActionEvent event) {
         simulation.unpause();
+        simulation.runSimulation();
     }
 
     @FXML
@@ -74,7 +75,8 @@ public class MenuController implements Initializable {
 
     public void loadSimulation(WireworldSimulation w_simulation){
         this.simulation = w_simulation;
-
+        this.simulation.runSimulation();
+        this.simulation.pause();
     }
 
 
