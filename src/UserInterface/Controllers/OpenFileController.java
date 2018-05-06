@@ -6,7 +6,6 @@ import java.io.IOException;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
@@ -15,15 +14,18 @@ import javax.imageio.ImageIO;
 class OpenFileController {
     private Image image;
     private FileChooser fileChooser;
-    private final PixelReader reader;
-    
+    private PixelReader reader;
+
     public OpenFileController(GameGrid grid){
         createFileChooserToOpenFile();
-        reader = image.getPixelReader();
-        System.out.println(grid.getXTiles() + "\n" + grid.getYTiles());
-        loadToGrid(grid);
-
-
+        try{
+            reader = image.getPixelReader();
+            System.out.println(grid.getXTiles() + "\n" + grid.getYTiles());
+            loadToGrid(grid);
+        } catch(NullPointerException e){
+            System.out.println("Working bugfix (may be changed)");
+            reader = null;
+        }
     }
 
     private void createFileChooserToOpenFile(){
@@ -33,18 +35,20 @@ class OpenFileController {
                 new FileChooser.ExtensionFilter("JPG files", "*.jpg"),
                 new FileChooser.ExtensionFilter("BMP files", "*.bmp"),
                 new FileChooser.ExtensionFilter("JPEG files", "*.jpeg"));
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.setTitle("Load generation");
-        fileChooser.setInitialFileName("generacja");
+        fileChooser.setInitialFileName("generation");
         File openedFile = fileChooser.showOpenDialog(null);
-        try{
-            BufferedImage bImage = ImageIO.read(openedFile);
-            image = SwingFXUtils.toFXImage(bImage, null);
-        }catch(IOException e){
-            throw new RuntimeException(e);
+        if(openedFile != null){
+            try{
+                BufferedImage bImage = ImageIO.read(openedFile);
+                image = SwingFXUtils.toFXImage(bImage, null);
+            }catch(IOException e){
+                throw new RuntimeException(e);
+            }
         }
     }
-    
+
     private void loadToGrid(GameGrid grid){
         for(int x = 0; x < grid.getXTiles() && x < image.getWidth(); x++){
             for(int y = 0; y < image.getHeight() && y < grid.getYTiles(); y++){
