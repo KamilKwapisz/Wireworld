@@ -39,21 +39,23 @@ public class WireworldSimulation extends Thread{
     public void pause() { isPaused = true; }
     public void unpause() { isPaused = false; }
 
-    private void initializeBoardFromGrid(){
+    public void initializeBoardFromGrid(){
         int x_tiles = grid.getXTiles();
         int y_tiles = grid.getYTiles();
 
         this.board = new Board(x_tiles, y_tiles);
     }
 
-    private void getCellsFromGrid(){
+    public void getCellsFromGrid(){
         GameGrid.Tile [][] tiles = grid.getGrid();
         for(int i = 0; i < grid.getXTiles(); i++){
             for(int j=0; j < grid.getYTiles(); j++){
                 GameGrid.Tile tile = tiles[i][j];
+                System.out.println(tile.getX() + " " + tile.getY());
                 this.board.addCell( new Cell( tile ) );
             }
         }
+
     }
 
     private void changeCellType(Cell cell){
@@ -98,7 +100,7 @@ public class WireworldSimulation extends Thread{
 
         initializeBoardFromGrid(); // initializing board with size of the GUI grid
 
-        this.isPaused = false;
+//        this.isPaused = false;
         int genMaxNumber = this.n;
         int DelayValue = (int)(this.delay * 1000); // delay value in milliseconds
 

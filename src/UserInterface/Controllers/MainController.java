@@ -233,6 +233,7 @@ public class MainController implements Initializable {
             game = small;
             wireDisplay.setCenter(game.createContent());
         }
+        simulation.initializeBoardFromGrid();
     }
 
     @FXML
@@ -249,8 +250,8 @@ public class MainController implements Initializable {
             wireDisplay.getChildren().clear();
             game = medium;
             wireDisplay.setCenter(game.createContent());
-            
         }
+        simulation.initializeBoardFromGrid();
     }
 
     @FXML
@@ -268,6 +269,8 @@ public class MainController implements Initializable {
             game = large;
             wireDisplay.setCenter(game.createContent());
         }
+        simulation.initializeBoardFromGrid();
+        simulation.getCellsFromGrid();
     }
 
     public GameGrid getGame() {

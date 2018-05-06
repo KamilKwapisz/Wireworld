@@ -31,10 +31,10 @@ public class SaveFileController {
                         writer.setColor(x, y, Color.YELLOW);
                         break;
                     case 2:
-                        writer.setColor(x, y, Color.BLUE);
+                        writer.setColor(x, y, Color.RED);
                         break;
                     case 3:
-                        writer.setColor(x, y, Color.RED);
+                        writer.setColor(x, y, Color.BLUE);
                         break;
                     default:
                         break;
