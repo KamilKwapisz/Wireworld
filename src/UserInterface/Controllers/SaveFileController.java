@@ -55,17 +55,19 @@ public class SaveFileController {
         fileChooser.setTitle("Save generation");
         fileChooser.setInitialFileName("generation");
         File savedFile = fileChooser.showSaveDialog(null);
-        BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
-        BufferedImage bImage2 = new BufferedImage(bImage.getWidth(), bImage.getHeight(), BufferedImage.TYPE_INT_RGB);
-        bImage2.getGraphics().drawImage(bImage, 0, 0, null);
-        String fileName = savedFile.getName();          
-        String extension = fileName.substring(fileName.indexOf(".") + 1, savedFile.getName().length());
-        try{
-            ImageIO.write(bImage2, extension, savedFile);
-        }catch(IOException e){
-            throw new RuntimeException(e);
-        }
         
+        if(savedFile != null){
+            BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+            BufferedImage bImage2 = new BufferedImage(bImage.getWidth(), bImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+            bImage2.getGraphics().drawImage(bImage, 0, 0, null);
+            String fileName = savedFile.getName();          
+            String extension = fileName.substring(fileName.indexOf(".") + 1, savedFile.getName().length());
+             try{
+                ImageIO.write(bImage2, extension, savedFile);
+            }catch(IOException e){
+                throw new RuntimeException(e);
+            }
+        }
         /* Test print */
         System.out.println("File path:" +  savedFile);
         
