@@ -22,10 +22,10 @@ class OpenFileController {
         reader = image.getPixelReader();
         System.out.println(grid.getXTiles() + "\n" + grid.getYTiles());
         loadToGrid(grid);
-        
+
 
     }
-    
+
     private void createFileChooserToOpenFile(){
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
