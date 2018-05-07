@@ -7,25 +7,25 @@ import java.util.ArrayList;
 
 public class WireworldSimulation extends Thread{
 
-    private int n; // number of generations to create
+    private int numberOfIterations; // number of generations to create
     private double delay;
     private boolean isPaused;
     private GameGrid grid;
     private Board board = null;
 
     public WireworldSimulation(int gen_number, double delay, GameGrid game){
-        setN(gen_number);
+        setNumberOfIterations(gen_number);
         setDelay(delay);
         this.isPaused = true;
         this.grid = game;
     }
 
-    public int getN() { return n; }
+    public int getNumberOfIterations() { return numberOfIterations; }
 
-    public void setN(int n) throws IllegalStateException {
-        if( n < 0)
+    public void setNumberOfIterations(int n) throws IllegalStateException {
+        if( numberOfIterations < 0)
             throw new IllegalStateException("Generation number must not be a negative number.");
-        this.n = n;
+        this.numberOfIterations = numberOfIterations;
     }
 
     public double getDelay() { return delay; }
@@ -38,6 +38,8 @@ public class WireworldSimulation extends Thread{
 
     public void pause() { isPaused = true; }
     public void unpause() { isPaused = false; }
+
+    public void setNewGrid( GameGrid newGrid ){ this.grid = newGrid; }
 
     public void initializeBoardFromGrid(){
         int x_tiles = grid.getXTiles();
@@ -74,25 +76,25 @@ public class WireworldSimulation extends Thread{
 
     private void changeCellsColors(ArrayList<Cell> notEmptyList){
         for(Cell cell : notEmptyList){
+            // for each not empty cell change cell's color and type in both grid and board
             grid.changeState(cell.getX(), cell.getY(), cell.getNextType());
+            cell.changeType();
         }
     }
 
     public void nextGeneration(){
-        getCellsFromGrid(); // get the most recent grid board setup
         // method creates one next generation
+
+        getCellsFromGrid(); // get the most recent grid board setup
+
         ArrayList<Cell> notEmptyCells = this.board.getNotEmptyCells();
         for (Cell cell : notEmptyCells) {
             changeCellType(cell);
         }
         changeCellsColors(notEmptyCells);
-        // when we finally determined what will be next cells types we can change all of them
-        for (Cell cell : notEmptyCells) {
-            cell.changeType();
-        }
-        System.out.println();
+
+        // for debug purpose only
         this.board.printBoard();
-        System.out.println();
     }
 
 
@@ -101,7 +103,7 @@ public class WireworldSimulation extends Thread{
         initializeBoardFromGrid(); // initializing board with size of the GUI grid
 
 //        this.isPaused = false;
-        int genMaxNumber = this.n;
+        int genMaxNumber = this.numberOfIterations;
         int DelayValue = (int)(this.delay * 1000); // delay value in milliseconds
 
         Service<Void> backgroundThread;

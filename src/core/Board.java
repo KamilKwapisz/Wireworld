@@ -1,8 +1,9 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Board {
+public class Board{
 
     private int width;
     private int height;
@@ -148,12 +149,14 @@ public class Board {
     }
 
     public void printBoard(){
+        System.out.println();
         for(int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 System.out.print(board.get(i).get(j).getType() + ", ");
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     public static void main(String[] args) {
