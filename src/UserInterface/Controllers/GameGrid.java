@@ -4,6 +4,7 @@ import UserInterface.Insertion.AndInsertion;
 import UserInterface.Insertion.InsertionFlag;
 import static UserInterface.Insertion.InsertionFlag.*;
 import UserInterface.Insertion.NandInsertion;
+import UserInterface.Insertion.NotInsertion;
 import UserInterface.Insertion.OrInsertion;
 import UserInterface.Insertion.XorInsertion;
 import core.WireworldSimulation;
@@ -298,8 +299,38 @@ public class GameGrid {
                         border.setFill(this.color.darker());
                     }
                 }
-            } else{
-                
+            } else if(insertionFlag == NOT_TOP){
+                if(this.x >= 2 && this.x <= X_TILES - 4 && this.y >= 11){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == NOT_BOT){
+                if(this.x >= 2 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 12){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == NOT_LEFT){
+                if(this.x >= 11 && this.y >= 2 && this.y <= Y_TILES - 3){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
+            } else if(insertionFlag == NOT_RIGHT){
+                if(this.x <= X_TILES - 12 && this.y >= 2 && this.y <= Y_TILES - 4){
+                    if(color == Color.BLACK){
+                        border.setFill(this.color.brighter().brighter().brighter().brighter());
+                    } else{
+                        border.setFill(this.color.darker());
+                    }
+                }
             }
         }
         private void placeExit(){
@@ -513,6 +544,54 @@ public class GameGrid {
                     if(this.x <= X_TILES - 14 && this.y >= 5 && this.y <= Y_TILES - 8){
                         NandInsertion nandInsertion = new NandInsertion();
                         nandInsertion.insertRight(grid, x, y);
+                        insertionFlag = NORMAL;
+                    }
+                } else if(e.isSecondaryButtonDown()){
+                    /* cancel inserting */
+                    border.setFill(this.color);
+                    insertionFlag = NORMAL;
+                }
+            } else if(insertionFlag == NOT_TOP){
+                if(e.isPrimaryButtonDown()){
+                    if(this.x >= 2 && this.x <= X_TILES - 4 && this.y >= 11){
+                        NotInsertion notInsertion = new NotInsertion();
+                        notInsertion.insertTop(grid, x, y);
+                        insertionFlag = NORMAL;
+                    }
+                } else if(e.isSecondaryButtonDown()){
+                    /* cancel inserting */
+                    border.setFill(this.color);
+                    insertionFlag = NORMAL;
+                }
+            } else if(insertionFlag == NOT_BOT){
+                if(e.isPrimaryButtonDown()){
+                    if(this.x >= 2 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 12){
+                        NotInsertion notInsertion = new NotInsertion();
+                        notInsertion.insertBottom(grid, x, y);
+                        insertionFlag = NORMAL;
+                    }
+                } else if(e.isSecondaryButtonDown()){
+                    /* cancel inserting */
+                    border.setFill(this.color);
+                    insertionFlag = NORMAL;
+                }
+            } else if(insertionFlag == NOT_LEFT){
+                if(e.isPrimaryButtonDown()){
+                    if(this.x >= 11 && this.y >= 2 && this.y <= Y_TILES - 3){
+                        NotInsertion notInsertion = new NotInsertion();
+                        notInsertion.insertLeft(grid, x, y);
+                        insertionFlag = NORMAL;
+                    }
+                } else if(e.isSecondaryButtonDown()){
+                    /* cancel inserting */
+                    border.setFill(this.color);
+                    insertionFlag = NORMAL;
+                }
+            } else if(insertionFlag == NOT_RIGHT){
+                if(e.isPrimaryButtonDown()){
+                    if(this.x <= X_TILES - 12 && this.y >= 2 && this.y <= Y_TILES - 4){
+                        NotInsertion notInsertion = new NotInsertion();
+                        notInsertion.insertRight(grid, x, y);
                         insertionFlag = NORMAL;
                     }
                 } else if(e.isSecondaryButtonDown()){

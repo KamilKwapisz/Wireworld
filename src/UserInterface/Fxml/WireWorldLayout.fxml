@@ -31,35 +31,43 @@
                <items>
                   <Menu mnemonicParsing="false" text="AND">
                     <items>
+                        <MenuItem fx:id="andRight" mnemonicParsing="false" onAction="#placeAndRight" text="Right" />
                       <MenuItem fx:id="andTop" mnemonicParsing="false" onAction="#placeAndTop" text="Top" />
                         <MenuItem fx:id="andBottom" mnemonicParsing="false" onAction="#placeAndBottom" text="Bottom" />
                         <MenuItem fx:id="andLeft" mnemonicParsing="false" onAction="#placeAndLeft" text="Left" />
-                        <MenuItem fx:id="andRight" mnemonicParsing="false" onAction="#placeAndRight" text="Right" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="OR">
                     <items>
+                        <MenuItem fx:id="orRight" mnemonicParsing="false" onAction="#placeOrRight" text="Right" />
                       <MenuItem fx:id="orTop" mnemonicParsing="false" onAction="#placeOrTop" text="Top" />
                         <MenuItem fx:id="orBottom" mnemonicParsing="false" onAction="#placeOrBottom" text="Bottom" />
                         <MenuItem fx:id="orLeft" mnemonicParsing="false" onAction="#placeOrLeft" text="Left" />
-                        <MenuItem fx:id="orRight" mnemonicParsing="false" onAction="#placeOrRight" text="Right" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="XOR">
                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#placeXorRight" text="Right" fx:id="xorRight" />
                       <MenuItem mnemonicParsing="false" onAction="#placeXorTop" text="Top" fx:id="xorTop" />
                         <MenuItem mnemonicParsing="false" onAction="#placeXorBottom" text="Bottom" fx:id="xorBottom" />
                         <MenuItem mnemonicParsing="false" onAction="#placeXorLeft" text="Left" fx:id="xorLeft" />
-                        <MenuItem mnemonicParsing="false" onAction="#placeXorRight" text="Right" fx:id="xorRight" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="NAND">
                     <items>
+                        <MenuItem fx:id="nandRight" mnemonicParsing="false" onAction="#placeNandRight" text="Right" />
                       <MenuItem fx:id="nandTop" mnemonicParsing="false" onAction="#placeNandTop" text="Top" />
                         <MenuItem fx:id="nandBottom" mnemonicParsing="false" onAction="#placeNandBottom" text="Bottom" />
                         <MenuItem fx:id="nandLeft" mnemonicParsing="false" onAction="#placeNandLeft" text="Left" />
-                        <MenuItem fx:id="nandRight" mnemonicParsing="false" onAction="#placeNandRight" text="Right" />
                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="NOT">
+                     <items>
+                        <MenuItem fx:id="notRight" mnemonicParsing="false" onAction="#placeNotRight" text="Right" />
+                        <MenuItem fx:id="notTop" mnemonicParsing="false" onAction="#placeNotTop" text="Top" />
+                        <MenuItem fx:id="notBottom" mnemonicParsing="false" onAction="#placeNotBottom" text="Bottom" />
+                        <MenuItem fx:id="notLeft" mnemonicParsing="false" onAction="#placeNotLeft" text="Left" />
+                     </items>
                   </Menu>
                </items>
           </Menu>

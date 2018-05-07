@@ -76,6 +76,14 @@ public class MainController implements Initializable {
     private GameGrid game;
     private WireworldSimulation simulation;
     private Stage stage;
+    @FXML
+    private MenuItem notRight;
+    @FXML
+    private MenuItem notTop;
+    @FXML
+    private MenuItem notBottom;
+    @FXML
+    private MenuItem notLeft;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -97,7 +105,7 @@ public class MainController implements Initializable {
         //wireDisplay.getChildren().add(game.createContent());
 
         // initializing simulation with default values
-        simulation = new WireworldSimulation(0, 0, this.getGame());
+        simulation = new WireworldSimulation(0, 0.0, this.getGame());
 
         MenuController menuController = botMenu.getController();
         menuController.loadSimulation(simulation);
@@ -209,6 +217,26 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    private void placeNotTop(ActionEvent event) {
+        game.setInsertionFlag(NOT_TOP);
+    }
+
+    @FXML
+    private void placeNotBottom(ActionEvent event) {
+        game.setInsertionFlag(NOT_BOT);
+    }
+
+    @FXML
+    private void placeNotLeft(ActionEvent event) {
+        game.setInsertionFlag(NOT_LEFT);
+    }
+    
+    @FXML
+    private void placeNotRight(ActionEvent event) {
+        game.setInsertionFlag(NOT_RIGHT);
+    }
+    
+    @FXML
     private void showHelp(ActionEvent event) {
         HelpController helpController = new HelpController();
         helpController.display("Help");
@@ -281,6 +309,8 @@ public class MainController implements Initializable {
         this.stage = stage;
     }
 //
+
+
 
     
 }
