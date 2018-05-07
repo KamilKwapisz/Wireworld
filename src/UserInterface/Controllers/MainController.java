@@ -97,7 +97,7 @@ public class MainController implements Initializable {
         //wireDisplay.getChildren().add(game.createContent());
 
         // initializing simulation with default values
-        simulation = new WireworldSimulation(0, 0.5, this.getGame());
+        simulation = new WireworldSimulation(0, 0, this.getGame());
 
         MenuController menuController = botMenu.getController();
         menuController.loadSimulation(simulation);

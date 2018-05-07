@@ -158,12 +158,12 @@ public class GameGrid {
             this.color = Color.YELLOW;
             border.setFill(color);
         }
-        private void blueTile(){
+        public void blueTile(){
             this.state = 3;
             this.color = Color.BLUE;
             border.setFill(color);
         }
-        private void redTile(){
+        public void redTile(){
             this.state = 2;
             this.color = Color.RED;
             border.setFill(color);

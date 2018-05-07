@@ -53,7 +53,6 @@ public class WireworldSimulation extends Thread{
         for(int i = 0; i < grid.getXTiles(); i++){
             for(int j=0; j < grid.getYTiles(); j++){
                 GameGrid.Tile tile = tiles[i][j];
-                System.out.println(tile.getX() + " " + tile.getY());
                 this.board.addCell( new Cell( tile ) );
             }
         }
@@ -94,7 +93,7 @@ public class WireworldSimulation extends Thread{
         changeCellsColors(notEmptyCells);
 
         // for debug purpose only
-        this.board.printBoard();
+//        this.board.printBoard();
     }
 
 
@@ -120,6 +119,7 @@ public class WireworldSimulation extends Thread{
                             if( !isPaused ) {
                                 nextGeneration(); // create next generation
                                 currentGenerationNumber++;
+                                System.out.println(currentGenerationNumber);
 
                                 try{
                                     sleep(DelayValue);
