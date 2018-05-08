@@ -12,6 +12,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+<?import UserInterface.Fxml.*?>
+
 <GridPane fx:id="menuPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserInterface.Controllers.MenuController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="250.0" prefWidth="330.0" />
@@ -48,14 +50,14 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </Label>
-            <TextField fx:id="genNumber" onInputMethodTextChanged="#changeNumOfGen" prefHeight="28.0" prefWidth="120.0" promptText="0">
+            <NumOfGenField fx:id="genNumber" onInputMethodTextChanged="#changeNumOfGen" prefHeight="28.0" prefWidth="120.0" promptText="0">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
                <font>
                   <Font name="Eras Demi ITC" size="15.0" />
                </font>
-            </TextField>
+            </NumOfGenField>
          </children>
          <GridPane.margin>
             <Insets />

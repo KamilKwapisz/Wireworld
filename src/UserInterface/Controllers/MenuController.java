@@ -1,5 +1,6 @@
 package UserInterface.Controllers;
 
+import UserInterface.Fxml.NumOfGenField;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ResourceBundle;
@@ -19,7 +20,7 @@ import javafx.scene.layout.GridPane;
 public class MenuController implements Initializable {
 
     @FXML
-    private TextField genNumber;
+    private NumOfGenField genNumber;
     @FXML
     private Label currentGen;
     @FXML
