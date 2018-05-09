@@ -107,6 +107,7 @@ public class MainController implements Initializable {
         // initializing simulation with default values
         simulation = new WireworldSimulation(0, 0.2, this.getGame());
 
+
         MenuController menuController = botMenu.getController();
         menuController.loadSimulation(simulation);
 
@@ -125,20 +126,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void placeAndTop(ActionEvent event) {
-
         game.setInsertionFlag(AND_TOP);
-        
-
-        simulation.runSimulation();
-//        try{
-////            Thread.sleep(1000);
-////            simulation.pause();
-////            Thread.sleep(1500);
-////            simulation.unpause();
-////        } catch (Exception e){
-////
-////        }
-
     }
 
     @FXML

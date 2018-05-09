@@ -115,7 +115,6 @@ public class WireworldSimulation extends Thread{
                     protected Void call() throws Exception {
                         int currentGenerationNumber = 1;
                         while( ( currentGenerationNumber < genMaxNumber ) || genMaxNumber == 0){
-//                            getCellsFromGrid(); // get the most recent grid board setup
                             if( !isPaused ) {
                                 nextGeneration(); // create next generation
                                 currentGenerationNumber++;
