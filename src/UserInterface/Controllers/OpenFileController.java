@@ -12,13 +12,13 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 
-class OpenFileController {
+public class OpenFileController implements FileController{
     private Image image;
     private FileChooser fileChooser;
     private PixelReader reader;
 
     public OpenFileController(GameGrid grid, Stage stage){
-        createFileChooserToOpenFile(stage);
+        createFileChooser(stage);
         try{
             reader = image.getPixelReader();
             System.out.println(grid.getXTiles() + "\n" + grid.getYTiles());
@@ -29,7 +29,8 @@ class OpenFileController {
         }
     }
 
-    private void createFileChooserToOpenFile(Stage stage){
+    @Override
+    public void createFileChooser(Stage stage){
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG files", "*.png"),

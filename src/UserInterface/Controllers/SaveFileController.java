@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 
-public class SaveFileController {
+public class SaveFileController implements FileController {
     private WritableImage image;
     private FileChooser fileChooser;
     private final PixelWriter writer;
@@ -43,10 +43,11 @@ public class SaveFileController {
                 }
             }
         }
-        createFileChooserToSaveFile(stage);
+        createFileChooser(stage);
     }
     
-    private void createFileChooserToSaveFile(Stage stage){
+    @Override
+    public void createFileChooser(Stage stage){
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new ExtensionFilter("PNG files", "*.png"),
