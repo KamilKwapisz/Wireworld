@@ -46,7 +46,7 @@ public class HelpController {
         AnchorPane layout = new AnchorPane();
         layout.setPrefSize(600, 600);
         layout.setId("layout");
-        String css = MenuController.class.getResource("/UserInterface/css/menu.css").toExternalForm();
+        String css = SimulationController.class.getResource("/UserInterface/css/menu.css").toExternalForm();
         layout.getStylesheets().add(css);
         layout.getChildren().addAll(helpLabel, closeButton);
 

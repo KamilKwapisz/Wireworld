@@ -4,11 +4,7 @@ import static UserInterface.Insertion.InsertionFlag.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import core.Board;
-import core.Cell;
 import core.WireworldSimulation;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,7 +68,7 @@ public class MainController implements Initializable {
     private CheckMenuItem mediumGrid;
     @FXML
     private CheckMenuItem largeGrid;
-    
+
     private GameGrid game;
     private WireworldSimulation simulation;
     private Stage stage;
@@ -84,21 +80,21 @@ public class MainController implements Initializable {
     private MenuItem notBottom;
     @FXML
     private MenuItem notLeft;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         FXMLLoader botMenu = new FXMLLoader(this.getClass().getResource("/UserInterface/fxml/BottomMenu.fxml"));
         GridPane menu = null;
-	try {
-        menu = botMenu.load();
-        
+        try {
+            menu = botMenu.load();
+
         } catch(IOException e){
             e.printStackTrace();
         }
-        String css = MenuController.class.getResource("/UserInterface/css/menu.css").toExternalForm();
+        String css = SimulationController.class.getResource("/UserInterface/css/menu.css").toExternalForm();
         wireMenu.getStylesheets().add(css);
         wireMenu.setCenter(menu);
-        
+
         game = new GameGrid();
         mediumGrid.setSelected(true);
         wireDisplay.setCenter(game.createContent());
@@ -107,12 +103,11 @@ public class MainController implements Initializable {
         // initializing simulation with default values
         simulation = new WireworldSimulation(0, 0.2, this.getGame());
 
-
-        MenuController menuController = botMenu.getController();
+        SimulationController menuController = botMenu.getController();
         menuController.loadSimulation(simulation);
 
 
-    }    
+    }
 
     @FXML
     private void openFile(ActionEvent event) {
@@ -126,7 +121,20 @@ public class MainController implements Initializable {
 
     @FXML
     private void placeAndTop(ActionEvent event) {
+
         game.setInsertionFlag(AND_TOP);
+
+
+        simulation.runSimulation();
+//        try{
+////            Thread.sleep(1000);
+////            simulation.pause();
+////            Thread.sleep(1500);
+////            simulation.unpause();
+////        } catch (Exception e){
+////
+////        }
+
     }
 
     @FXML
@@ -218,12 +226,12 @@ public class MainController implements Initializable {
     private void placeNotLeft(ActionEvent event) {
         game.setInsertionFlag(NOT_LEFT);
     }
-    
+
     @FXML
     private void placeNotRight(ActionEvent event) {
         game.setInsertionFlag(NOT_RIGHT);
     }
-    
+
     @FXML
     private void showHelp(ActionEvent event) {
         HelpController helpController = new HelpController();
@@ -292,7 +300,7 @@ public class MainController implements Initializable {
     public GameGrid getGame() {
         return game;
     }
-    
+
     public void setStage(Stage stage){
         this.stage = stage;
     }
@@ -300,5 +308,5 @@ public class MainController implements Initializable {
 
 
 
-    
+
 }

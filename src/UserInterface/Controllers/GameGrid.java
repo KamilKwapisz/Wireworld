@@ -7,7 +7,6 @@ import UserInterface.Insertion.NandInsertion;
 import UserInterface.Insertion.NotInsertion;
 import UserInterface.Insertion.OrInsertion;
 import UserInterface.Insertion.XorInsertion;
-import core.WireworldSimulation;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
