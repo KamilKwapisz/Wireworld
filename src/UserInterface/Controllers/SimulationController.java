@@ -11,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.GridPane;
 
 
@@ -50,9 +49,6 @@ public class SimulationController implements Initializable {
 //        playB.setOnAction(e->simulation.run());
     }    
 
-    @FXML
-    private void changeNumOfGen(InputMethodEvent event) {
-    }
 
     @FXML
     private void backGeneration(ActionEvent event) {

@@ -91,7 +91,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </Label>
-            <NumOfGenField fx:id="genNumber" layoutX="180.0" layoutY="33.0" onInputMethodTextChanged="#changeNumOfGen" prefHeight="28.0" prefWidth="140.0" promptText="0">
+            <NumOfGenField fx:id="genNumber" layoutX="180.0" layoutY="33.0" prefHeight="28.0" prefWidth="140.0" promptText="0">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
