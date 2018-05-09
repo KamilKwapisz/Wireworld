@@ -3,9 +3,6 @@ package UserInterface;
 import java.io.IOException;
 
 import UserInterface.Controllers.MainController;
-import core.Board;
-import core.Cell;
-import core.WireworldSimulation;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

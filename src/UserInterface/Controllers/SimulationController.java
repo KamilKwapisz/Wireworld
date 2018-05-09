@@ -4,7 +4,6 @@ import UserInterface.Fxml.NumOfGenField;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ResourceBundle;
-
 import core.WireworldSimulation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,12 +11,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.GridPane;
 
 
-public class MenuController implements Initializable {
+public class SimulationController implements Initializable {
 
     @FXML
     private NumOfGenField genNumber;
@@ -39,6 +37,8 @@ public class MenuController implements Initializable {
     private Label delayValue;
 
     private WireworldSimulation simulation;
+    @FXML
+    private Button apply;
 
 
     @Override
@@ -78,6 +78,10 @@ public class MenuController implements Initializable {
         this.simulation = w_simulation;
         this.simulation.runSimulation();
         this.simulation.pause();
+    }
+
+    @FXML
+    private void applyGenNumber(ActionEvent event) {
     }
 
 

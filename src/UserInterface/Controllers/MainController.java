@@ -4,11 +4,7 @@ import static UserInterface.Insertion.InsertionFlag.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import core.Board;
-import core.Cell;
 import core.WireworldSimulation;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -95,7 +91,7 @@ public class MainController implements Initializable {
         } catch(IOException e){
             e.printStackTrace();
         }
-        String css = MenuController.class.getResource("/UserInterface/css/menu.css").toExternalForm();
+        String css = SimulationController.class.getResource("/UserInterface/css/menu.css").toExternalForm();
         wireMenu.getStylesheets().add(css);
         wireMenu.setCenter(menu);
         
@@ -107,7 +103,7 @@ public class MainController implements Initializable {
         // initializing simulation with default values
         simulation = new WireworldSimulation(0, 0.2, this.getGame());
 
-        MenuController menuController = botMenu.getController();
+        SimulationController menuController = botMenu.getController();
         menuController.loadSimulation(simulation);
 
 
