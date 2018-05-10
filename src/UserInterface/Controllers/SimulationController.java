@@ -34,10 +34,11 @@ public class SimulationController implements Initializable {
     private Slider delaySlider;
     @FXML
     private Label delayValue;
-
-    private WireworldSimulation simulation;
     @FXML
     private Button apply;
+    
+    private WireworldSimulation simulation;
+    private int numberOfGenerations = 0;
 
 
     @Override
@@ -45,8 +46,8 @@ public class SimulationController implements Initializable {
         delaySlider.setValue(1);
         delayValue.setText(new Double(1).toString());
         delayValue.textProperty().bindBidirectional(delaySlider.valueProperty(), NumberFormat.getNumberInstance());
-
-//        playB.setOnAction(e->simulation.run());
+        
+        genNumber.setText("0");
     }    
 
 
@@ -78,6 +79,16 @@ public class SimulationController implements Initializable {
 
     @FXML
     private void applyGenNumber(ActionEvent event) {
+        try{
+        numberOfGenerations = Integer.parseInt(genNumber.getText());
+        System.out.println("pobrane: " + numberOfGenerations);
+        simulation.setNumberOfIterations(numberOfGenerations);
+        System.out.println("symulacja: " + simulation.getNumberOfIterations());
+        } catch(NumberFormatException e){
+            System.out.println("Number of generations is missing. Number of generations is beeing set to 0.");
+            numberOfGenerations = 0;
+            genNumber.setText("0");
+        }
     }
 
 

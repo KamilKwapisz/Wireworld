@@ -25,7 +25,7 @@ public class WireworldSimulation extends Thread{
     public void setNumberOfIterations(int n) throws IllegalStateException {
         if( numberOfIterations < 0)
             throw new IllegalStateException("Generation number must not be a negative number.");
-        this.numberOfIterations = numberOfIterations;
+        this.numberOfIterations = n;
     }
 
     public double getDelay() { return delay; }

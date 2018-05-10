@@ -125,7 +125,7 @@ public class MainController implements Initializable {
         game.setInsertionFlag(AND_TOP);
 
 
-        simulation.runSimulation();
+    //    simulation.runSimulation();
 //        try{
 ////            Thread.sleep(1000);
 ////            simulation.pause();
