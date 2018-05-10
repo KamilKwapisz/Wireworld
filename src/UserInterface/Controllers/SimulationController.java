@@ -48,7 +48,7 @@ public class SimulationController implements Initializable {
         delayValue.textProperty().bindBidirectional(delaySlider.valueProperty(), NumberFormat.getNumberInstance());
         
         genNumber.setText("0");
-    }    
+    }
 
 
     @FXML
@@ -62,8 +62,10 @@ public class SimulationController implements Initializable {
 
     @FXML
     private void playSimulation(ActionEvent event) {
-        simulation.unpause();
-        simulation.runSimulation();
+        if (simulation.isPaused()) {
+            simulation.unpause();
+            simulation.runSimulation();
+        }
     }
 
     @FXML
@@ -75,6 +77,7 @@ public class SimulationController implements Initializable {
         this.simulation = w_simulation;
         this.simulation.runSimulation();
         this.simulation.pause();
+
     }
 
     @FXML

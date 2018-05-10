@@ -98,10 +98,11 @@ public class WireworldSimulation extends Thread{
 
 
     public void runSimulation(){
+        System.out.println("TEST");
 
         initializeBoardFromGrid(); // initializing board with size of the GUI grid
 
-//        this.isPaused = false;
+//        this.isPaused = true;
         int genMaxNumber = this.numberOfIterations;
         int DelayValue = (int)(this.delay * 1000); // delay value in milliseconds
 
