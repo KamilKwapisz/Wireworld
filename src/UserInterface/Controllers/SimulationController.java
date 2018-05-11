@@ -5,12 +5,15 @@ import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ResourceBundle;
 import core.WireworldSimulation;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 
 
@@ -44,8 +47,23 @@ public class SimulationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         delaySlider.setValue(1);
-        delayValue.setText(new Double(1).toString());
-        delayValue.textProperty().bindBidirectional(delaySlider.valueProperty(), NumberFormat.getNumberInstance());
+        delayValue.setText("1");
+        //delayValue.textProperty().bindBidirectional(delaySlider.valueProperty(), NumberFormat.getNumberInstance());
+       
+        String LABEL_TOOLTIP = "hello";
+        delayValue.setTooltip(new Tooltip(LABEL_TOOLTIP));
+        delayValue.setText(Math.round(delaySlider.getValue()) + "");
+        delaySlider.valueProperty().addListener(new ChangeListener<Number>() {
+        @Override 
+        public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+            if (newValue == null) {
+                 delayValue.setText("");
+                 return;
+            }
+        delayValue.setText((Math.round(newValue.doubleValue() * 100.0) / 100.0) + "");
+        simulation.setDelay(Math.round(newValue.doubleValue() * 100.0) / 100.0);
+        
+      }});
         
         genNumber.setText("0");
     }
@@ -66,6 +84,7 @@ public class SimulationController implements Initializable {
             simulation.unpause();
             simulation.runSimulation();
         }
+        System.out.println("Current delay: " + simulation.getDelay());
     }
 
     @FXML
@@ -88,7 +107,7 @@ public class SimulationController implements Initializable {
         simulation.setNumberOfIterations(numberOfGenerations);
         System.out.println("symulacja: " + simulation.getNumberOfIterations());
         } catch(NumberFormatException e){
-            System.out.println("Number of generations is missing. Number of generations is beeing set to 0.");
+            System.out.println("Number of generations is missing or is too big. Number of generations is beeing set to 0.");
             numberOfGenerations = 0;
             genNumber.setText("0");
         }

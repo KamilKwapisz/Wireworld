@@ -62,7 +62,7 @@
       </HBox>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <children>
-            <Slider fx:id="delaySlider" layoutX="136.0" layoutY="7.0" max="2.0" min="0.5" prefHeight="14.0" prefWidth="349.0">
+            <Slider fx:id="delaySlider" layoutX="136.0" layoutY="7.0" max="1.5" min="0.08" prefHeight="14.0" prefWidth="349.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
