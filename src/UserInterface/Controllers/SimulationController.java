@@ -5,12 +5,15 @@ import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ResourceBundle;
 import core.WireworldSimulation;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 
 
@@ -40,13 +43,26 @@ public class SimulationController implements Initializable {
     private WireworldSimulation simulation;
     private int numberOfGenerations = 0;
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        delaySlider.setValue(1);
-        delayValue.setText(new Double(1).toString());
-        delayValue.textProperty().bindBidirectional(delaySlider.valueProperty(), NumberFormat.getNumberInstance());
+        delaySlider.setValue(0.2);
         
+        //delayValue.textProperty().bindBidirectional(delaySlider.valueProperty(), NumberFormat.getNumberInstance());
+       
+        delayValue.setText(Math.round(delaySlider.getValue()) + "");
+        delaySlider.valueProperty().addListener(new ChangeListener<Number>() {
+        @Override 
+        public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+            if (newValue == null) {
+                 delayValue.setText("");
+                 return;
+            }
+        delayValue.setText((Math.round(newValue.doubleValue() * 100.0) / 100.0) + "");
+        simulation.setDelay(Math.round(newValue.doubleValue() * 100.0) / 100.0);
+        
+      }});
+        
+        delayValue.setText("0.2");
         genNumber.setText("0");
     }
 
@@ -84,15 +100,12 @@ public class SimulationController implements Initializable {
     private void applyGenNumber(ActionEvent event) {
         try{
         numberOfGenerations = Integer.parseInt(genNumber.getText());
-        System.out.println("pobrane: " + numberOfGenerations);
         simulation.setNumberOfIterations(numberOfGenerations);
-        System.out.println("symulacja: " + simulation.getNumberOfIterations());
         } catch(NumberFormatException e){
-            System.out.println("Number of generations is missing. Number of generations is beeing set to 0.");
+            System.out.println("Number of generations is missing or is too big. Number of generations is beeing set to 0.");
             numberOfGenerations = 0;
             genNumber.setText("0");
         }
     }
-
-
+    
 }

@@ -32,7 +32,7 @@ public class WireworldSimulation extends Thread{
             throw new IllegalStateException("Generation number must not be a negative number.");
         this.numberOfIterations = n;
     }
-
+    
     public double getDelay() { return delay; }
 
     public void setDelay(double delay) throws IllegalStateException{
@@ -127,7 +127,8 @@ public class WireworldSimulation extends Thread{
                                 System.out.println(currentGenerationNumber);
 
                                 try{
-                                    sleep(DelayValue);
+                                    //sleep(DelayValue);
+                                    sleep((int)(delay * 1000)); //delay value in milliseconds
                                 } catch (InterruptedException e){
                                     e.printStackTrace();
                                 }
