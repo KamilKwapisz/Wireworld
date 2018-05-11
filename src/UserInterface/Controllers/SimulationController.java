@@ -43,15 +43,12 @@ public class SimulationController implements Initializable {
     private WireworldSimulation simulation;
     private int numberOfGenerations = 0;
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        delaySlider.setValue(1);
-        delayValue.setText("1");
+        delaySlider.setValue(0.2);
+        
         //delayValue.textProperty().bindBidirectional(delaySlider.valueProperty(), NumberFormat.getNumberInstance());
        
-        String LABEL_TOOLTIP = "hello";
-        delayValue.setTooltip(new Tooltip(LABEL_TOOLTIP));
         delayValue.setText(Math.round(delaySlider.getValue()) + "");
         delaySlider.valueProperty().addListener(new ChangeListener<Number>() {
         @Override 
@@ -65,6 +62,7 @@ public class SimulationController implements Initializable {
         
       }});
         
+        delayValue.setText("0.2");
         genNumber.setText("0");
     }
 
@@ -84,7 +82,6 @@ public class SimulationController implements Initializable {
             simulation.unpause();
             simulation.runSimulation();
         }
-        System.out.println("Current delay: " + simulation.getDelay());
     }
 
     @FXML
@@ -103,15 +100,12 @@ public class SimulationController implements Initializable {
     private void applyGenNumber(ActionEvent event) {
         try{
         numberOfGenerations = Integer.parseInt(genNumber.getText());
-        System.out.println("pobrane: " + numberOfGenerations);
         simulation.setNumberOfIterations(numberOfGenerations);
-        System.out.println("symulacja: " + simulation.getNumberOfIterations());
         } catch(NumberFormatException e){
             System.out.println("Number of generations is missing or is too big. Number of generations is beeing set to 0.");
             numberOfGenerations = 0;
             genNumber.setText("0");
         }
     }
-
-
+    
 }

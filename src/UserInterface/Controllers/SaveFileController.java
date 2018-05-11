@@ -51,9 +51,7 @@ public class SaveFileController implements FileController {
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new ExtensionFilter("PNG files", "*.png"),
-                new ExtensionFilter("JPG files", "*.jpg"),
-                new ExtensionFilter("BMP files", "*.bmp"),
-                new ExtensionFilter("JPEG files", "*.jpeg"));
+                new ExtensionFilter("BMP files", "*.bmp"));
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.setTitle("Save generation");
         fileChooser.setInitialFileName("generation");

@@ -34,9 +34,7 @@ public class OpenFileController implements FileController{
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG files", "*.png"),
-                new FileChooser.ExtensionFilter("JPG files", "*.jpg"),
-                new FileChooser.ExtensionFilter("BMP files", "*.bmp"),
-                new FileChooser.ExtensionFilter("JPEG files", "*.jpeg"));
+                new FileChooser.ExtensionFilter("BMP files", "*.bmp"));
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.setTitle("Load generation");
         fileChooser.setInitialFileName("generation");
