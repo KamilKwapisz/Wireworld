@@ -69,6 +69,8 @@ public class SimulationController implements Initializable {
 
     @FXML
     private void backGeneration(ActionEvent event) {
+//        this.simulation.decrementCurrentGenNumber(); // decrementing current gen number
+        this.simulation.loadLastGeneration();
     }
 
     @FXML
@@ -80,7 +82,7 @@ public class SimulationController implements Initializable {
     private void playSimulation(ActionEvent event) {
         if (simulation.isPaused()) {
             simulation.unpause();
-            simulation.runSimulation();
+//            simulation.runSimulation();
         }
     }
 
@@ -107,5 +109,11 @@ public class SimulationController implements Initializable {
             genNumber.setText("0");
         }
     }
-    
+
+    public Label getCurrentGen(){
+        return this.currentGen;
+    }
+
+
+
 }

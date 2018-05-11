@@ -7,12 +7,16 @@ import UserInterface.Insertion.NandInsertion;
 import UserInterface.Insertion.NotInsertion;
 import UserInterface.Insertion.OrInsertion;
 import UserInterface.Insertion.XorInsertion;
+import core.Board;
+import core.Cell;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
 
 
 public class GameGrid {
@@ -107,6 +111,11 @@ public class GameGrid {
             default:
                 break;
         }
+    }
+
+    public void updateGeneration(ArrayList<Cell> cells){
+        for( Cell cell : cells)
+            changeState(cell.getX(), cell.getY(), cell.getType());
     }
 
     public class Tile extends StackPane{

@@ -1,5 +1,7 @@
 package core;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -64,6 +66,12 @@ public class Board{
             }
         }
         return newList;
+    }
+
+    public void updateGeneration(ArrayList<Cell> cells){
+        for(Cell cell : cells){
+            this.addCell(new Cell(cell.getX(), cell.getY(), cell.getType()));
+        }
     }
 
     public void addCell(Cell cell) throws IndexOutOfBoundsException{
@@ -174,11 +182,22 @@ public class Board{
 
     }
 
-    public void loadGeneration(int previousGenerationNumber){
+    public Board loadGeneration(int previousGenerationNumber){
+        Board newBoard = new Board(this.getWidth(), this.getHeight());
         String filename = "gen" + previousGenerationNumber + ".txt";
-        try (Stream<String> lines = Files.lines(Paths.get(filename), Charset.defaultCharset())) {
-            lines.forEachOrdered(System.out::println);
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // process the line.
+                int x = Character.getNumericValue(line.charAt(1));
+                int y = Character.getNumericValue(line.charAt(3));
+                int type = Character.getNumericValue(line.charAt(6));
+                newBoard.addCell(new Cell(x, y, type));
+
+            }
         } catch (Exception e){}
+
+        return newBoard;
     }
 
 
@@ -187,7 +206,10 @@ public class Board{
         b.addCell(new Cell(0, 0,1));
         b.addCell(new Cell(1, 1,2));
         b.saveGeneration(1);
-        b.loadGeneration(1);
+        b.addCell(new Cell(0, 0,0));
+        b.addCell(new Cell(1, 1,0));
+        b = b.loadGeneration(1);
+        b.printBoard();
     }
 
 

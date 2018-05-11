@@ -3,26 +3,69 @@ package core;
 import UserInterface.Controllers.GameGrid;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import utils.SizedStack;
 
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 public class WireworldSimulation extends Thread{
 
     private int numberOfIterations; // number of generations to create
     private double delay;
     private boolean isPaused;
+    private int currentGenerationNumber; // number of currently processed generation
     private GameGrid grid;
     private Board board = null;
+    private SizedStack<ArrayList<Cell>> lastGenerations; // stack containing 5 recently created generations
+    private final int STACKSIZE = 5;
 
     public WireworldSimulation(int gen_number, double delay, GameGrid game){
         setNumberOfIterations(gen_number);
         setDelay(delay);
         this.isPaused = true;
         this.grid = game;
+        this.lastGenerations = new SizedStack<ArrayList<Cell>>(this.STACKSIZE + 1);
+    }
+
+    private void rememberCurrentGeneration(){
+        ArrayList<Cell> cells = board.getNotEmptyCells();
+        lastGenerations.push( cells );
+    }
+
+    public void loadLastGeneration(){
+        Board board = this.board;
+        GameGrid grid = this.grid;
+
+        Service<Void> backgroundThread;
+        backgroundThread = new Service<Void>(){
+
+            @Override
+            protected Task<Void> createTask(){
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        if( lastGenerations.size() > 0) {
+                            ArrayList<Cell> cells = lastGenerations.pop();
+                            board.updateGeneration(cells);
+                            grid.updateGeneration(cells);
+                            decrementCurrentGenNumber();
+                        }
+                        return null;
+                    }
+                };
+            }
+        };
+        backgroundThread.restart();
+
+
+    }
+
+
+    public int getCurrentGenerationNumber(){ return currentGenerationNumber; }
+    public void setCurrentGenerationNumber(int number){ this.currentGenerationNumber = number; }
+    public void incrementCurrentGenNumber(){this.currentGenerationNumber += 1;}
+    public void decrementCurrentGenNumber(){
+        if( this.currentGenerationNumber > 1)
+            this.currentGenerationNumber -= 1;
     }
 
     public int getNumberOfIterations() { return numberOfIterations; }
@@ -96,6 +139,7 @@ public class WireworldSimulation extends Thread{
             changeCellType(cell);
         }
         changeCellsColors(notEmptyCells);
+        rememberCurrentGeneration();
 
         // for debug purpose only
 //        this.board.printBoard();
@@ -119,11 +163,14 @@ public class WireworldSimulation extends Thread{
                 return new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
-                        int currentGenerationNumber = 1;
-                        while( ( currentGenerationNumber < genMaxNumber ) || genMaxNumber == 0){
+                        setCurrentGenerationNumber(1);
+                        int a = 0;
+                        while( ( getCurrentGenerationNumber() < genMaxNumber ) || genMaxNumber == 0){
+//                            System.out.println(getCurrentGenerationNumber());
+
                             if( !isPaused ) {
                                 nextGeneration(); // create next generation
-                                currentGenerationNumber++;
+                                incrementCurrentGenNumber();
                                 System.out.println(currentGenerationNumber);
 
                                 try{
@@ -132,6 +179,9 @@ public class WireworldSimulation extends Thread{
                                 } catch (InterruptedException e){
                                     e.printStackTrace();
                                 }
+                            }
+                            else{
+                                Thread.sleep(2);
                             }
                         }
                         return null;
