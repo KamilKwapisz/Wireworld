@@ -3,7 +3,12 @@ package core;
 import UserInterface.Controllers.GameGrid;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class WireworldSimulation extends Thread{
 
@@ -138,5 +143,6 @@ public class WireworldSimulation extends Thread{
 
     public GameGrid getGrid() { return grid; }
     public Board getBoard() { return board; }
+
 
 }

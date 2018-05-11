@@ -1,7 +1,12 @@
 package core;
 
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 public class Board{
 
@@ -159,9 +164,30 @@ public class Board{
         System.out.println();
     }
 
+    public void saveGeneration(int genNumber){
+        String fname = "gen" + genNumber + ".txt";
+        ArrayList<Cell> cells = getNotEmptyCells();
+        try (PrintWriter out = new PrintWriter(fname)) {
+            for( Cell cell : cells)
+                out.println(cell.toString());
+        } catch (Exception e){}
+
+    }
+
+    public void loadGeneration(int previousGenerationNumber){
+        String filename = "gen" + previousGenerationNumber + ".txt";
+        try (Stream<String> lines = Files.lines(Paths.get(filename), Charset.defaultCharset())) {
+            lines.forEachOrdered(System.out::println);
+        } catch (Exception e){}
+    }
+
+
     public static void main(String[] args) {
         Board b = new Board(2, 2);
-        b.addCell(new Cell(3, 3,1));
+        b.addCell(new Cell(0, 0,1));
+        b.addCell(new Cell(1, 1,2));
+        b.saveGeneration(1);
+        b.loadGeneration(1);
     }
 
 

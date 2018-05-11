@@ -89,10 +89,10 @@ public class Cell {
 
     @Override
     public String toString(){
-        // (x, y)[type]
+        // (x,y)[type]
         StringBuilder sb = new StringBuilder("");
         sb.append("(").append(getX())
-                .append(", ")
+                .append(",")
                 .append(getY()).append(")[")
                 .append(this.type).append("]");
         return sb.toString();
