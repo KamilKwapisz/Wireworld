@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.Stack;
+import static org.assertj.core.api.Assertions.*;
 
 public class SizedStack<T> extends Stack<T> {
     private int maxSize;
@@ -28,5 +29,9 @@ public class SizedStack<T> extends Stack<T> {
         stack.push(5);
         stack.push(6);
         System.out.println(stack.toString());
+
+        assertThat(stack).containsOnly(2, 3, 4, 5, 6);
+
+        System.out.println(stack.size());
     }
 }

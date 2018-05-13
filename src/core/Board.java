@@ -1,14 +1,6 @@
 package core;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.stream.Stream;
 
 public class Board{
 
@@ -170,46 +162,6 @@ public class Board{
             System.out.println();
         }
         System.out.println();
-    }
-
-    public void saveGeneration(int genNumber){
-        String fname = "gen" + genNumber + ".txt";
-        ArrayList<Cell> cells = getNotEmptyCells();
-        try (PrintWriter out = new PrintWriter(fname)) {
-            for( Cell cell : cells)
-                out.println(cell.toString());
-        } catch (Exception e){}
-
-    }
-
-    public Board loadGeneration(int previousGenerationNumber){
-        Board newBoard = new Board(this.getWidth(), this.getHeight());
-        String filename = "gen" + previousGenerationNumber + ".txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                // process the line.
-                int x = Character.getNumericValue(line.charAt(1));
-                int y = Character.getNumericValue(line.charAt(3));
-                int type = Character.getNumericValue(line.charAt(6));
-                newBoard.addCell(new Cell(x, y, type));
-
-            }
-        } catch (Exception e){}
-
-        return newBoard;
-    }
-
-
-    public static void main(String[] args) {
-        Board b = new Board(2, 2);
-        b.addCell(new Cell(0, 0,1));
-        b.addCell(new Cell(1, 1,2));
-        b.saveGeneration(1);
-        b.addCell(new Cell(0, 0,0));
-        b.addCell(new Cell(1, 1,0));
-        b = b.loadGeneration(1);
-        b.printBoard();
     }
 
 
