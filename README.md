@@ -15,7 +15,6 @@ Implementation of cellular automata based on Brian Silverman's Wireworld.
 
 ## Author
 
-*
 * [Konrad Magiera](https://github.com/KonradMagiera)
 * [Kamil Kwapisz](https://github.com/KamilKwapisz)
 
