@@ -1,4 +1,4 @@
-# Wireworld  v0.7
+# Wireworld
 
 Implementation of cellular automata based on Brian Silverman's Wireworld.
 
@@ -8,13 +8,25 @@ Implementation of cellular automata based on Brian Silverman's Wireworld.
 * JavaFX
 * [AssertJ](http://joel-costigliola.github.io/assertj/)
 
-
 ## Version
 
 0.7
 
-## Author
+## Features
 
+* drawing electrical circuits on the board using left and right mouse buttons,
+* creating setted up number of generations,
+* loading generations from png and bmp file,
+* saving generations to png and bmp file,
+* 3 sizes of the wireworld board,
+* inserting AND, OR, XOR, NAND, NOT logic gates in 4 directions,
+* clearing board,
+* changing speed of simulation,
+* restoring up to 6 previous generations,
+* pausing and unpausing simulation,
+* creating single next generation manually.
+
+## Authors
 * [Konrad Magiera](https://github.com/KonradMagiera)
 * [Kamil Kwapisz](https://github.com/KamilKwapisz)
 
