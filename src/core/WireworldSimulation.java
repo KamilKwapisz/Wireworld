@@ -3,6 +3,7 @@ package core;
 import UserInterface.Controllers.GameGrid;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.control.Label;
 import utils.SizedStack;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class WireworldSimulation extends Thread{
     private Board board = null;
     private SizedStack<ArrayList<Cell>> lastGenerations; // stack containing 5 recently created generations
     private final int STACKSIZE = 5;
+    private Label currentGenNumberLabel;
 
     public WireworldSimulation(int gen_number, double delay, GameGrid game){
         setNumberOfIterations(gen_number);
@@ -48,6 +50,7 @@ public class WireworldSimulation extends Thread{
                             board.updateGeneration(cells);
                             grid.updateGeneration(cells);
                             decrementCurrentGenNumber();
+
                         }
                         return null;
                     }
@@ -140,20 +143,18 @@ public class WireworldSimulation extends Thread{
         }
         changeCellsColors(notEmptyCells);
         rememberCurrentGeneration();
+        incrementCurrentGenNumber();
 
-        // for debug purpose only
-//        this.board.printBoard();
     }
 
+    public void changeGenNumberText(int genNumber){
+        this.currentGenNumberLabel.setText(genNumber+ "");
+    }
 
     public void runSimulation(){
-        System.out.println("TEST");
-
         initializeBoardFromGrid(); // initializing board with size of the GUI grid
 
-//        this.isPaused = true;
         int genMaxNumber = this.numberOfIterations;
-        int DelayValue = (int)(this.delay * 1000); // delay value in milliseconds
 
         Service<Void> backgroundThread;
         backgroundThread = new Service<Void>(){
@@ -164,18 +165,14 @@ public class WireworldSimulation extends Thread{
                     @Override
                     protected Void call() throws Exception {
                         setCurrentGenerationNumber(1);
-                        int a = 0;
                         while( ( getCurrentGenerationNumber() < genMaxNumber ) || genMaxNumber == 0){
-//                            System.out.println(getCurrentGenerationNumber());
-
                             if( !isPaused ) {
                                 nextGeneration(); // create next generation
-                                incrementCurrentGenNumber();
                                 System.out.println(currentGenerationNumber);
 
                                 try{
-                                    //sleep(DelayValue);
                                     sleep((int)(delay * 1000)); //delay value in milliseconds
+
                                 } catch (InterruptedException e){
                                     e.printStackTrace();
                                 }
@@ -183,17 +180,27 @@ public class WireworldSimulation extends Thread{
                             else{
                                 Thread.sleep(2);
                             }
+                            updateMessage("" + currentGenerationNumber); // updating message for current gen number label
                         }
                         return null;
                     }
                 };
             }
         };
+        try {
+            this.currentGenNumberLabel.textProperty().bind(backgroundThread.messageProperty());  // changing current gen label to message prepared before
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         backgroundThread.restart();
     }
 
     public GameGrid getGrid() { return grid; }
     public Board getBoard() { return board; }
+
+    public void setCurrentGenNumberLabel(Label currentGenNumberLabel) {
+        this.currentGenNumberLabel = currentGenNumberLabel;
+    }
 
 
 }
