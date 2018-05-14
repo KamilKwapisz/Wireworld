@@ -241,6 +241,7 @@ public class MainController implements Initializable {
     @FXML
     private void clearGrid(ActionEvent event) {
         game.clearGrid();
+        simulation.clearBoard();
     }
 
     @FXML

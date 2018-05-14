@@ -77,6 +77,7 @@ public class WireworldSimulation extends Thread{
         if( numberOfIterations < 0)
             throw new IllegalStateException("Generation number must not be a negative number.");
         this.numberOfIterations = n;
+        setCurrentGenerationNumber(1);
     }
     
     public double getDelay() { return delay; }
@@ -97,6 +98,7 @@ public class WireworldSimulation extends Thread{
         int y_tiles = grid.getYTiles();
 
         this.board = new Board(x_tiles, y_tiles);
+        setCurrentGenerationNumber(1);  // resetting gen number counter
     }
 
     public void getCellsFromGrid(){
@@ -147,14 +149,10 @@ public class WireworldSimulation extends Thread{
 
     }
 
-    public void changeGenNumberText(int genNumber){
-        this.currentGenNumberLabel.setText(genNumber+ "");
-    }
-
     public void runSimulation(){
         initializeBoardFromGrid(); // initializing board with size of the GUI grid
 
-        int genMaxNumber = this.numberOfIterations;
+//        int genMaxNumber = this.numberOfIterations;
 
         Service<Void> backgroundThread;
         backgroundThread = new Service<Void>(){
@@ -201,6 +199,16 @@ public class WireworldSimulation extends Thread{
 
     public void setCurrentGenNumberLabel(Label currentGenNumberLabel) {
         this.currentGenNumberLabel = currentGenNumberLabel;
+    }
+
+    public void clearBoard(){
+        for(int i = 0; i < grid.getXTiles(); i++){
+            for(int j=0; j < grid.getYTiles(); j++){
+                this.board.addCell( new Cell(i, j, 0 ) );
+            }
+        }
+
+        setCurrentGenerationNumber(1);
     }
 
 
