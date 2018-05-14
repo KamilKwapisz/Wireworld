@@ -43,7 +43,7 @@ public class GameGrid {
         grid = new Tile[X_TILES][Y_TILES];
     }
     
-    public Parent createContent() {
+    public Parent fillGrid() {
         Pane root = new Pane();
         root.setPrefSize(WIDTH, HEIGHT);
         
