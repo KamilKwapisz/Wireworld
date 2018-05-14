@@ -97,8 +97,8 @@ public class MainController implements Initializable {
 
         game = new GameGrid();
         mediumGrid.setSelected(true);
-        wireDisplay.setCenter(game.createContent());
-        //wireDisplay.getChildren().add(game.createContent());
+        wireDisplay.setCenter(game.fillGrid());
+        //wireDisplay.getChildren().add(game.fillGrid());
 
         // initializing simulation with default values
         simulation = new WireworldSimulation(0, 0.2, this.getGame());
@@ -256,7 +256,7 @@ public class MainController implements Initializable {
             GameGrid small = new GameGrid(40);
             wireDisplay.getChildren().clear();
             game = small;
-            wireDisplay.setCenter(game.createContent());
+            wireDisplay.setCenter(game.fillGrid());
         }
         simulation.setNewGrid(game);
     }
@@ -274,7 +274,7 @@ public class MainController implements Initializable {
             GameGrid medium = new GameGrid(20);
             wireDisplay.getChildren().clear();
             game = medium;
-            wireDisplay.setCenter(game.createContent());
+            wireDisplay.setCenter(game.fillGrid());
         }
         simulation.setNewGrid(game);
     }
@@ -292,7 +292,7 @@ public class MainController implements Initializable {
             GameGrid large = new GameGrid(10);
             wireDisplay.getChildren().clear();
             game = large;
-            wireDisplay.setCenter(game.createContent());
+            wireDisplay.setCenter(game.fillGrid());
         }
         simulation.setNewGrid(game);
     }

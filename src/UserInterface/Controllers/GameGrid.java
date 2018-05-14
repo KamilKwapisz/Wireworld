@@ -7,7 +7,6 @@ import UserInterface.Insertion.NandInsertion;
 import UserInterface.Insertion.NotInsertion;
 import UserInterface.Insertion.OrInsertion;
 import UserInterface.Insertion.XorInsertion;
-import core.Board;
 import core.Cell;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
@@ -43,7 +42,7 @@ public class GameGrid {
         grid = new Tile[X_TILES][Y_TILES];
     }
     
-    public Parent createContent() {
+    public Parent fillGrid() {
         Pane root = new Pane();
         root.setPrefSize(WIDTH, HEIGHT);
         
@@ -138,7 +137,7 @@ public class GameGrid {
             
             setOnMousePressed(e ->changeState(e, this.state));
             setOnMouseEntered(en ->placeIsAllowed());
-            setOnMouseExited(ex->placeExit());
+            setOnMouseExited(ex->exitInsertMode());
 
             
 
@@ -341,7 +340,7 @@ public class GameGrid {
                 }
             }
         }
-        private void placeExit(){
+        private void exitInsertMode(){
             if(insertionFlag == NORMAL){
                 
             } else{
