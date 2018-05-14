@@ -164,24 +164,25 @@ public class WireworldSimulation extends Thread{
                 return new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
-                        setCurrentGenerationNumber(1);
-                        while( ( getCurrentGenerationNumber() < genMaxNumber ) || genMaxNumber == 0){
-                            if( !isPaused ) {
-                                nextGeneration(); // create next generation
-                                System.out.println(currentGenerationNumber);
+                        try {
+                            setCurrentGenerationNumber(1);
+                            while ((getCurrentGenerationNumber() < numberOfIterations) || numberOfIterations == 0) {
+                                if (!isPaused) {
+                                    nextGeneration(); // create next generation
+                                    System.out.println(currentGenerationNumber);
 
-                                try{
-                                    sleep((int)(delay * 1000)); //delay value in milliseconds
+                                    try {
+                                        sleep((int) (delay * 1000)); //delay value in milliseconds
 
-                                } catch (InterruptedException e){
-                                    e.printStackTrace();
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    Thread.sleep(2);
                                 }
+                                updateMessage("" + currentGenerationNumber); // updating message for current gen number label
                             }
-                            else{
-                                Thread.sleep(2);
-                            }
-                            updateMessage("" + currentGenerationNumber); // updating message for current gen number label
-                        }
+                        }catch (Exception e){}
                         return null;
                     }
                 };
