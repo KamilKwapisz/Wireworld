@@ -247,13 +247,9 @@ public class MainController implements Initializable {
     @FXML
     private void setSmallGrid(ActionEvent event) {
         if(smallGrid.isSelected() && !mediumGrid.isSelected() && !largeGrid.isSelected()){
-            smallGrid.setSelected(true);
-            mediumGrid.setSelected(false);
-            largeGrid.setSelected(false);
+            setMenuItemGridSizeSelection(true, false, false);
         } else {
-            smallGrid.setSelected(true);
-            mediumGrid.setSelected(false);
-            largeGrid.setSelected(false);
+            setMenuItemGridSizeSelection(true, false, false);
             GameGrid small = new GameGrid(40);
             wireDisplay.getChildren().clear();
             game = small;
@@ -270,13 +266,9 @@ public class MainController implements Initializable {
     @FXML
     private void setMediumGrid(ActionEvent event) {
         if(mediumGrid.isSelected() && !largeGrid.isSelected() && !smallGrid.isSelected()){
-            smallGrid.setSelected(false);
-            mediumGrid.setSelected(true);
-            largeGrid.setSelected(false);
+            setMenuItemGridSizeSelection(false, true, false);
         } else {
-            smallGrid.setSelected(false);
-            mediumGrid.setSelected(true);
-            largeGrid.setSelected(false);
+            setMenuItemGridSizeSelection(false, true, false);
             GameGrid medium = new GameGrid(20);
             wireDisplay.getChildren().clear();
             game = medium;
@@ -292,13 +284,9 @@ public class MainController implements Initializable {
     @FXML
     private void setLargeGrid(ActionEvent event) {
         if(largeGrid.isSelected() && !mediumGrid.isSelected() && !smallGrid.isSelected()){
-            smallGrid.setSelected(false);
-            mediumGrid.setSelected(false);
-            largeGrid.setSelected(true);
+            setMenuItemGridSizeSelection(false, false, true);
         } else {
-            smallGrid.setSelected(false);
-            mediumGrid.setSelected(false);
-            largeGrid.setSelected(true);
+            setMenuItemGridSizeSelection(false, false, true);
             GameGrid large = new GameGrid(10);
             wireDisplay.getChildren().clear();
             game = large;
@@ -319,9 +307,11 @@ public class MainController implements Initializable {
     public void setStage(Stage stage){
         this.stage = stage;
     }
-//
 
-
-
+    private void setMenuItemGridSizeSelection(boolean small, boolean medium, boolean large){
+            smallGrid.setSelected(small);
+            mediumGrid.setSelected(medium);
+            largeGrid.setSelected(large);
+    }
 
 }
