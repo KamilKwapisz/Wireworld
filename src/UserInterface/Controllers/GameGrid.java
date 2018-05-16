@@ -54,7 +54,6 @@ public class GameGrid {
                 root.getChildren().add(tile);
             }
         }
-
         return root;
     }
     
@@ -70,8 +69,7 @@ public class GameGrid {
     public void clearGrid(){
         for(int x = 0; x < X_TILES; x++){
             for(int y = 0; y < Y_TILES; y++){
-                changeState(x, y, 0);
-                //grid[x][y].blackTile();
+                changeState(x, y, 0);;
             }
         }
     }
@@ -138,9 +136,6 @@ public class GameGrid {
             setOnMousePressed(e ->changeState(e, this.state));
             setOnMouseEntered(en ->placeIsAllowed());
             setOnMouseExited(ex->exitInsertMode());
-
-            
-
         }
         
         public int getX(){
@@ -157,198 +152,136 @@ public class GameGrid {
         
 
         private void blackTile(){
-            this.state = 0;
-            this.color = Color.BLACK;
-            border.setFill(color);
+            if(this.state != 0){
+                this.state = 0;
+                this.color = Color.BLACK;
+                border.setFill(color);
+            }
         }
         public void yellowTile(){
-            this.state = 1;
-            this.color = Color.YELLOW;
-            border.setFill(color);
+            if(this.state != 1){
+                this.state = 1;
+                this.color = Color.YELLOW;
+                border.setFill(color);
+            }
         }
         public void blueTile(){
-            this.state = 3;
-            this.color = Color.BLUE;
-            border.setFill(color);
+            if(this.state != 3){
+                this.state = 3;
+                this.color = Color.BLUE;
+                border.setFill(color);
+            }
         }
         public void redTile(){
-            this.state = 2;
-            this.color = Color.RED;
-            border.setFill(color);
+            if(this.state != 2){
+                this.state = 2;
+                this.color = Color.RED;
+                border.setFill(color);
+            }
+        }
+        
+        private void highlightTile(){
+            if(color == Color.BLACK){
+                border.setFill(this.color.brighter().brighter().brighter().brighter());
+            } else{
+                border.setFill(this.color.darker());
+            }
         }
         
         private void placeIsAllowed(){
             if(insertionFlag == AND_TOP){
                 if(this.x >= 3 && this.x <= X_TILES - 6 && this.y >= 17){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == AND_BOT){
                 if(this.x >= 5 && this.x <= X_TILES - 4 && this.y <= Y_TILES - 18){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == AND_LEFT){
                 if(this.x >= 17 && this.y >= 5 && this.y <= Y_TILES - 4){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == AND_RIGHT){
                 if(this.x <= X_TILES - 18 && this.y >= 3 && this.y <= Y_TILES - 6){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == OR_TOP){
                 if(this.x >= 1 && this.x <= X_TILES - 4 && this.y >= 8){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == OR_BOT){
                 if(this.x >= 3 && this.x <= X_TILES - 2 && this.y <= Y_TILES - 9){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == OR_LEFT){
                 if(this.x >= 8 && this.y >= 3 && this.y <= Y_TILES - 2){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == OR_RIGHT){
                 if(this.x <= X_TILES - 9 && this.y >= 1 && this.y <= Y_TILES - 4){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == XOR_TOP){
                 if(this.x >= 2 && this.x <= X_TILES - 4 && this.y >= 10){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == XOR_BOT){
                 if(this.x >= 4 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 11){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == XOR_LEFT){
                 if(this.x >= 10 && this.y >= 4 && this.y <= Y_TILES - 3){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == XOR_RIGHT){
                 if(this.x <= X_TILES - 11 && this.y >= 2 && this.y <= Y_TILES - 5){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == NAND_TOP){
                 if(this.x >= 5 && this.x <= X_TILES - 8 && this.y >= 13){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == NAND_BOT){
                 if(this.x >= 7 && this.x <= X_TILES - 6 && this.y <= Y_TILES - 14){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == NAND_LEFT){
                 if(this.x >= 13 && this.y >= 7 && this.y <= Y_TILES - 6){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == NAND_RIGHT){
                 if(this.x <= X_TILES - 14 && this.y >= 5 && this.y <= Y_TILES - 8){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == NOT_TOP){
                 if(this.x >= 2 && this.x <= X_TILES - 4 && this.y >= 11){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == NOT_BOT){
                 if(this.x >= 2 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 12){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == NOT_LEFT){
                 if(this.x >= 11 && this.y >= 2 && this.y <= Y_TILES - 3){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             } else if(insertionFlag == NOT_RIGHT){
                 if(this.x <= X_TILES - 12 && this.y >= 2 && this.y <= Y_TILES - 4){
-                    if(color == Color.BLACK){
-                        border.setFill(this.color.brighter().brighter().brighter().brighter());
-                    } else{
-                        border.setFill(this.color.darker());
-                    }
+                    highlightTile();
                 }
             }
         }
         private void exitInsertMode(){
-            if(insertionFlag == NORMAL){
-                
-            } else{
+            if(insertionFlag != NORMAL){
                 border.setFill(this.color);
             }
         }
                 
-                
+        private void cancelInserting(){
+            border.setFill(this.color);
+            insertionFlag = NORMAL;
+        }
+        
         private void changeState(MouseEvent e, int currentState){
             if(insertionFlag == NORMAL){
                 if(e.isPrimaryButtonDown()){
@@ -375,8 +308,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == AND_BOT){
                 if(e.isPrimaryButtonDown()){
@@ -387,8 +319,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == AND_LEFT){
                 if(e.isPrimaryButtonDown()){
@@ -399,8 +330,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == AND_RIGHT){
                 if(e.isPrimaryButtonDown()){
@@ -411,8 +341,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == OR_TOP){
                 if(e.isPrimaryButtonDown()){
@@ -423,8 +352,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == OR_BOT){
                 if(e.isPrimaryButtonDown()){
@@ -435,8 +363,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == OR_LEFT){
                 if(e.isPrimaryButtonDown()){
@@ -447,8 +374,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == OR_RIGHT){
                 if(e.isPrimaryButtonDown()){
@@ -459,8 +385,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == XOR_TOP){
                 if(e.isPrimaryButtonDown()){
@@ -471,8 +396,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == XOR_BOT){
                 if(e.isPrimaryButtonDown()){
@@ -483,8 +407,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == XOR_LEFT){
                 if(e.isPrimaryButtonDown()){
@@ -495,8 +418,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == XOR_RIGHT){
                 if(e.isPrimaryButtonDown()){
@@ -507,8 +429,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == NAND_TOP){
                 if(e.isPrimaryButtonDown()){
@@ -519,8 +440,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == NAND_BOT){
                 if(e.isPrimaryButtonDown()){
@@ -531,8 +451,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == NAND_LEFT){
                 if(e.isPrimaryButtonDown()){
@@ -543,8 +462,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == NAND_RIGHT){
                 if(e.isPrimaryButtonDown()){
@@ -555,8 +473,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == NOT_TOP){
                 if(e.isPrimaryButtonDown()){
@@ -567,8 +484,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == NOT_BOT){
                 if(e.isPrimaryButtonDown()){
@@ -579,8 +495,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == NOT_LEFT){
                 if(e.isPrimaryButtonDown()){
@@ -591,8 +506,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             } else if(insertionFlag == NOT_RIGHT){
                 if(e.isPrimaryButtonDown()){
@@ -603,8 +517,7 @@ public class GameGrid {
                     }
                 } else if(e.isSecondaryButtonDown()){
                     /* cancel inserting */
-                    border.setFill(this.color);
-                    insertionFlag = NORMAL;
+                    cancelInserting();
                 }
             }
         }  

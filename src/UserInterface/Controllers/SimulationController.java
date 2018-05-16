@@ -2,7 +2,6 @@ package UserInterface.Controllers;
 
 import UserInterface.Fxml.NumOfGenField;
 import java.net.URL;
-import java.text.NumberFormat;
 import java.util.ResourceBundle;
 import core.WireworldSimulation;
 import javafx.beans.value.ChangeListener;
@@ -13,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 
 

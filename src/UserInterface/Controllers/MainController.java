@@ -68,10 +68,6 @@ public class MainController implements Initializable {
     private CheckMenuItem mediumGrid;
     @FXML
     private CheckMenuItem largeGrid;
-
-    private GameGrid game;
-    private WireworldSimulation simulation;
-    private Stage stage;
     @FXML
     private MenuItem notRight;
     @FXML
@@ -80,6 +76,10 @@ public class MainController implements Initializable {
     private MenuItem notBottom;
     @FXML
     private MenuItem notLeft;
+    
+    private GameGrid game;
+    private WireworldSimulation simulation;
+    private Stage stage;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -98,7 +98,6 @@ public class MainController implements Initializable {
         game = new GameGrid();
         mediumGrid.setSelected(true);
         wireDisplay.setCenter(game.fillGrid());
-        //wireDisplay.getChildren().add(game.fillGrid());
 
         // initializing simulation with default values
         simulation = new WireworldSimulation(0, 0.2, this.getGame());
@@ -121,20 +120,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void placeAndTop(ActionEvent event) {
-
         game.setInsertionFlag(AND_TOP);
-
-
-        //    simulation.runSimulation();
-//        try{
-////            Thread.sleep(1000);
-////            simulation.pause();
-////            Thread.sleep(1500);
-////            simulation.unpause();
-////        } catch (Exception e){
-////
-////        }
-
     }
 
     @FXML
@@ -250,17 +236,9 @@ public class MainController implements Initializable {
             setMenuItemGridSizeSelection(true, false, false);
         } else {
             setMenuItemGridSizeSelection(true, false, false);
-            GameGrid small = new GameGrid(40);
-            wireDisplay.getChildren().clear();
-            game = small;
-            wireDisplay.setCenter(game.fillGrid());
-
-
+            reloadDisplayedGrid(40);
         }
-        simulation.pause();
-        simulation.setNewGrid(game);
-        simulation.initializeBoardFromGrid();
-
+        reloadSimulationForNewGrid();
     }
 
     @FXML
@@ -269,16 +247,9 @@ public class MainController implements Initializable {
             setMenuItemGridSizeSelection(false, true, false);
         } else {
             setMenuItemGridSizeSelection(false, true, false);
-            GameGrid medium = new GameGrid(20);
-            wireDisplay.getChildren().clear();
-            game = medium;
-            wireDisplay.setCenter(game.fillGrid());
-
-
+            reloadDisplayedGrid(20);
         }
-        simulation.pause();
-        simulation.setNewGrid(game);
-        simulation.initializeBoardFromGrid();
+        reloadSimulationForNewGrid();
     }
 
     @FXML
@@ -287,16 +258,9 @@ public class MainController implements Initializable {
             setMenuItemGridSizeSelection(false, false, true);
         } else {
             setMenuItemGridSizeSelection(false, false, true);
-            GameGrid large = new GameGrid(10);
-            wireDisplay.getChildren().clear();
-            game = large;
-            wireDisplay.setCenter(game.fillGrid());
-
-
+            reloadDisplayedGrid(10);
         }
-        simulation.pause();
-        simulation.setNewGrid(game);
-        simulation.initializeBoardFromGrid();
+        reloadSimulationForNewGrid();
 
     }
 
@@ -312,6 +276,19 @@ public class MainController implements Initializable {
             smallGrid.setSelected(small);
             mediumGrid.setSelected(medium);
             largeGrid.setSelected(large);
+    }
+    
+    private void reloadSimulationForNewGrid(){
+        simulation.pause();
+        simulation.setNewGrid(game);
+        simulation.initializeBoardFromGrid();
+    }
+    
+    private void reloadDisplayedGrid(int size){
+        GameGrid newGame = new GameGrid(size);
+        wireDisplay.getChildren().clear();
+        game = newGame;
+        wireDisplay.setCenter(game.fillGrid());
     }
 
 }
