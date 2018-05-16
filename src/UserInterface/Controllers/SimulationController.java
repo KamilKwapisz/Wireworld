@@ -101,8 +101,14 @@ public class SimulationController implements Initializable {
     @FXML
     private void applyGenNumber(ActionEvent event) {
         try{
-        numberOfGenerations = Integer.parseInt(genNumber.getText());
-        simulation.setNumberOfIterations(numberOfGenerations);
+            if(simulation.getCurrentGenerationNumber() == simulation.getNumberOfIterations()){
+                simulation.runSimulation();
+                simulation.pause();
+            }
+
+            numberOfGenerations = Integer.parseInt(genNumber.getText());
+            simulation.setNumberOfIterations(numberOfGenerations);
+            simulation.setCurrentGenerationNumber(1);
         } catch(NumberFormatException e){
             System.out.println("Number of generations is missing or is too big. Number of generations is beeing set to 0.");
             numberOfGenerations = 0;
