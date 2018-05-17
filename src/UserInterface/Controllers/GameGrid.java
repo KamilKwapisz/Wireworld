@@ -3,6 +3,7 @@ package UserInterface.Controllers;
 import UserInterface.Insertion.AndInsertion;
 import UserInterface.Insertion.InsertionFlag;
 import static UserInterface.Insertion.InsertionFlag.*;
+import UserInterface.Insertion.LogicGate;
 import UserInterface.Insertion.NandInsertion;
 import UserInterface.Insertion.NotInsertion;
 import UserInterface.Insertion.OrInsertion;
@@ -25,8 +26,8 @@ public class GameGrid {
     private static int X_TILES = WIDTH / TILE_SIZE;
     private static int Y_TILES = HEIGHT / TILE_SIZE;;
     private Tile[][] grid;
-
     private InsertionFlag insertionFlag = NORMAL;
+    private LogicGate logicGate;
     
     public void setInsertionFlag(InsertionFlag flag){
         this.insertionFlag = flag;
@@ -36,10 +37,12 @@ public class GameGrid {
         setTileSize(size);
         calculateTilesNumber();
         grid = new Tile[X_TILES][Y_TILES];
+        logicGate = new LogicGate(grid);
     }
 
     public GameGrid(){
         grid = new Tile[X_TILES][Y_TILES];
+        logicGate = new LogicGate(grid);
     }
     
     public Parent fillGrid() {
@@ -135,7 +138,7 @@ public class GameGrid {
             
             setOnMousePressed(e ->changeState(e, this.state));
             setOnMouseEntered(en ->placeIsAllowed());
-            setOnMouseExited(ex->exitInsertMode());
+            setOnMouseExited(ex->leaveTile());
         }
         
         public int getX(){
@@ -188,6 +191,7 @@ public class GameGrid {
             }
         }
         
+        /* Highloghts tiles when user can insert logicGate. Used in onEntered event */
         private void placeIsAllowed(){
             if(insertionFlag == AND_TOP){
                 if(this.x >= 3 && this.x <= X_TILES - 6 && this.y >= 17){
@@ -271,7 +275,8 @@ public class GameGrid {
                 }
             }
         }
-        private void exitInsertMode(){
+        /* recover color when mouse leaves the tile. Works when inserting logicGate in onExit event */
+        private void leaveTile(){
             if(insertionFlag != NORMAL){
                 border.setFill(this.color);
             }
@@ -282,6 +287,33 @@ public class GameGrid {
             insertionFlag = NORMAL;
         }
         
+        private void insertAnd(){
+            logicGate.setProperties(this.x, this.y, insertionFlag);
+            logicGate.insertAnd();
+            insertionFlag = NORMAL;
+        }
+        private void insertOr(){
+            logicGate.setProperties(this.x, this.y, insertionFlag);
+            logicGate.insertOr();
+            insertionFlag = NORMAL;
+        }
+        private void insertXor(){
+            logicGate.setProperties(this.x, this.y, insertionFlag);
+            logicGate.insertXor();
+            insertionFlag = NORMAL;
+        }
+        private void insertNand(){
+            logicGate.setProperties(this.x, this.y, insertionFlag);
+            logicGate.insertNand();
+            insertionFlag = NORMAL;
+        }
+        private void insertNot(){
+            logicGate.setProperties(this.x, this.y, insertionFlag);
+            logicGate.insertNot();
+            insertionFlag = NORMAL;
+        }
+        
+        /* Change tile state or insert logicGate. Used in onPressed event */
         private void changeState(MouseEvent e, int currentState){
             if(insertionFlag == NORMAL){
                 if(e.isPrimaryButtonDown()){
@@ -302,221 +334,161 @@ public class GameGrid {
             } else if(insertionFlag == AND_TOP){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 3 && this.x <= X_TILES - 6 && this.y >= 17){
-                        AndInsertion andInsertion = new AndInsertion();
-                        andInsertion.insertTop(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertAnd();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == AND_BOT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 5 && this.x <= X_TILES - 4 && this.y <= Y_TILES - 18){
-                        AndInsertion andInsertion = new AndInsertion();
-                        andInsertion.insertBottom(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertAnd();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == AND_LEFT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 17 && this.y >= 5 && this.y <= Y_TILES - 4){
-                        AndInsertion andInsertion = new AndInsertion();
-                        andInsertion.insertLeft(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertAnd();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == AND_RIGHT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x <= X_TILES - 18 && this.y >= 3 && this.y <= Y_TILES - 6){
-                        AndInsertion andInsertion = new AndInsertion();
-                        andInsertion.insertRight(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertAnd();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == OR_TOP){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 1 && this.x <= X_TILES - 4 && this.y >= 8){
-                        OrInsertion orInsertion = new OrInsertion();
-                        orInsertion.insertTop(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertOr();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == OR_BOT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 3 && this.x <= X_TILES - 2 && this.y <= Y_TILES - 9){
-                        OrInsertion orInsertion = new OrInsertion();
-                        orInsertion.insertBottom(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertOr();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == OR_LEFT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 8 && this.y >= 3 && this.y <= Y_TILES - 2){
-                        OrInsertion orInsertion = new OrInsertion();
-                        orInsertion.insertLeft(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertOr();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == OR_RIGHT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x <= X_TILES - 9 && this.y >= 1 && this.y <= Y_TILES - 4){
-                        OrInsertion orInsertion = new OrInsertion();
-                        orInsertion.insertRight(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertOr();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == XOR_TOP){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 2 && this.x <= X_TILES - 4 && this.y >= 10){
-                        XorInsertion xorInsertion = new XorInsertion();
-                        xorInsertion.insertTop(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertXor();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == XOR_BOT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 4 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 11){
-                        XorInsertion xorInsertion = new XorInsertion();
-                        xorInsertion.insertBottom(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertXor();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == XOR_LEFT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 10 && this.y >= 4 && this.y <= Y_TILES - 3){
-                        XorInsertion xorInsertion = new XorInsertion();
-                        xorInsertion.insertLeft(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertXor();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == XOR_RIGHT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x <= X_TILES - 11 && this.y >= 2 && this.y <= Y_TILES - 5){
-                        XorInsertion xorInsertion = new XorInsertion();
-                        xorInsertion.insertRight(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertXor();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == NAND_TOP){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 5 && this.x <= X_TILES - 8 && this.y >= 13){
-                        NandInsertion nandInsertion = new NandInsertion();
-                        nandInsertion.insertTop(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertNand();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == NAND_BOT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 7 && this.x <= X_TILES - 6 && this.y <= Y_TILES - 14){
-                        NandInsertion nandInsertion = new NandInsertion();
-                        nandInsertion.insertBottom(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertNand();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == NAND_LEFT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 13 && this.y >= 7 && this.y <= Y_TILES - 6){
-                        NandInsertion nandInsertion = new NandInsertion();
-                        nandInsertion.insertLeft(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertNand();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == NAND_RIGHT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x <= X_TILES - 14 && this.y >= 5 && this.y <= Y_TILES - 8){
-                        NandInsertion nandInsertion = new NandInsertion();
-                        nandInsertion.insertRight(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertNand();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == NOT_TOP){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 2 && this.x <= X_TILES - 4 && this.y >= 11){
-                        NotInsertion notInsertion = new NotInsertion();
-                        notInsertion.insertTop(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertNot();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == NOT_BOT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 2 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 12){
-                        NotInsertion notInsertion = new NotInsertion();
-                        notInsertion.insertBottom(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertNot();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == NOT_LEFT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x >= 11 && this.y >= 2 && this.y <= Y_TILES - 3){
-                        NotInsertion notInsertion = new NotInsertion();
-                        notInsertion.insertLeft(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertNot();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             } else if(insertionFlag == NOT_RIGHT){
                 if(e.isPrimaryButtonDown()){
                     if(this.x <= X_TILES - 12 && this.y >= 2 && this.y <= Y_TILES - 4){
-                        NotInsertion notInsertion = new NotInsertion();
-                        notInsertion.insertRight(grid, x, y);
-                        insertionFlag = NORMAL;
+                        insertNot();
                     }
                 } else if(e.isSecondaryButtonDown()){
-                    /* cancel inserting */
                     cancelInserting();
                 }
             }
