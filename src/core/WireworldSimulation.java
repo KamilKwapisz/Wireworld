@@ -136,6 +136,7 @@ public class WireworldSimulation extends Thread{
 
     public void nextGeneration(){
         // method creates one next generation
+        rememberCurrentGeneration();
 
         getCellsFromGrid(); // get the most recent grid board setup
 
@@ -143,9 +144,10 @@ public class WireworldSimulation extends Thread{
         for (Cell cell : notEmptyCells) {
             changeCellType(cell);
         }
+
         changeCellsColors(notEmptyCells);
-        rememberCurrentGeneration();
         incrementCurrentGenNumber();
+
 
     }
 
