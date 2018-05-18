@@ -4,12 +4,17 @@ import java.util.Stack;
 import static org.assertj.core.api.Assertions.*;
 
 public class SizedStack<T> extends Stack<T> {
-    private int maxSize;
+    private int maxSize = 5;
 
     public SizedStack(int size) {
         super();
         this.maxSize = size;
     }
+
+    public SizedStack(){
+        super();
+    }
+
 
     @Override
     public T push(T object) {
