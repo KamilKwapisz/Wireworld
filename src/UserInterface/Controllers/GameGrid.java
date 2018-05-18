@@ -1,13 +1,8 @@
 package UserInterface.Controllers;
 
-import UserInterface.Insertion.AndInsertion;
 import UserInterface.Insertion.InsertionFlag;
 import static UserInterface.Insertion.InsertionFlag.*;
 import UserInterface.Insertion.LogicGate;
-import UserInterface.Insertion.NandInsertion;
-import UserInterface.Insertion.NotInsertion;
-import UserInterface.Insertion.OrInsertion;
-import UserInterface.Insertion.XorInsertion;
 import core.Cell;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
@@ -62,6 +57,18 @@ public class GameGrid {
     
     private void setTileSize(int size){
         this.TILE_SIZE = size;
+    }
+    
+    public int getTileSize(){
+        return this.TILE_SIZE;
+    }
+    
+    public int getWidth(){
+        return this.WIDTH;
+    }
+    
+    public int getHeight(){
+        return this.HEIGHT;
     }
     
     private void calculateTilesNumber(){

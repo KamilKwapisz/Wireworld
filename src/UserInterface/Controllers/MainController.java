@@ -11,6 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -291,4 +293,19 @@ public class MainController implements Initializable {
         wireDisplay.setCenter(game.fillGrid());
     }
 
+    /* Draw conductor using mouse drag with CTRL */
+    @FXML
+    private void mouseDraggedDraw(MouseEvent event) {
+        if(event.isPrimaryButtonDown() && event.isControlDown()){
+            if(event.getX() >= 0 && event.getX() <= game.getWidth() && event.getY() >= 0 && event.getY() <= game.getHeight()){
+                try{
+                    int tileXCoordinate = (int)event.getX()/game.getTileSize();
+                    int tileYCoordinate = (int)event.getY()/game.getTileSize();
+                    game.changeState(tileXCoordinate, tileYCoordinate, 1);
+                } catch (ArrayIndexOutOfBoundsException e){ /* Prevent drawning when user mouse drag not on the grid */
+                    System.out.println("There is no Tile to change.");
+                }
+            }
+        }
+    }
 }

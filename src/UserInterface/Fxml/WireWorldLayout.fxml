@@ -90,7 +90,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <BorderPane fx:id="wireDisplay" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" />
+      <BorderPane fx:id="wireDisplay" maxWidth="1.7976931348623157E308" onMouseDragged="#mouseDraggedDraw" GridPane.rowIndex="1" />
       <BorderPane fx:id="wireMenu" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2" />
    </children>
 </GridPane>
