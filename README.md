@@ -10,11 +10,13 @@ Implementation of cellular automata based on Brian Silverman's Wireworld.
 
 ## Version
 
-0.7
+1.0
 
 ## Features
 
 * drawing electrical circuits on the board using left and right mouse buttons,
+* drawing conductors with left mouse button and CTRL pressed
+* removing conductors with left mouse button and SHIFT pressed
 * creating setted up number of generations,
 * loading generations from png and bmp file,
 * saving generations to png and bmp file,

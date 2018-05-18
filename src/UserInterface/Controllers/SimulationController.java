@@ -89,8 +89,8 @@ public class SimulationController implements Initializable {
         simulation.nextGeneration();
     }
 
-    public void loadSimulation(WireworldSimulation w_simulation){
-        this.simulation = w_simulation;
+    public void loadSimulation(WireworldSimulation wSimulation){
+        this.simulation = wSimulation;
         this.simulation.setCurrentGenNumberLabel(this.currentGen);
         this.simulation.runSimulation();
         this.simulation.pause();

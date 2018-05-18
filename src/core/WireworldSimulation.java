@@ -91,14 +91,20 @@ public class WireworldSimulation extends Thread{
     public void pause() { isPaused = true; }
     public void unpause() { isPaused = false; }
 
-    public void setNewGrid( GameGrid newGrid ){ this.grid = newGrid; }
+    public void setNewGrid( GameGrid newGrid ){
+        this.grid = newGrid;
+        initializeBoardFromGrid();
+    }
 
     public void initializeBoardFromGrid(){
+
         int x_tiles = grid.getXTiles();
         int y_tiles = grid.getYTiles();
 
+
         this.board = new Board(x_tiles, y_tiles);
         setCurrentGenerationNumber(1);  // resetting gen number counter
+        System.out.println("test " + x_tiles + " = "+y_tiles + " cur "+getCurrentGenerationNumber());
     }
 
     public void getCellsFromGrid(){
@@ -136,7 +142,7 @@ public class WireworldSimulation extends Thread{
 
     public void nextGeneration(){
         // method creates one next generation
-        rememberCurrentGeneration();
+//        rememberCurrentGeneration();
 
         getCellsFromGrid(); // get the most recent grid board setup
 

@@ -234,6 +234,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void setSmallGrid(ActionEvent event) {
+        simulation.pause();
         if(smallGrid.isSelected() && !mediumGrid.isSelected() && !largeGrid.isSelected()){
             setMenuItemGridSizeSelection(true, false, false);
         } else {
@@ -245,6 +246,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void setMediumGrid(ActionEvent event) {
+        simulation.pause();
         if(mediumGrid.isSelected() && !largeGrid.isSelected() && !smallGrid.isSelected()){
             setMenuItemGridSizeSelection(false, true, false);
         } else {
@@ -256,6 +258,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void setLargeGrid(ActionEvent event) {
+        simulation.pause();
         if(largeGrid.isSelected() && !mediumGrid.isSelected() && !smallGrid.isSelected()){
             setMenuItemGridSizeSelection(false, false, true);
         } else {
@@ -283,7 +286,6 @@ public class MainController implements Initializable {
     private void reloadSimulationForNewGrid(){
         simulation.pause();
         simulation.setNewGrid(game);
-        simulation.initializeBoardFromGrid();
     }
     
     private void reloadDisplayedGrid(int size){
