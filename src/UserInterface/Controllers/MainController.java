@@ -297,15 +297,22 @@ public class MainController implements Initializable {
     @FXML
     private void mouseDraggedDraw(MouseEvent event) {
         if(event.isPrimaryButtonDown() && event.isControlDown()){
-            if(event.getX() >= 0 && event.getX() <= game.getWidth() && event.getY() >= 0 && event.getY() <= game.getHeight()){
+            dragChangeState(event, 1);
+        } else if(event.isPrimaryButtonDown() && event.isShiftDown()){
+            dragChangeState(event, 0);
+        }
+    }
+    
+    private void dragChangeState(MouseEvent event, int state){
+        if(event.getX() >= 0 && event.getX() <= game.getWidth() && event.getY() >= 0 && event.getY() <= game.getHeight()){
                 try{
                     int tileXCoordinate = (int)event.getX()/game.getTileSize();
                     int tileYCoordinate = (int)event.getY()/game.getTileSize();
-                    game.changeState(tileXCoordinate, tileYCoordinate, 1);
+                    game.changeState(tileXCoordinate, tileYCoordinate, state);
                 } catch (ArrayIndexOutOfBoundsException e){ /* Prevent drawning when user mouse drag not on the grid */
                     System.out.println("There is no Tile to change.");
                 }
             }
-        }
     }
+    
 }
