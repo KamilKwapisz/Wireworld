@@ -33,11 +33,13 @@ public class GameGrid {
         calculateTilesNumber();
         grid = new Tile[X_TILES][Y_TILES];
         logicGate = new LogicGate(grid);
+        fillGrid();
     }
 
     public GameGrid(){
         grid = new Tile[X_TILES][Y_TILES];
         logicGate = new LogicGate(grid);
+        fillGrid();
     }
     
     public Parent fillGrid() {

@@ -26,6 +26,7 @@ public class WireworldSimulation extends Thread{
         this.isPaused = true;
         this.grid = game;
         this.lastGenerations = new SizedStack<ArrayList<Cell>>(this.STACKSIZE + 1);
+        initializeBoardFromGrid();
     }
 
     private void rememberCurrentGeneration(){
@@ -74,7 +75,7 @@ public class WireworldSimulation extends Thread{
     public int getNumberOfIterations() { return numberOfIterations; }
 
     public void setNumberOfIterations(int n) throws IllegalStateException {
-        if( numberOfIterations < 0)
+        if( n < 0)
             throw new IllegalStateException("Generation number must not be a negative number.");
         this.numberOfIterations = n;
         setCurrentGenerationNumber(1);
@@ -101,10 +102,8 @@ public class WireworldSimulation extends Thread{
         int x_tiles = grid.getXTiles();
         int y_tiles = grid.getYTiles();
 
-
         this.board = new Board(x_tiles, y_tiles);
         setCurrentGenerationNumber(1);  // resetting gen number counter
-        System.out.println("test " + x_tiles + " = "+y_tiles + " cur "+getCurrentGenerationNumber());
     }
 
     public void getCellsFromGrid(){
