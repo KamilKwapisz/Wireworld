@@ -15,6 +15,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 
@@ -82,6 +84,7 @@ public class MainController implements Initializable {
     private GameGrid game;
     private WireworldSimulation simulation;
     private Stage stage;
+    private MediaPlayer musicPlayer;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -104,9 +107,15 @@ public class MainController implements Initializable {
         // initializing simulation with default values
         simulation = new WireworldSimulation(0, 0.2, this.getGame());
 
-        SimulationController menuController = botMenu.getController();
-        menuController.loadSimulation(simulation);
-
+        SimulationController simulationController = botMenu.getController();
+        simulationController.loadSimulation(simulation);
+        
+        Media song = new Media(getClass().getResource("song.mp3").toExternalForm());
+        musicPlayer = new MediaPlayer(song);
+        musicPlayer.setAutoPlay(true);
+        musicPlayer.setVolume(0.5);
+        musicPlayer.pause();
+        simulationController.loadMediaPlayer(musicPlayer);
 
     }
 
@@ -287,6 +296,7 @@ public class MainController implements Initializable {
         if(simulation.getCurrentGenerationNumber() == simulation.getNumberOfIterations()){
             simulation.runSimulation();
         }
+        musicPlayer.pause();
         simulation.pause();
         simulation.setNewGrid(game);
 

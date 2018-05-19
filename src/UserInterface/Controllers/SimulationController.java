@@ -13,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 
 public class SimulationController implements Initializable {
@@ -40,13 +42,14 @@ public class SimulationController implements Initializable {
     
     private WireworldSimulation simulation;
     private int numberOfGenerations = 0;
+    private MediaPlayer musicPlayer;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         delaySlider.setValue(0.2);
         
         //delayValue.textProperty().bindBidirectional(delaySlider.valueProperty(), NumberFormat.getNumberInstance());
-       
+     
         delayValue.setText(Math.round(delaySlider.getValue()) + "");
         delaySlider.valueProperty().addListener(new ChangeListener<Number>() {
         @Override 
@@ -55,6 +58,11 @@ public class SimulationController implements Initializable {
                  delayValue.setText("");
                  return;
             }
+            if(newValue.equals(0.08) && simulation.isPaused() == false){
+                musicPlayer.play();
+            } else{
+                musicPlayer.pause();
+            }
         delayValue.setText((Math.round(newValue.doubleValue() * 100.0) / 100.0) + "");
         simulation.setDelay(Math.round(newValue.doubleValue() * 100.0) / 100.0);
         
@@ -62,6 +70,8 @@ public class SimulationController implements Initializable {
         
         delayValue.setText("0.2");
         genNumber.setText("0");
+        
+        
     }
 
 
@@ -94,9 +104,12 @@ public class SimulationController implements Initializable {
         this.simulation.setCurrentGenNumberLabel(this.currentGen);
         this.simulation.runSimulation();
         this.simulation.pause();
-
-
     }
+    
+    public void loadMediaPlayer(MediaPlayer musicPlayer){
+        this.musicPlayer = musicPlayer;
+    }
+    
 
     @FXML
     private void applyGenNumber(ActionEvent event) {
