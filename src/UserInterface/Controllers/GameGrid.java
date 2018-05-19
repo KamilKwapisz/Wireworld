@@ -33,13 +33,25 @@ public class GameGrid {
         calculateTilesNumber();
         grid = new Tile[X_TILES][Y_TILES];
         logicGate = new LogicGate(grid);
-        fillGrid();
+        //fillGrid();
+        for(int x = 0; x < X_TILES; x++){
+            for(int y = 0; y < Y_TILES; y++){
+                Tile tile = new Tile(x, y, 0);
+                grid[x][y] = tile;
+            }
+        }
     }
 
     public GameGrid(){
         grid = new Tile[X_TILES][Y_TILES];
         logicGate = new LogicGate(grid);
-        fillGrid();
+        //fillGrid();
+        for(int x = 0; x < X_TILES; x++){
+            for(int y = 0; y < Y_TILES; y++){
+                Tile tile = new Tile(x, y, 0);
+                grid[x][y] = tile;
+            }
+        }
     }
     
     public Parent fillGrid() {
@@ -48,10 +60,9 @@ public class GameGrid {
         
         for(int x = 0; x < X_TILES; x++){
             for(int y = 0; y < Y_TILES; y++){
-                Tile tile = new Tile(x, y, 0);
-                grid[x][y] = tile;
-                
-                root.getChildren().add(tile);
+                //Tile tile = new Tile(x, y, 0);
+                //grid[x][y] = tile;
+                root.getChildren().add(grid[x][y]);
             }
         }
         return root;
