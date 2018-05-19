@@ -141,7 +141,7 @@ public class WireworldSimulation extends Thread{
 
     public void nextGeneration(){
         // method creates one next generation
-//        rememberCurrentGeneration();
+        rememberCurrentGeneration();
 
         getCellsFromGrid(); // get the most recent grid board setup
 
