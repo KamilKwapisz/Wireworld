@@ -11,13 +11,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 public class MainController implements Initializable {
@@ -114,6 +114,9 @@ public class MainController implements Initializable {
         musicPlayer = new MediaPlayer(song);
         musicPlayer.setAutoPlay(true);
         musicPlayer.setVolume(0.5);
+        musicPlayer.setOnEndOfMedia(() -> {
+            musicPlayer.seek(Duration.ZERO);
+        });
         musicPlayer.pause();
         simulationController.loadMediaPlayer(musicPlayer);
 
