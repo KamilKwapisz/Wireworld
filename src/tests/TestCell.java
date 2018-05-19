@@ -5,7 +5,6 @@ import core.*;
 
 public class TestCell {
 
-
     private static void testTypeChanging(){
         Cell testcell = new Cell(0,0,0);
         assertThat(testcell.getType()).as("check cell type").isEqualTo(0);
@@ -49,11 +48,16 @@ public class TestCell {
                 .hasMessage("Incorrect cell type.");
     }
 
-
-    public static void main(String[] args) {
+    public void test(){
         testTypeChanging();
         testCellCoordinates();
         testIncorrectCells();
+    }
+
+    public static void main(String[] args) {
+        TestCell testCell = new TestCell();
+
+        testCell.test();
     }
 
 }

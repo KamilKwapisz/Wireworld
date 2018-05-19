@@ -4,7 +4,7 @@ import utils.SizedStack;
 
 public class TestSizedStack {
 
-    private static void testSizedStack() {
+    public void test() {
 
         SizedStack stack = new SizedStack();
         for (int i = 0; i <= 6; i++) {
@@ -20,6 +20,7 @@ public class TestSizedStack {
     }
 
     public static void main(String[] args) {
-        testSizedStack();
+        TestSizedStack testStack = new TestSizedStack();
+        testStack.test();
     }
 }

@@ -1,5 +1,4 @@
 package tests;
-import static UserInterface.Insertion.InsertionFlag.NAND_TOP;
 import static org.assertj.core.api.Assertions.*;
 import UserInterface.Controllers.GameGrid;
 
@@ -19,7 +18,6 @@ public class TestGameGrid {
 
     private static void testChangeState() {
         GameGrid grid = new GameGrid();
-//        grid.fillGrid();
 
         for(int i = 0; i < 6; i++){
                 grid.changeState(i, i, (i % 3) + 1);
@@ -33,7 +31,6 @@ public class TestGameGrid {
 
     private static void testClearGrid() {
         GameGrid grid = new GameGrid();
-//        grid.fillGrid();
         for(int i = 0; i < 15; i++){
             grid.changeState(i, i, (i % 3) + 1);
         }
@@ -44,10 +41,15 @@ public class TestGameGrid {
 
     }
 
-    public static void main(String[] args) {
+    public void test(){
         testGridSize();
         testChangeState();
         testClearGrid();
+    }
+
+    public static void main(String[] args) {
+        TestGameGrid testGrid = new TestGameGrid();
+        testGrid.test();
     }
 
 }

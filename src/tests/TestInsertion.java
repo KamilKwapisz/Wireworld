@@ -7,15 +7,16 @@ import static org.assertj.core.api.Assertions.*;
 
 public class TestInsertion {
 
-    private static void testAndLogicGateInsertion(){
+    private final int x = 30;
+    private final int y = 15 ;
+
+    private void testAndLogicGateInsertion(){
         GameGrid gameGrid = new GameGrid();
-        gameGrid.setInsertionFlag(AND_RIGHT);
         LogicGate gate = new LogicGate(gameGrid.getGrid());
-        int x = 30;
-        int y = 15 ;
+        GameGrid.Tile[][] grid = gameGrid.getGrid();
+
         gate.setProperties(x, y, AND_RIGHT);
         gate.insertAnd();
-        GameGrid.Tile[][] grid = gameGrid.getGrid();
 
         assertThat(grid[x][y].getState()).isEqualTo(1);
         assertThat(grid[x][y+2].getState()).isEqualTo(1);
@@ -63,15 +64,13 @@ public class TestInsertion {
 
     }
 
-    private static void testOrLogicGateInsertion() {
+    private void testOrLogicGateInsertion() {
         GameGrid gameGrid = new GameGrid();
-        gameGrid.setInsertionFlag(OR_BOT);
         LogicGate gate = new LogicGate(gameGrid.getGrid());
-        int x = 30;
-        int y = 15;
+        GameGrid.Tile[][] grid = gameGrid.getGrid();
+
         gate.setProperties(x, y, OR_BOT);
         gate.insertOr();
-        GameGrid.Tile[][] grid = gameGrid.getGrid();
 
         assertThat(grid[x][y].getState()).isEqualTo(1);
         assertThat(grid[x-2][y].getState()).isEqualTo(1);
@@ -93,15 +92,13 @@ public class TestInsertion {
 
     }
 
-    private static void testXorLogicGateInsertion() {
+    private void testXorLogicGateInsertion() {
         GameGrid gameGrid = new GameGrid();
-        gameGrid.setInsertionFlag(XOR_LEFT);
         LogicGate gate = new LogicGate(gameGrid.getGrid());
-        int x = 30;
-        int y = 15;
+        GameGrid.Tile[][] grid = gameGrid.getGrid();
+
         gate.setProperties(x, y, XOR_LEFT);
         gate.insertXor();
-        GameGrid.Tile[][] grid = gameGrid.getGrid();
 
         assertThat(grid[x][y].getState()).isEqualTo(1);
         assertThat(grid[x][y-2].getState()).isEqualTo(1);
@@ -132,15 +129,13 @@ public class TestInsertion {
         assertThat(grid[x-10][y-1].getState()).isEqualTo(1);
     }
 
-    private static void testNandLogicGateInsertion() {
+    private void testNandLogicGateInsertion() {
         GameGrid gameGrid = new GameGrid();
-        gameGrid.setInsertionFlag(NAND_TOP);
         LogicGate gate = new LogicGate(gameGrid.getGrid());
-        int x = 30;
-        int y = 15;
+        GameGrid.Tile[][] grid = gameGrid.getGrid();
+
         gate.setProperties(x, y, NAND_TOP);
         gate.insertNand();
-        GameGrid.Tile[][] grid = gameGrid.getGrid();
 
         assertThat(grid[x+1][y-13].getState()).isEqualTo(1);
         assertThat(grid[x+1][y-12].getState()).isEqualTo(1);
@@ -194,15 +189,13 @@ public class TestInsertion {
     }
 
 
-    private static void testNotLogicGateInsertion() {
+    private void testNotLogicGateInsertion() {
         GameGrid gameGrid = new GameGrid();
-        gameGrid.setInsertionFlag(NOT_RIGHT);
         LogicGate gate = new LogicGate(gameGrid.getGrid());
-        int x = 30;
-        int y = 15;
+        GameGrid.Tile[][] grid = gameGrid.getGrid();
+
         gate.setProperties(x, y, NOT_RIGHT);
         gate.insertNot();
-        GameGrid.Tile[][] grid = gameGrid.getGrid();
 
         assertThat(grid[x][y].getState()).isEqualTo(1);
         assertThat(grid[x+1][y].getState()).isEqualTo(1);
@@ -228,12 +221,20 @@ public class TestInsertion {
 
     }
 
+    public void test(){
+        TestInsertion tests = new TestInsertion();
+
+        tests.testAndLogicGateInsertion();
+        tests.testOrLogicGateInsertion();
+        tests.testXorLogicGateInsertion();
+        tests.testNandLogicGateInsertion();
+        tests.testNotLogicGateInsertion();
+    }
+
     public static void main(String[] args) {
-        testAndLogicGateInsertion();
-        testOrLogicGateInsertion();
-        testXorLogicGateInsertion();
-        testNandLogicGateInsertion();
-        testNotLogicGateInsertion();
+        TestInsertion tests = new TestInsertion();
+
+        tests.test();
     }
 
 

@@ -3,10 +3,8 @@ import static org.assertj.core.api.Assertions.*;
 import UserInterface.Controllers.GameGrid;
 import core.*;
 
-import java.util.ArrayList;
 
 public class TestWireworldSimulation {
-
 
     private static void testInitializeBoardFromGrid(){
         GameGrid grid = new GameGrid(20);
@@ -101,11 +99,16 @@ public class TestWireworldSimulation {
         // TODO
     }
 
-    public static void main(String[] args) {
+    public void test(){
         testInitializeBoardFromGrid();
         testSeters();
         testGetCellsFromGrid();
         testNextGeneration();
+    }
+
+    public static void main(String[] args) {
+        TestWireworldSimulation testSimulation = new TestWireworldSimulation();
+        testSimulation.test();
 
     }
 

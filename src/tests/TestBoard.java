@@ -18,9 +18,7 @@ public class TestBoard {
     }
 
     private static void testCountElectronHeadsNeighbours(){
-        // temporarily, it will be replaced with AssertJ tests
         Board board = new Board(3,3);
-
         board.addCell(new Cell(0, 0, 3));
         board.addCell(new Cell(1, 0, 1));
         board.addCell(new Cell(2, 0, 3));
@@ -84,11 +82,11 @@ public class TestBoard {
     }
 
     private static void testAddCell() {
+        Board board = new Board(3,3);
         Cell cell = new Cell(0, 0, 1);
         Cell cell2 = new Cell(1, 0, 3);
         Cell cell3 = new Cell(2, 2, 2);
 
-        Board board = new Board(3, 3);
         board.addCell(cell);
         board.addCell(cell2);
         board.addCell(cell3);
@@ -118,11 +116,11 @@ public class TestBoard {
 
     }
     private static void testGetBoard() {
+        Board board = new Board(3,3);
         Cell cell = new Cell(0, 0, 1);
         Cell cell2 = new Cell(1, 0, 3);
         Cell cell3 = new Cell(2, 2, 2);
 
-        Board board = new Board(3, 3);
         board.addCell(cell);
         board.addCell(cell2);
         board.addCell(cell3);
@@ -165,11 +163,11 @@ public class TestBoard {
     }
 
     private static void testGetNotEmptyCells(){
+        Board board = new Board(4,4);
         Cell cell = new Cell(0,0, 1);
         Cell cell2 = new Cell(1,1, 1);
         Cell cell3 = new Cell(2,2, 1);
 
-        Board board = new Board(4, 4);
         board.addCell(cell);
         board.addCell(cell2);
         board.addCell(cell3);
@@ -180,39 +178,18 @@ public class TestBoard {
                 .contains(cell, cell2, cell3);
     }
 
-//    private static void testCopyBoard(){
-////        Cell cell = new Cell(0,0, 1);
-////        Cell cell2 = new Cell(1,1, 3);
-////        Cell cell3 = new Cell(2,2, 2);
-////        Cell cell4 = new Cell(3,3, 2);
-////        Cell cell5 = new Cell(4,4, 2);
-////        Cell cell6 = new Cell(4,2, 2);
-////        Cell cell7 = new Cell(1,4, 2);
-////
-////        Board board = new Board(5, 5);
-////        board.addCell(cell);
-////        board.addCell(cell2);
-////        board.addCell(cell3);
-////        board.addCell(cell4);
-////        board.addCell(cell5);
-////        board.addCell(cell6);
-////        board.addCell(cell7);
-////
-////        Board newBoard = board.copyBoard();
-////        assertThat(newBoard)
-////                .as("checking if board copy is equal to copied board")
-////                .isEqualToComparingFieldByField(board);
-////    }
-
-
-    public static void main(String[] args) {
+    public void test(){
         testGetCell();
         testCountElectronHeadsNeighbours();
         testSetSize();
         testAddCell();
         testGetBoard();
         testGetNotEmptyCells();
-//        testCopyBoard();
+    }
+
+    public static void main(String[] args) {
+        TestBoard testBoard = new TestBoard();
+        testBoard.test();
     }
 
 
