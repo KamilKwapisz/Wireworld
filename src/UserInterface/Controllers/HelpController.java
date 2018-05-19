@@ -23,13 +23,21 @@ public class HelpController {
         window.setTitle(title);
         window.getIcons().add(new Image("UserInterface/launcher.png"));
         
+        StringBuilder help = new StringBuilder();
+        help.append("How to use the program\n\n");
         
-        String help = "Help" + "\nYou can create your own circuit using mouse buttons:"
-                + "\nPress LMB to set Conductor or clear tile"
-                + "\nPress RMB to set Electron's head, Electron's tail or clear tile";
+        help.append("You can create your own circuit using mouse buttons:\n");
+        help.append(">Press LMB to set Conductor or clear tile.\n>Press RMB to set Electron's head, Electron's tail or clear tile.\n\n");
+        
+        help.append("Moreover, you can draw circuit with mouse dragging (move mouse while LMB is pressed):\n");
+        help.append(">Hold CTRL down to draw Conductor.\n>Hold SHIFT down to clear grid.\n\n");
+        
+        help.append("While inserting logic gates you are informed whether you can place logic gate or not by simple\nhighlght on gird.\n");
+        help.append(">Press LMB to insert logic gate if it is possible. Program will wait untill you choose correct tile.\n");
+        help.append(">Press RMB to cancel inserting logic gate.");
         
         Label helpLabel = new Label();
-        helpLabel.setText(help);
+        helpLabel.setText(help.toString());
         
         Button closeButton = new Button("Close");
         closeButton.setId("closeButton");
@@ -44,7 +52,7 @@ public class HelpController {
         AnchorPane.setBottomAnchor(closeButton, 25.0);
         
         AnchorPane layout = new AnchorPane();
-        layout.setPrefSize(600, 600);
+        layout.setPrefSize(600, 400);
         layout.setId("layout");
         String css = SimulationController.class.getResource("/UserInterface/css/menu.css").toExternalForm();
         layout.getStylesheets().add(css);
