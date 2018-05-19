@@ -286,7 +286,6 @@ public class MainController implements Initializable {
     private void reloadSimulationForNewGrid(){
         if(simulation.getCurrentGenerationNumber() == simulation.getNumberOfIterations()){
             simulation.runSimulation();
-//            simulation.pause();
         }
         simulation.pause();
         simulation.setNewGrid(game);
