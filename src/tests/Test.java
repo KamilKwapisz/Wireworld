@@ -16,8 +16,5 @@ public class Test {
         testInsertion.test();
         testSizedStack.test();
         testWireworldSimulation.test();
-        
-
     }
-
 }

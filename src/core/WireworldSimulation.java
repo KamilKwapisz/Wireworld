@@ -20,8 +20,8 @@ public class WireworldSimulation extends Thread{
     private final int STACKSIZE = 5;
     private Label currentGenNumberLabel;
 
-    public WireworldSimulation(int gen_number, double delay, GameGrid game){
-        setNumberOfIterations(gen_number);
+    public WireworldSimulation(int genNumber, double delay, GameGrid game){
+        setNumberOfIterations(genNumber);
         setDelay(delay);
         this.isPaused = true;
         this.grid = game;
@@ -99,10 +99,10 @@ public class WireworldSimulation extends Thread{
 
     public void initializeBoardFromGrid(){
 
-        int x_tiles = grid.getXTiles();
-        int y_tiles = grid.getYTiles();
+        int xTilesNumber = grid.getXTiles();
+        int yTilesNumber = grid.getYTiles();
 
-        this.board = new Board(x_tiles, y_tiles);
+        this.board = new Board(xTilesNumber, yTilesNumber);
         setCurrentGenerationNumber(1);  // resetting gen number counter
     }
 
