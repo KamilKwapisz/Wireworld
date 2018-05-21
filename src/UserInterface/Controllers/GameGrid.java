@@ -5,7 +5,6 @@ import static UserInterface.Insertion.InsertionFlag.*;
 import UserInterface.Insertion.LogicGate;
 import core.Cell;
 import javafx.scene.Parent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -133,6 +132,13 @@ public class GameGrid {
         }
     }
 
+    public Rectangle getRectangle(int x, int y){
+        return grid[x][y].border;
+    }
+    public Color getColor(int x, int y){
+        return grid[x][y].color;
+    }
+    
     public void updateGeneration(ArrayList<Cell> cells){
         for( Cell cell : cells)
             changeState(cell.getX(), cell.getY(), cell.getType());
@@ -301,219 +307,5 @@ public class GameGrid {
                 border.setFill(this.color);
             }
         }
-                
-        private void cancelInserting(){
-            border.setFill(this.color);
-            insertionFlag = NORMAL;
-        }
-        
-        private void insertAnd(){
-            logicGate.setProperties(this.x, this.y, insertionFlag);
-            logicGate.insertAnd();
-            insertionFlag = NORMAL;
-        }
-        private void insertOr(){
-            logicGate.setProperties(this.x, this.y, insertionFlag);
-            logicGate.insertOr();
-            insertionFlag = NORMAL;
-        }
-        private void insertXor(){
-            logicGate.setProperties(this.x, this.y, insertionFlag);
-            logicGate.insertXor();
-            insertionFlag = NORMAL;
-        }
-        private void insertNand(){
-            logicGate.setProperties(this.x, this.y, insertionFlag);
-            logicGate.insertNand();
-            insertionFlag = NORMAL;
-        }
-        private void insertNot(){
-            logicGate.setProperties(this.x, this.y, insertionFlag);
-            logicGate.insertNot();
-            insertionFlag = NORMAL;
-        }
-        
-        /* Change tile state or insert logicGate. Used in onPressed event */
-        
-        /* Method not used - moving mouse events from each Tile to one global mouse event. Temporary version for reminding */
-        private void changeState(MouseEvent e, int currentState){
-            if(insertionFlag == NORMAL){
-                if(e.isPrimaryButtonDown()){
-                    if(currentState == 1){
-                        blackTile();
-                    } else{
-                      yellowTile();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    if(currentState == 2){
-                        blackTile();
-                     } else if(currentState == 3){
-                        redTile();
-                    } else{
-                        blueTile();
-                    }
-                }
-            } else if(insertionFlag == AND_TOP){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 3 && this.x <= X_TILES - 6 && this.y >= 17){
-                        insertAnd();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == AND_BOT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 5 && this.x <= X_TILES - 4 && this.y <= Y_TILES - 18){
-                        insertAnd();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == AND_LEFT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 17 && this.y >= 5 && this.y <= Y_TILES - 4){
-                        insertAnd();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == AND_RIGHT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x <= X_TILES - 18 && this.y >= 3 && this.y <= Y_TILES - 6){
-                        insertAnd();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == OR_TOP){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 1 && this.x <= X_TILES - 4 && this.y >= 8){
-                        insertOr();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == OR_BOT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 3 && this.x <= X_TILES - 2 && this.y <= Y_TILES - 9){
-                        insertOr();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == OR_LEFT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 8 && this.y >= 3 && this.y <= Y_TILES - 2){
-                        insertOr();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == OR_RIGHT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x <= X_TILES - 9 && this.y >= 1 && this.y <= Y_TILES - 4){
-                        insertOr();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == XOR_TOP){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 2 && this.x <= X_TILES - 4 && this.y >= 10){
-                        insertXor();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == XOR_BOT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 4 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 11){
-                        insertXor();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == XOR_LEFT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 10 && this.y >= 4 && this.y <= Y_TILES - 3){
-                        insertXor();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == XOR_RIGHT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x <= X_TILES - 11 && this.y >= 2 && this.y <= Y_TILES - 5){
-                        insertXor();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == NAND_TOP){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 5 && this.x <= X_TILES - 8 && this.y >= 13){
-                        insertNand();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == NAND_BOT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 7 && this.x <= X_TILES - 6 && this.y <= Y_TILES - 14){
-                        insertNand();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == NAND_LEFT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 13 && this.y >= 7 && this.y <= Y_TILES - 6){
-                        insertNand();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == NAND_RIGHT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x <= X_TILES - 14 && this.y >= 5 && this.y <= Y_TILES - 8){
-                        insertNand();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == NOT_TOP){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 2 && this.x <= X_TILES - 4 && this.y >= 11){
-                        insertNot();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == NOT_BOT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 2 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 12){
-                        insertNot();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == NOT_LEFT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x >= 11 && this.y >= 2 && this.y <= Y_TILES - 3){
-                        insertNot();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            } else if(insertionFlag == NOT_RIGHT){
-                if(e.isPrimaryButtonDown()){
-                    if(this.x <= X_TILES - 12 && this.y >= 2 && this.y <= Y_TILES - 4){
-                        insertNot();
-                    }
-                } else if(e.isSecondaryButtonDown()){
-                    cancelInserting();
-                }
-            }
-        }  
     }
 }

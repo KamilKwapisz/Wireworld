@@ -1,6 +1,8 @@
 package UserInterface.Controllers;
 
+import UserInterface.Insertion.InsertionFlag;
 import static UserInterface.Insertion.InsertionFlag.*;
+import UserInterface.Insertion.LogicGate;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -83,8 +86,10 @@ public class MainController implements Initializable {
     
     private GameGrid game;
     private WireworldSimulation simulation;
+    private InsertionFlag insertionFlag;
     private Stage stage;
     private MediaPlayer musicPlayer;
+    private LogicGate logicGate;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -119,6 +124,8 @@ public class MainController implements Initializable {
         });
         musicPlayer.pause();
         simulationController.loadMediaPlayer(musicPlayer);
+        logicGate = new LogicGate(game.getGrid());
+        insertionFlag = NORMAL;
 
     }
 
@@ -134,101 +141,121 @@ public class MainController implements Initializable {
 
     @FXML
     private void placeAndTop(ActionEvent event) {
+        this.insertionFlag = AND_TOP;
         game.setInsertionFlag(AND_TOP);
     }
 
     @FXML
     private void placeAndBottom(ActionEvent event) {
+        this.insertionFlag = AND_BOT;
         game.setInsertionFlag(AND_BOT);
     }
 
     @FXML
     private void placeAndLeft(ActionEvent event) {
+        this.insertionFlag = AND_LEFT;
         game.setInsertionFlag(AND_LEFT);
     }
 
     @FXML
     private void placeAndRight(ActionEvent event) {
+        this.insertionFlag = AND_RIGHT;
         game.setInsertionFlag(AND_RIGHT);
     }
 
     @FXML
     private void placeOrTop(ActionEvent event) {
+        this.insertionFlag = OR_TOP;
         game.setInsertionFlag(OR_TOP);
     }
 
     @FXML
     private void placeOrBottom(ActionEvent event) {
+        this.insertionFlag = OR_BOT;
         game.setInsertionFlag(OR_BOT);
     }
 
     @FXML
     private void placeOrLeft(ActionEvent event) {
+        this.insertionFlag = OR_LEFT;
         game.setInsertionFlag(OR_LEFT);
     }
 
     @FXML
     private void placeOrRight(ActionEvent event) {
+        this.insertionFlag = OR_RIGHT;
         game.setInsertionFlag(OR_RIGHT);
     }
 
     @FXML
     private void placeXorTop(ActionEvent event) {
+        this.insertionFlag = XOR_TOP;
         game.setInsertionFlag(XOR_TOP);
     }
 
     @FXML
     private void placeXorBottom(ActionEvent event) {
+        this.insertionFlag = XOR_BOT;
         game.setInsertionFlag(XOR_BOT);
     }
 
     @FXML
     private void placeXorLeft(ActionEvent event) {
+        this.insertionFlag = XOR_LEFT;
         game.setInsertionFlag(XOR_LEFT);
     }
 
     @FXML
     private void placeXorRight(ActionEvent event) {
+        this.insertionFlag = XOR_RIGHT;
         game.setInsertionFlag(XOR_RIGHT);
     }
 
     @FXML
     private void placeNandTop(ActionEvent event) {
+        this.insertionFlag = NAND_TOP;
         game.setInsertionFlag(NAND_TOP);
     }
 
     @FXML
     private void placeNandBottom(ActionEvent event) {
+        this.insertionFlag = NAND_BOT;
         game.setInsertionFlag(NAND_BOT);
     }
 
     @FXML
     private void placeNandLeft(ActionEvent event) {
+        this.insertionFlag = NAND_LEFT;
         game.setInsertionFlag(NAND_LEFT);
     }
 
     @FXML
     private void placeNandRight(ActionEvent event) {
+        this.insertionFlag = NAND_RIGHT;
         game.setInsertionFlag(NAND_RIGHT);
     }
 
     @FXML
     private void placeNotTop(ActionEvent event) {
+        this.insertionFlag = NOT_TOP;
         game.setInsertionFlag(NOT_TOP);
     }
 
     @FXML
     private void placeNotBottom(ActionEvent event) {
+        this.insertionFlag = NOT_BOT;
         game.setInsertionFlag(NOT_BOT);
     }
 
     @FXML
     private void placeNotLeft(ActionEvent event) {
+        this.insertionFlag = NOT_LEFT;
         game.setInsertionFlag(NOT_LEFT);
     }
 
     @FXML
     private void placeNotRight(ActionEvent event) {
+        this.insertionFlag = NOT_RIGHT;
         game.setInsertionFlag(NOT_RIGHT);
     }
 
@@ -309,6 +336,8 @@ public class MainController implements Initializable {
         GameGrid newGame = new GameGrid(size);
         wireDisplay.getChildren().clear();
         game = newGame;
+        logicGate = new LogicGate(game.getGrid());
+        insertionFlag = NORMAL;
         wireDisplay.setCenter(game.fillGrid());
     }
 
@@ -338,21 +367,223 @@ public class MainController implements Initializable {
     private void mouseChangeState(MouseEvent event) {
         int tileXCoordinate = (int)event.getX()/game.getTileSize();
         int tileYCoordinate = (int)event.getY()/game.getTileSize();
-        if(event.isPrimaryButtonDown()){
-                    if(game.getGridState(tileXCoordinate, tileYCoordinate) == 1){
-                        game.changeState(tileXCoordinate, tileYCoordinate, 0);
-                    } else{
-                      game.changeState(tileXCoordinate, tileYCoordinate, 1);
-                    }
-                } else if(event.isSecondaryButtonDown()){
-                    if(game.getGridState(tileXCoordinate, tileYCoordinate) == 2){
-                        game.changeState(tileXCoordinate, tileYCoordinate, 0);
-                     } else if(game.getGridState(tileXCoordinate, tileYCoordinate) == 3){
-                         game.changeState(tileXCoordinate, tileYCoordinate, 2);
-                    } else{
-                         game.changeState(tileXCoordinate, tileYCoordinate, 3);
-                    }
+        
+        if (insertionFlag == NORMAL) {
+            if (event.isPrimaryButtonDown()) {
+                if (game.getGridState(tileXCoordinate, tileYCoordinate) == 1) {
+                    game.changeState(tileXCoordinate, tileYCoordinate, 0);
+                } else {
+                    game.changeState(tileXCoordinate, tileYCoordinate, 1);
                 }
+            } else if (event.isSecondaryButtonDown()) {
+                if (game.getGridState(tileXCoordinate, tileYCoordinate) == 2) {
+                    game.changeState(tileXCoordinate, tileYCoordinate, 0);
+                } else if (game.getGridState(tileXCoordinate, tileYCoordinate) == 3) {
+                    game.changeState(tileXCoordinate, tileYCoordinate, 2);
+                } else {
+                    game.changeState(tileXCoordinate, tileYCoordinate, 3);
+                }
+            }
+        } else if (insertionFlag == AND_TOP) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 3 && tileXCoordinate <= game.getXTiles() - 6 && tileYCoordinate >= 17) {
+                    insertAnd(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == AND_BOT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 5 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate <= game.getYTiles() - 18) {
+                    insertAnd(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == AND_LEFT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 17 && tileYCoordinate >= 5 && tileYCoordinate <= game.getYTiles() - 4) {
+                    insertAnd(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == AND_RIGHT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate <= game.getXTiles() - 18 && tileYCoordinate >= 3 && tileYCoordinate <= game.getYTiles() - 6) {
+                    insertAnd(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == OR_TOP) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 1 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 8) {
+                    insertOr(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == OR_BOT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 3 && tileXCoordinate <= game.getXTiles() - 2 && tileYCoordinate <= game.getYTiles() - 9) {
+                    insertOr(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == OR_LEFT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 8 && tileYCoordinate >= 3 && tileYCoordinate <= game.getYTiles() - 2) {
+                    insertOr(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == OR_RIGHT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate <= game.getXTiles() - 9 && tileYCoordinate >= 1 && tileYCoordinate <= game.getYTiles() - 4) {
+                    insertOr(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == XOR_TOP) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 10) {
+                    insertXor(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == XOR_BOT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 4 && tileXCoordinate <= game.getXTiles() - 3 && tileYCoordinate <= game.getYTiles() - 11) {
+                    insertXor(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == XOR_LEFT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 10 && tileYCoordinate >= 4 && tileYCoordinate <= game.getYTiles() - 3) {
+                    insertXor(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == XOR_RIGHT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate <= game.getXTiles() - 11 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 5) {
+                    insertXor(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == NAND_TOP) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 5 && tileXCoordinate <= game.getXTiles() - 8 && tileYCoordinate >= 13) {
+                    insertNand(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == NAND_BOT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 7 && tileXCoordinate <= game.getXTiles() - 6 && tileYCoordinate <= game.getYTiles() - 14) {
+                    insertNand(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == NAND_LEFT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 13 && tileYCoordinate >= 7 && tileYCoordinate <= game.getYTiles() - 6) {
+                    insertNand(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == NAND_RIGHT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate <= game.getXTiles() - 14 && tileYCoordinate >= 5 && tileYCoordinate <= game.getYTiles() - 8) {
+                    insertNand(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == NOT_TOP) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 11) {
+                    insertNot(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == NOT_BOT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 3 && tileYCoordinate <= game.getYTiles() - 12) {
+                    insertNot(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == NOT_LEFT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate >= 11 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 3) {
+                    insertNot(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        } else if (insertionFlag == NOT_RIGHT) {
+            if (event.isPrimaryButtonDown()) {
+                if (tileXCoordinate <= game.getXTiles() - 12 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 4) {
+                    insertNot(tileXCoordinate, tileYCoordinate);
+                }
+            } else if (event.isSecondaryButtonDown()) {
+                cancelInserting(tileXCoordinate, tileYCoordinate);
+            }
+        }
     }
+
+        private void insertAnd(int x, int y){
+            logicGate.setProperties(x, y, insertionFlag);
+            logicGate.insertAnd();
+            insertionFlag = NORMAL;
+            game.setInsertionFlag(NORMAL);
+        }
+        
+                private void insertOr(int x, int y){
+            logicGate.setProperties(x, y, insertionFlag);
+            logicGate.insertOr();
+            insertionFlag = NORMAL;
+            game.setInsertionFlag(NORMAL);
+        }
+        private void insertXor(int x, int y){
+            logicGate.setProperties(x, y, insertionFlag);
+            logicGate.insertXor();
+            insertionFlag = NORMAL;
+            game.setInsertionFlag(NORMAL);
+        }
+        private void insertNand(int x, int y){
+            logicGate.setProperties(x, y, insertionFlag);
+            logicGate.insertNand();
+            insertionFlag = NORMAL;
+            game.setInsertionFlag(NORMAL);
+        }
+        private void insertNot(int x, int y){
+            logicGate.setProperties(x, y, insertionFlag);
+            logicGate.insertNot();
+            insertionFlag = NORMAL;
+            game.setInsertionFlag(NORMAL);
+        }
+        
+            
+        private void cancelInserting(int x, int y){
+            Rectangle border = game.getRectangle(x, y);
+            border.setFill(game.getColor(x, y));
+            insertionFlag = NORMAL;
+        }
     
 }

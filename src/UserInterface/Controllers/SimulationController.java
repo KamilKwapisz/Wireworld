@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 
@@ -83,6 +82,7 @@ public class SimulationController implements Initializable {
 
     @FXML
     private void pauseSimulation(ActionEvent event) {
+        musicPlayer.pause();
         simulation.pause();
     }
 
