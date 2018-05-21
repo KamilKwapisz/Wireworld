@@ -333,5 +333,26 @@ public class MainController implements Initializable {
                 }
             }
     }
+
+    @FXML
+    private void mouseChangeState(MouseEvent event) {
+        int tileXCoordinate = (int)event.getX()/game.getTileSize();
+        int tileYCoordinate = (int)event.getY()/game.getTileSize();
+        if(event.isPrimaryButtonDown()){
+                    if(game.getGridState(tileXCoordinate, tileYCoordinate) == 1){
+                        game.changeState(tileXCoordinate, tileYCoordinate, 0);
+                    } else{
+                      game.changeState(tileXCoordinate, tileYCoordinate, 1);
+                    }
+                } else if(event.isSecondaryButtonDown()){
+                    if(game.getGridState(tileXCoordinate, tileYCoordinate) == 2){
+                        game.changeState(tileXCoordinate, tileYCoordinate, 0);
+                     } else if(game.getGridState(tileXCoordinate, tileYCoordinate) == 3){
+                         game.changeState(tileXCoordinate, tileYCoordinate, 2);
+                    } else{
+                         game.changeState(tileXCoordinate, tileYCoordinate, 3);
+                    }
+                }
+    }
     
 }

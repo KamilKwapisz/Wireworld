@@ -156,7 +156,7 @@ public class GameGrid {
             setTranslateX(x * TILE_SIZE);
             setTranslateY(y * TILE_SIZE);
             
-            setOnMousePressed(e ->changeState(e, this.state));
+          //  setOnMousePressed(e ->changeState(e, this.state));
             setOnMouseEntered(en ->placeIsAllowed());
             setOnMouseExited(ex->leaveTile());
         }
@@ -334,6 +334,8 @@ public class GameGrid {
         }
         
         /* Change tile state or insert logicGate. Used in onPressed event */
+        
+        /* Method not used - moving mouse events from each Tile to one global mouse event. Temporary version for reminding */
         private void changeState(MouseEvent e, int currentState){
             if(insertionFlag == NORMAL){
                 if(e.isPrimaryButtonDown()){

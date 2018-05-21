@@ -181,7 +181,7 @@ public class WireworldSimulation extends Thread{
 
 
         Service<Void> backgroundThread;
-        backgroundThread = new Service<>(){
+        backgroundThread = new Service<Void>(){
 
             @Override
             protected Task<Void> createTask(){
