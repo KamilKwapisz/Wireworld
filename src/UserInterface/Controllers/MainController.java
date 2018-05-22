@@ -360,14 +360,14 @@ public class MainController implements Initializable {
                 } catch (ArrayIndexOutOfBoundsException e){ /* Prevent drawning when user mouse drag not on the grid */
                     System.out.println("There is no Tile to change.");
                 }
-            }
+        }
     }
 
     @FXML
     private void mouseChangeState(MouseEvent event) {
-        int tileXCoordinate = (int)event.getX()/game.getTileSize();
-        int tileYCoordinate = (int)event.getY()/game.getTileSize();
-        
+        int tileXCoordinate = (int) event.getX() / game.getTileSize();
+        int tileYCoordinate = (int) event.getY() / game.getTileSize();
+
         if (insertionFlag == NORMAL) {
             if (event.isPrimaryButtonDown()) {
                 if (game.getGridState(tileXCoordinate, tileYCoordinate) == 1) {
@@ -385,205 +385,158 @@ public class MainController implements Initializable {
                 }
             }
         } else if (insertionFlag == AND_TOP) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 3 && tileXCoordinate <= game.getXTiles() - 6 && tileYCoordinate >= 17) {
-                    insertAnd(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 3 && tileXCoordinate <= game.getXTiles() - 6 && tileYCoordinate >= 17;
+            andMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == AND_BOT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 5 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate <= game.getYTiles() - 18) {
-                    insertAnd(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 5 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate <= game.getYTiles() - 18;
+            andMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == AND_LEFT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 17 && tileYCoordinate >= 5 && tileYCoordinate <= game.getYTiles() - 4) {
-                    insertAnd(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 17 && tileYCoordinate >= 5 && tileYCoordinate <= game.getYTiles() - 4;
+            andMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == AND_RIGHT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate <= game.getXTiles() - 18 && tileYCoordinate >= 3 && tileYCoordinate <= game.getYTiles() - 6) {
-                    insertAnd(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate <= game.getXTiles() - 18 && tileYCoordinate >= 3 && tileYCoordinate <= game.getYTiles() - 6;
+            andMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == OR_TOP) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 1 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 8) {
-                    insertOr(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 1 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 8;
+            orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == OR_BOT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 3 && tileXCoordinate <= game.getXTiles() - 2 && tileYCoordinate <= game.getYTiles() - 9) {
-                    insertOr(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 3 && tileXCoordinate <= game.getXTiles() - 2 && tileYCoordinate <= game.getYTiles() - 9;
+            orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == OR_LEFT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 8 && tileYCoordinate >= 3 && tileYCoordinate <= game.getYTiles() - 2) {
-                    insertOr(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 8 && tileYCoordinate >= 3 && tileYCoordinate <= game.getYTiles() - 2;
+            orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == OR_RIGHT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate <= game.getXTiles() - 9 && tileYCoordinate >= 1 && tileYCoordinate <= game.getYTiles() - 4) {
-                    insertOr(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate <= game.getXTiles() - 9 && tileYCoordinate >= 1 && tileYCoordinate <= game.getYTiles() - 4;
+            orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == XOR_TOP) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 10) {
-                    insertXor(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 10;
+            xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == XOR_BOT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 4 && tileXCoordinate <= game.getXTiles() - 3 && tileYCoordinate <= game.getYTiles() - 11) {
-                    insertXor(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 4 && tileXCoordinate <= game.getXTiles() - 3 && tileYCoordinate <= game.getYTiles() - 11;
+            xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == XOR_LEFT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 10 && tileYCoordinate >= 4 && tileYCoordinate <= game.getYTiles() - 3) {
-                    insertXor(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 10 && tileYCoordinate >= 4 && tileYCoordinate <= game.getYTiles() - 3;
+            xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == XOR_RIGHT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate <= game.getXTiles() - 11 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 5) {
-                    insertXor(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate <= game.getXTiles() - 11 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 5;
+            xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == NAND_TOP) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 5 && tileXCoordinate <= game.getXTiles() - 8 && tileYCoordinate >= 13) {
-                    insertNand(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 5 && tileXCoordinate <= game.getXTiles() - 8 && tileYCoordinate >= 13;
+            nandMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == NAND_BOT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 7 && tileXCoordinate <= game.getXTiles() - 6 && tileYCoordinate <= game.getYTiles() - 14) {
-                    insertNand(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 7 && tileXCoordinate <= game.getXTiles() - 6 && tileYCoordinate <= game.getYTiles() - 14;
+            nandMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == NAND_LEFT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 13 && tileYCoordinate >= 7 && tileYCoordinate <= game.getYTiles() - 6) {
-                    insertNand(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 13 && tileYCoordinate >= 7 && tileYCoordinate <= game.getYTiles() - 6;
+            nandMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == NAND_RIGHT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate <= game.getXTiles() - 14 && tileYCoordinate >= 5 && tileYCoordinate <= game.getYTiles() - 8) {
-                    insertNand(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate <= game.getXTiles() - 14 && tileYCoordinate >= 5 && tileYCoordinate <= game.getYTiles() - 8;
+            nandMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == NOT_TOP) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 11) {
-                    insertNot(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 11;
+            notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == NOT_BOT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 3 && tileYCoordinate <= game.getYTiles() - 12) {
-                    insertNot(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 3 && tileYCoordinate <= game.getYTiles() - 12;
+            notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == NOT_LEFT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate >= 11 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 3) {
-                    insertNot(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate >= 11 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 3;
+            notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (insertionFlag == NOT_RIGHT) {
-            if (event.isPrimaryButtonDown()) {
-                if (tileXCoordinate <= game.getXTiles() - 12 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 4) {
-                    insertNot(tileXCoordinate, tileYCoordinate);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                cancelInserting(tileXCoordinate, tileYCoordinate);
-            }
+            boolean isPossible = tileXCoordinate <= game.getXTiles() - 12 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 4;
+            notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         }
     }
 
-        private void insertAnd(int x, int y){
-            logicGate.setProperties(x, y, insertionFlag);
-            logicGate.insertAnd();
-            insertionFlag = NORMAL;
-            game.setInsertionFlag(NORMAL);
+    private void insertAnd(int x, int y) {
+        logicGate.setProperties(x, y, insertionFlag);
+        logicGate.insertAnd();
+        insertionFlag = NORMAL;
+        game.setInsertionFlag(NORMAL);
+    }
+
+    private void insertOr(int x, int y) {
+        logicGate.setProperties(x, y, insertionFlag);
+        logicGate.insertOr();
+        insertionFlag = NORMAL;
+        game.setInsertionFlag(NORMAL);
+    }
+
+    private void insertXor(int x, int y) {
+        logicGate.setProperties(x, y, insertionFlag);
+        logicGate.insertXor();
+        insertionFlag = NORMAL;
+        game.setInsertionFlag(NORMAL);
+    }
+
+    private void insertNand(int x, int y) {
+        logicGate.setProperties(x, y, insertionFlag);
+        logicGate.insertNand();
+        insertionFlag = NORMAL;
+        game.setInsertionFlag(NORMAL);
+    }
+
+    private void insertNot(int x, int y) {
+        logicGate.setProperties(x, y, insertionFlag);
+        logicGate.insertNot();
+        insertionFlag = NORMAL;
+        game.setInsertionFlag(NORMAL);
+    }
+
+    private void cancelInserting(int x, int y) {
+        Rectangle border = game.getRectangle(x, y);
+        border.setFill(game.getColor(x, y));
+        insertionFlag = NORMAL;
+        game.setInsertionFlag(NORMAL);
+    }
+
+    private void andMouseControl(MouseEvent event, boolean isPossible, int x, int y) {
+        if (event.isPrimaryButtonDown()) {
+            if (isPossible) {
+                insertAnd(x, y);
+            }
+        } else if (event.isSecondaryButtonDown()) {
+            cancelInserting(x, y);
         }
-        
-                private void insertOr(int x, int y){
-            logicGate.setProperties(x, y, insertionFlag);
-            logicGate.insertOr();
-            insertionFlag = NORMAL;
-            game.setInsertionFlag(NORMAL);
+    }
+
+    private void orMouseControl(MouseEvent event, boolean isPossible, int x, int y) {
+        if (event.isPrimaryButtonDown()) {
+            if (isPossible) {
+                insertOr(x, y);
+            }
+        } else if (event.isSecondaryButtonDown()) {
+            cancelInserting(x, y);
         }
-        private void insertXor(int x, int y){
-            logicGate.setProperties(x, y, insertionFlag);
-            logicGate.insertXor();
-            insertionFlag = NORMAL;
-            game.setInsertionFlag(NORMAL);
+    }
+
+    private void xorMouseControl(MouseEvent event, boolean isPossible, int x, int y) {
+        if (event.isPrimaryButtonDown()) {
+            if (isPossible) {
+                insertXor(x, y);
+            }
+        } else if (event.isSecondaryButtonDown()) {
+            cancelInserting(x, y);
         }
-        private void insertNand(int x, int y){
-            logicGate.setProperties(x, y, insertionFlag);
-            logicGate.insertNand();
-            insertionFlag = NORMAL;
-            game.setInsertionFlag(NORMAL);
+    }
+
+    private void nandMouseControl(MouseEvent event, boolean isPossible, int x, int y) {
+        if (event.isPrimaryButtonDown()) {
+            if (isPossible) {
+                insertNand(x, y);
+            }
+        } else if (event.isSecondaryButtonDown()) {
+            cancelInserting(x, y);
         }
-        private void insertNot(int x, int y){
-            logicGate.setProperties(x, y, insertionFlag);
-            logicGate.insertNot();
-            insertionFlag = NORMAL;
-            game.setInsertionFlag(NORMAL);
+    }
+
+    private void notMouseControl(MouseEvent event, boolean isPossible, int x, int y) {
+        if (event.isPrimaryButtonDown()) {
+            if (isPossible) {
+                insertNot(x, y);
+            }
+        } else if (event.isSecondaryButtonDown()) {
+            cancelInserting(x, y);
         }
-        
-            
-        private void cancelInserting(int x, int y){
-            Rectangle border = game.getRectangle(x, y);
-            border.setFill(game.getColor(x, y));
-            insertionFlag = NORMAL;
-        }
+    }
     
 }

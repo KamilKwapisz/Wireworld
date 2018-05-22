@@ -92,6 +92,9 @@ public class SimulationController implements Initializable {
             simulation.unpause();
 //            simulation.runSimulation();
         }
+        if(delaySlider.getValue() == 0.08){
+            musicPlayer.play();
+        }
     }
 
     @FXML
