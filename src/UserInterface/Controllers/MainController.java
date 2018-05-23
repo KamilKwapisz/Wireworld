@@ -20,7 +20,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
 public class MainController implements Initializable {
 
     @FXML
@@ -81,7 +80,7 @@ public class MainController implements Initializable {
     private MenuItem notBottom;
     @FXML
     private MenuItem notLeft;
-    
+
     private GameGrid game;
     private WireworldSimulation simulation;
     private Stage stage;
@@ -95,7 +94,7 @@ public class MainController implements Initializable {
         try {
             menu = botMenu.load();
 
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         String css = SimulationController.class.getResource("/UserInterface/css/menu.css").toExternalForm();
@@ -111,7 +110,7 @@ public class MainController implements Initializable {
 
         SimulationController simulationController = botMenu.getController();
         simulationController.loadSimulation(simulation);
-        
+
         Media song = new Media(getClass().getResource("song.mp3").toExternalForm());
         musicPlayer = new MediaPlayer(song);
         musicPlayer.setAutoPlay(true);
@@ -270,7 +269,7 @@ public class MainController implements Initializable {
     @FXML
     private void setSmallGrid(ActionEvent event) {
         simulation.pause();
-        if(smallGrid.isSelected() && !mediumGrid.isSelected() && !largeGrid.isSelected()){
+        if (smallGrid.isSelected() && !mediumGrid.isSelected() && !largeGrid.isSelected()) {
             setMenuItemGridSizeSelection(true, false, false);
         } else {
             setMenuItemGridSizeSelection(true, false, false);
@@ -282,7 +281,7 @@ public class MainController implements Initializable {
     @FXML
     private void setMediumGrid(ActionEvent event) {
         simulation.pause();
-        if(mediumGrid.isSelected() && !largeGrid.isSelected() && !smallGrid.isSelected()){
+        if (mediumGrid.isSelected() && !largeGrid.isSelected() && !smallGrid.isSelected()) {
             setMenuItemGridSizeSelection(false, true, false);
         } else {
             setMenuItemGridSizeSelection(false, true, false);
@@ -294,7 +293,7 @@ public class MainController implements Initializable {
     @FXML
     private void setLargeGrid(ActionEvent event) {
         simulation.pause();
-        if(largeGrid.isSelected() && !mediumGrid.isSelected() && !smallGrid.isSelected()){
+        if (largeGrid.isSelected() && !mediumGrid.isSelected() && !smallGrid.isSelected()) {
             setMenuItemGridSizeSelection(false, false, true);
         } else {
             setMenuItemGridSizeSelection(false, false, true);
@@ -308,18 +307,18 @@ public class MainController implements Initializable {
         return game;
     }
 
-    public void setStage(Stage stage){
+    public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    private void setMenuItemGridSizeSelection(boolean small, boolean medium, boolean large){
-            smallGrid.setSelected(small);
-            mediumGrid.setSelected(medium);
-            largeGrid.setSelected(large);
+    private void setMenuItemGridSizeSelection(boolean small, boolean medium, boolean large) {
+        smallGrid.setSelected(small);
+        mediumGrid.setSelected(medium);
+        largeGrid.setSelected(large);
     }
-    
-    private void reloadSimulationForNewGrid(){
-        if(simulation.getCurrentGenerationNumber() == simulation.getNumberOfIterations()){
+
+    private void reloadSimulationForNewGrid() {
+        if (simulation.getCurrentGenerationNumber() == simulation.getNumberOfIterations()) {
             simulation.runSimulation();
         }
         musicPlayer.pause();
@@ -327,8 +326,8 @@ public class MainController implements Initializable {
         simulation.setNewGrid(game);
 
     }
-    
-    private void reloadDisplayedGrid(int size){
+
+    private void reloadDisplayedGrid(int size) {
         GameGrid newGame = new GameGrid(size);
         wireDisplay.getChildren().clear();
         game = newGame;
@@ -339,22 +338,23 @@ public class MainController implements Initializable {
     /* Draw conductor using mouse drag with CTRL */
     @FXML
     private void mouseDraggedDraw(MouseEvent event) {
-        if(event.isPrimaryButtonDown() && event.isControlDown()){
+        if (event.isPrimaryButtonDown() && event.isControlDown()) {
             dragChangeState(event, 1);
-        } else if(event.isPrimaryButtonDown() && event.isShiftDown()){
+        } else if (event.isPrimaryButtonDown() && event.isShiftDown()) {
             dragChangeState(event, 0);
         }
     }
-    
-    private void dragChangeState(MouseEvent event, int state){
-        if(event.getX() >= 0 && event.getX() <= game.getWidth() && event.getY() >= 0 && event.getY() <= game.getHeight()){
-                try{
-                    int tileXCoordinate = (int)event.getX()/game.getTileSize();
-                    int tileYCoordinate = (int)event.getY()/game.getTileSize();
-                    game.changeState(tileXCoordinate, tileYCoordinate, state);
-                } catch (ArrayIndexOutOfBoundsException e){ /* Prevent drawning when user mouse drag not on the grid */
-                    System.out.println("There is no Tile to change.");
-                }
+
+    private void dragChangeState(MouseEvent event, int state) {
+        if (event.getX() >= 0 && event.getX() <= game.getWidth() && event.getY() >= 0 && event.getY() <= game.getHeight()) {
+            try {
+                int tileXCoordinate = (int) event.getX() / game.getTileSize();
+                int tileYCoordinate = (int) event.getY() / game.getTileSize();
+                game.changeState(tileXCoordinate, tileYCoordinate, state);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                /* Prevent drawning when user mouse drag not on the grid */
+                System.out.println("There is no Tile to change.");
+            }
         }
     }
 
@@ -364,19 +364,21 @@ public class MainController implements Initializable {
         int tileYCoordinate = (int) event.getY() / game.getTileSize();
 
         if (mouseStateChanger.getInsertionFlag() == NORMAL) {
-            if (event.isPrimaryButtonDown()) {
-                if (game.getGridState(tileXCoordinate, tileYCoordinate) == 1) {
-                    game.changeState(tileXCoordinate, tileYCoordinate, 0);
-                } else {
-                    game.changeState(tileXCoordinate, tileYCoordinate, 1);
-                }
-            } else if (event.isSecondaryButtonDown()) {
-                if (game.getGridState(tileXCoordinate, tileYCoordinate) == 2) {
-                    game.changeState(tileXCoordinate, tileYCoordinate, 0);
-                } else if (game.getGridState(tileXCoordinate, tileYCoordinate) == 3) {
-                    game.changeState(tileXCoordinate, tileYCoordinate, 2);
-                } else {
-                    game.changeState(tileXCoordinate, tileYCoordinate, 3);
+            if (tileXCoordinate < game.getXTiles() && tileYCoordinate < game.getYTiles()) {
+                if (event.isPrimaryButtonDown()) {
+                    if (game.getGridState(tileXCoordinate, tileYCoordinate) == 1) {
+                        game.changeState(tileXCoordinate, tileYCoordinate, 0);
+                    } else {
+                        game.changeState(tileXCoordinate, tileYCoordinate, 1);
+                    }
+                } else if (event.isSecondaryButtonDown()) {
+                    if (game.getGridState(tileXCoordinate, tileYCoordinate) == 2) {
+                        game.changeState(tileXCoordinate, tileYCoordinate, 0);
+                    } else if (game.getGridState(tileXCoordinate, tileYCoordinate) == 3) {
+                        game.changeState(tileXCoordinate, tileYCoordinate, 2);
+                    } else {
+                        game.changeState(tileXCoordinate, tileYCoordinate, 3);
+                    }
                 }
             }
         } else if (mouseStateChanger.getInsertionFlag() == AND_TOP) {
