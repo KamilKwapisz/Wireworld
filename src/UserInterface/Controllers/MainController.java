@@ -1,8 +1,6 @@
 package UserInterface.Controllers;
 
-import UserInterface.Insertion.InsertionFlag;
 import static UserInterface.Insertion.InsertionFlag.*;
-import UserInterface.Insertion.LogicGate;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -86,10 +84,9 @@ public class MainController implements Initializable {
     
     private GameGrid game;
     private WireworldSimulation simulation;
-    private InsertionFlag insertionFlag;
     private Stage stage;
     private MediaPlayer musicPlayer;
-    private LogicGate logicGate;
+    private MouseStateChanger mouseStateChanger;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -124,8 +121,7 @@ public class MainController implements Initializable {
         });
         musicPlayer.pause();
         simulationController.loadMediaPlayer(musicPlayer);
-        logicGate = new LogicGate(game.getGrid());
-        insertionFlag = NORMAL;
+        mouseStateChanger = new MouseStateChanger(game);
 
     }
 
@@ -141,121 +137,121 @@ public class MainController implements Initializable {
 
     @FXML
     private void placeAndTop(ActionEvent event) {
-        this.insertionFlag = AND_TOP;
+        mouseStateChanger.setInsertionFlag(AND_TOP);
         game.setInsertionFlag(AND_TOP);
     }
 
     @FXML
     private void placeAndBottom(ActionEvent event) {
-        this.insertionFlag = AND_BOT;
+        mouseStateChanger.setInsertionFlag(AND_BOT);
         game.setInsertionFlag(AND_BOT);
     }
 
     @FXML
     private void placeAndLeft(ActionEvent event) {
-        this.insertionFlag = AND_LEFT;
+        mouseStateChanger.setInsertionFlag(AND_LEFT);
         game.setInsertionFlag(AND_LEFT);
     }
 
     @FXML
     private void placeAndRight(ActionEvent event) {
-        this.insertionFlag = AND_RIGHT;
+        mouseStateChanger.setInsertionFlag(AND_RIGHT);
         game.setInsertionFlag(AND_RIGHT);
     }
 
     @FXML
     private void placeOrTop(ActionEvent event) {
-        this.insertionFlag = OR_TOP;
+        mouseStateChanger.setInsertionFlag(OR_TOP);
         game.setInsertionFlag(OR_TOP);
     }
 
     @FXML
     private void placeOrBottom(ActionEvent event) {
-        this.insertionFlag = OR_BOT;
+        mouseStateChanger.setInsertionFlag(OR_BOT);
         game.setInsertionFlag(OR_BOT);
     }
 
     @FXML
     private void placeOrLeft(ActionEvent event) {
-        this.insertionFlag = OR_LEFT;
+        mouseStateChanger.setInsertionFlag(OR_LEFT);
         game.setInsertionFlag(OR_LEFT);
     }
 
     @FXML
     private void placeOrRight(ActionEvent event) {
-        this.insertionFlag = OR_RIGHT;
+        mouseStateChanger.setInsertionFlag(OR_RIGHT);
         game.setInsertionFlag(OR_RIGHT);
     }
 
     @FXML
     private void placeXorTop(ActionEvent event) {
-        this.insertionFlag = XOR_TOP;
+        mouseStateChanger.setInsertionFlag(XOR_TOP);
         game.setInsertionFlag(XOR_TOP);
     }
 
     @FXML
     private void placeXorBottom(ActionEvent event) {
-        this.insertionFlag = XOR_BOT;
+        mouseStateChanger.setInsertionFlag(XOR_BOT);
         game.setInsertionFlag(XOR_BOT);
     }
 
     @FXML
     private void placeXorLeft(ActionEvent event) {
-        this.insertionFlag = XOR_LEFT;
+        mouseStateChanger.setInsertionFlag(XOR_LEFT);
         game.setInsertionFlag(XOR_LEFT);
     }
 
     @FXML
     private void placeXorRight(ActionEvent event) {
-        this.insertionFlag = XOR_RIGHT;
+        mouseStateChanger.setInsertionFlag(XOR_RIGHT);
         game.setInsertionFlag(XOR_RIGHT);
     }
 
     @FXML
     private void placeNandTop(ActionEvent event) {
-        this.insertionFlag = NAND_TOP;
+        mouseStateChanger.setInsertionFlag(NAND_TOP);
         game.setInsertionFlag(NAND_TOP);
     }
 
     @FXML
     private void placeNandBottom(ActionEvent event) {
-        this.insertionFlag = NAND_BOT;
+        mouseStateChanger.setInsertionFlag(NAND_BOT);
         game.setInsertionFlag(NAND_BOT);
     }
 
     @FXML
     private void placeNandLeft(ActionEvent event) {
-        this.insertionFlag = NAND_LEFT;
+        mouseStateChanger.setInsertionFlag(NAND_LEFT);
         game.setInsertionFlag(NAND_LEFT);
     }
 
     @FXML
     private void placeNandRight(ActionEvent event) {
-        this.insertionFlag = NAND_RIGHT;
+        mouseStateChanger.setInsertionFlag(NAND_RIGHT);
         game.setInsertionFlag(NAND_RIGHT);
     }
 
     @FXML
     private void placeNotTop(ActionEvent event) {
-        this.insertionFlag = NOT_TOP;
+        mouseStateChanger.setInsertionFlag(NOT_TOP);
         game.setInsertionFlag(NOT_TOP);
     }
 
     @FXML
     private void placeNotBottom(ActionEvent event) {
-        this.insertionFlag = NOT_BOT;
+        mouseStateChanger.setInsertionFlag(NOT_BOT);
         game.setInsertionFlag(NOT_BOT);
     }
 
     @FXML
     private void placeNotLeft(ActionEvent event) {
-        this.insertionFlag = NOT_LEFT;
+        mouseStateChanger.setInsertionFlag(NOT_LEFT);
         game.setInsertionFlag(NOT_LEFT);
     }
 
     @FXML
     private void placeNotRight(ActionEvent event) {
-        this.insertionFlag = NOT_RIGHT;
+        mouseStateChanger.setInsertionFlag(NOT_RIGHT);
         game.setInsertionFlag(NOT_RIGHT);
     }
 
@@ -336,8 +332,7 @@ public class MainController implements Initializable {
         GameGrid newGame = new GameGrid(size);
         wireDisplay.getChildren().clear();
         game = newGame;
-        logicGate = new LogicGate(game.getGrid());
-        insertionFlag = NORMAL;
+        mouseStateChanger = new MouseStateChanger(game);
         wireDisplay.setCenter(game.fillGrid());
     }
 
@@ -368,7 +363,7 @@ public class MainController implements Initializable {
         int tileXCoordinate = (int) event.getX() / game.getTileSize();
         int tileYCoordinate = (int) event.getY() / game.getTileSize();
 
-        if (insertionFlag == NORMAL) {
+        if (mouseStateChanger.getInsertionFlag() == NORMAL) {
             if (event.isPrimaryButtonDown()) {
                 if (game.getGridState(tileXCoordinate, tileYCoordinate) == 1) {
                     game.changeState(tileXCoordinate, tileYCoordinate, 0);
@@ -384,159 +379,66 @@ public class MainController implements Initializable {
                     game.changeState(tileXCoordinate, tileYCoordinate, 3);
                 }
             }
-        } else if (insertionFlag == AND_TOP) {
+        } else if (mouseStateChanger.getInsertionFlag() == AND_TOP) {
             boolean isPossible = tileXCoordinate >= 3 && tileXCoordinate <= game.getXTiles() - 6 && tileYCoordinate >= 17;
-            andMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == AND_BOT) {
+            mouseStateChanger.andMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == AND_BOT) {
             boolean isPossible = tileXCoordinate >= 5 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate <= game.getYTiles() - 18;
-            andMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == AND_LEFT) {
+            mouseStateChanger.andMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == AND_LEFT) {
             boolean isPossible = tileXCoordinate >= 17 && tileYCoordinate >= 5 && tileYCoordinate <= game.getYTiles() - 4;
-            andMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == AND_RIGHT) {
+            mouseStateChanger.andMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == AND_RIGHT) {
             boolean isPossible = tileXCoordinate <= game.getXTiles() - 18 && tileYCoordinate >= 3 && tileYCoordinate <= game.getYTiles() - 6;
-            andMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == OR_TOP) {
+            mouseStateChanger.andMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == OR_TOP) {
             boolean isPossible = tileXCoordinate >= 1 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 8;
-            orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == OR_BOT) {
+            mouseStateChanger.orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == OR_BOT) {
             boolean isPossible = tileXCoordinate >= 3 && tileXCoordinate <= game.getXTiles() - 2 && tileYCoordinate <= game.getYTiles() - 9;
-            orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == OR_LEFT) {
+            mouseStateChanger.orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == OR_LEFT) {
             boolean isPossible = tileXCoordinate >= 8 && tileYCoordinate >= 3 && tileYCoordinate <= game.getYTiles() - 2;
-            orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == OR_RIGHT) {
+            mouseStateChanger.orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == OR_RIGHT) {
             boolean isPossible = tileXCoordinate <= game.getXTiles() - 9 && tileYCoordinate >= 1 && tileYCoordinate <= game.getYTiles() - 4;
-            orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == XOR_TOP) {
+            mouseStateChanger.orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == XOR_TOP) {
             boolean isPossible = tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 10;
-            xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == XOR_BOT) {
+            mouseStateChanger.xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == XOR_BOT) {
             boolean isPossible = tileXCoordinate >= 4 && tileXCoordinate <= game.getXTiles() - 3 && tileYCoordinate <= game.getYTiles() - 11;
-            xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == XOR_LEFT) {
+            mouseStateChanger.xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == XOR_LEFT) {
             boolean isPossible = tileXCoordinate >= 10 && tileYCoordinate >= 4 && tileYCoordinate <= game.getYTiles() - 3;
-            xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == XOR_RIGHT) {
+            mouseStateChanger.xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == XOR_RIGHT) {
             boolean isPossible = tileXCoordinate <= game.getXTiles() - 11 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 5;
-            xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == NAND_TOP) {
+            mouseStateChanger.xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == NAND_TOP) {
             boolean isPossible = tileXCoordinate >= 5 && tileXCoordinate <= game.getXTiles() - 8 && tileYCoordinate >= 13;
-            nandMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == NAND_BOT) {
+            mouseStateChanger.nandMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == NAND_BOT) {
             boolean isPossible = tileXCoordinate >= 7 && tileXCoordinate <= game.getXTiles() - 6 && tileYCoordinate <= game.getYTiles() - 14;
-            nandMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == NAND_LEFT) {
+            mouseStateChanger.nandMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == NAND_LEFT) {
             boolean isPossible = tileXCoordinate >= 13 && tileYCoordinate >= 7 && tileYCoordinate <= game.getYTiles() - 6;
-            nandMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == NAND_RIGHT) {
+            mouseStateChanger.nandMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == NAND_RIGHT) {
             boolean isPossible = tileXCoordinate <= game.getXTiles() - 14 && tileYCoordinate >= 5 && tileYCoordinate <= game.getYTiles() - 8;
-            nandMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == NOT_TOP) {
+            mouseStateChanger.nandMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == NOT_TOP) {
             boolean isPossible = tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 11;
-            notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == NOT_BOT) {
+            mouseStateChanger.notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == NOT_BOT) {
             boolean isPossible = tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 3 && tileYCoordinate <= game.getYTiles() - 12;
-            notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == NOT_LEFT) {
+            mouseStateChanger.notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == NOT_LEFT) {
             boolean isPossible = tileXCoordinate >= 11 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 3;
-            notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
-        } else if (insertionFlag == NOT_RIGHT) {
+            mouseStateChanger.notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+        } else if (mouseStateChanger.getInsertionFlag() == NOT_RIGHT) {
             boolean isPossible = tileXCoordinate <= game.getXTiles() - 12 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 4;
-            notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
+            mouseStateChanger.notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         }
     }
-
-    private void insertAnd(int x, int y) {
-        logicGate.setProperties(x, y, insertionFlag);
-        logicGate.insertAnd();
-        insertionFlag = NORMAL;
-        game.setInsertionFlag(NORMAL);
-    }
-
-    private void insertOr(int x, int y) {
-        logicGate.setProperties(x, y, insertionFlag);
-        logicGate.insertOr();
-        insertionFlag = NORMAL;
-        game.setInsertionFlag(NORMAL);
-    }
-
-    private void insertXor(int x, int y) {
-        logicGate.setProperties(x, y, insertionFlag);
-        logicGate.insertXor();
-        insertionFlag = NORMAL;
-        game.setInsertionFlag(NORMAL);
-    }
-
-    private void insertNand(int x, int y) {
-        logicGate.setProperties(x, y, insertionFlag);
-        logicGate.insertNand();
-        insertionFlag = NORMAL;
-        game.setInsertionFlag(NORMAL);
-    }
-
-    private void insertNot(int x, int y) {
-        logicGate.setProperties(x, y, insertionFlag);
-        logicGate.insertNot();
-        insertionFlag = NORMAL;
-        game.setInsertionFlag(NORMAL);
-    }
-
-    private void cancelInserting(int x, int y) {
-        Rectangle border = game.getRectangle(x, y);
-        border.setFill(game.getColor(x, y));
-        insertionFlag = NORMAL;
-        game.setInsertionFlag(NORMAL);
-    }
-
-    private void andMouseControl(MouseEvent event, boolean isPossible, int x, int y) {
-        if (event.isPrimaryButtonDown()) {
-            if (isPossible) {
-                insertAnd(x, y);
-            }
-        } else if (event.isSecondaryButtonDown()) {
-            cancelInserting(x, y);
-        }
-    }
-
-    private void orMouseControl(MouseEvent event, boolean isPossible, int x, int y) {
-        if (event.isPrimaryButtonDown()) {
-            if (isPossible) {
-                insertOr(x, y);
-            }
-        } else if (event.isSecondaryButtonDown()) {
-            cancelInserting(x, y);
-        }
-    }
-
-    private void xorMouseControl(MouseEvent event, boolean isPossible, int x, int y) {
-        if (event.isPrimaryButtonDown()) {
-            if (isPossible) {
-                insertXor(x, y);
-            }
-        } else if (event.isSecondaryButtonDown()) {
-            cancelInserting(x, y);
-        }
-    }
-
-    private void nandMouseControl(MouseEvent event, boolean isPossible, int x, int y) {
-        if (event.isPrimaryButtonDown()) {
-            if (isPossible) {
-                insertNand(x, y);
-            }
-        } else if (event.isSecondaryButtonDown()) {
-            cancelInserting(x, y);
-        }
-    }
-
-    private void notMouseControl(MouseEvent event, boolean isPossible, int x, int y) {
-        if (event.isPrimaryButtonDown()) {
-            if (isPossible) {
-                insertNot(x, y);
-            }
-        } else if (event.isSecondaryButtonDown()) {
-            cancelInserting(x, y);
-        }
-    }
-    
 }
