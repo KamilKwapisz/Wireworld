@@ -17,15 +17,15 @@ public class WireworldSimulation extends Thread{
     private GameGrid grid;
     private Board board = null;
     private SizedStack<ArrayList<Cell>> lastGenerations; // stack containing 5 recently created generations
-    private final int STACKSIZE = 5;
     private Label currentGenNumberLabel;
 
     public WireworldSimulation(int genNumber, double delay, GameGrid game){
+        int STACKSIZE = 6;
         setNumberOfIterations(genNumber);
         setDelay(delay);
         this.isPaused = true;
         this.grid = game;
-        this.lastGenerations = new SizedStack<ArrayList<Cell>>(this.STACKSIZE + 1);
+        this.lastGenerations = new SizedStack<ArrayList<Cell>>(STACKSIZE);
         initializeBoardFromGrid();
     }
 
@@ -66,8 +66,8 @@ public class WireworldSimulation extends Thread{
 
     public int getCurrentGenerationNumber(){ return currentGenerationNumber; }
     public void setCurrentGenerationNumber(int number){ this.currentGenerationNumber = number; }
-    public void incrementCurrentGenNumber(){this.currentGenerationNumber += 1;}
-    public void decrementCurrentGenNumber(){
+    private void incrementCurrentGenNumber(){this.currentGenerationNumber += 1;}
+    private void decrementCurrentGenNumber(){
         if( this.currentGenerationNumber > 1)
             this.currentGenerationNumber -= 1;
     }
@@ -83,21 +83,21 @@ public class WireworldSimulation extends Thread{
     
     public double getDelay() { return delay; }
 
-    public void setDelay(double delay) throws IllegalStateException{
+    public void setDelay(double delay) {
         this.delay = delay;
     }
 
     public boolean isPaused() { return isPaused; }
 
-    public void pause() { isPaused = true; }
-    public void unpause() { isPaused = false; }
+    public void pause() { this.isPaused = true; }
+    public void unpause() { this.isPaused = false; }
 
     public void setNewGrid( GameGrid newGrid ){
         this.grid = newGrid;
         initializeBoardFromGrid();
     }
 
-    public void initializeBoardFromGrid(){
+    private void initializeBoardFromGrid(){
 
         int xTilesNumber = grid.getXTiles();
         int yTilesNumber = grid.getYTiles();
@@ -107,10 +107,11 @@ public class WireworldSimulation extends Thread{
     }
 
     public void getCellsFromGrid(){
+        GameGrid.Tile tile;
         GameGrid.Tile [][] tiles = grid.getGrid();
         for(int i = 0; i < grid.getXTiles(); i++){
             for(int j=0; j < grid.getYTiles(); j++){
-                GameGrid.Tile tile = tiles[i][j];
+                tile = tiles[i][j];
                 this.board.addCell( new Cell( tile ) );
             }
         }
@@ -118,6 +119,7 @@ public class WireworldSimulation extends Thread{
     }
 
     private void changeCellType(Cell cell){
+        // method changes cell given as a parameter type using wireworld rules
         int neighbours = this.board.countElectronHeadsNeighbours(cell);
         if( cell.getType() == 1 && (neighbours == 1 || neighbours == 2) ){
             // if cell has 1 or 2 electron's head neighbours it also become electron's head
@@ -149,14 +151,11 @@ public class WireworldSimulation extends Thread{
         for (Cell cell : notEmptyCells) {
             changeCellType(cell);
         }
-
         changeCellsColors(notEmptyCells);
         incrementCurrentGenNumber();
-
-
     }
 
-    public void simulate(){
+    private void simulate(){
         while ((getCurrentGenerationNumber() < numberOfIterations) || numberOfIterations == 0) {
             if (!isPaused) {
 
@@ -178,8 +177,6 @@ public class WireworldSimulation extends Thread{
 
     public void runSimulation(){
         initializeBoardFromGrid(); // initializing board with size of the GUI grid
-
-
         Service<Void> backgroundThread;
         backgroundThread = new Service<Void>(){
 
@@ -217,7 +214,7 @@ public class WireworldSimulation extends Thread{
             this.currentGenNumberLabel.textProperty().bind(backgroundThread.messageProperty());  // changing current gen label to message prepared before
             backgroundThread.restart();
         } catch (Exception e){
-            // no GUI so we can simulate here
+            // no GUI so we can simulate in other way here
            simulate();
         }
     }
@@ -238,14 +235,5 @@ public class WireworldSimulation extends Thread{
 
         setCurrentGenerationNumber(1);
     }
-
-    public static void main(String[] args) {
-        GameGrid grid = new GameGrid();
-        WireworldSimulation simulation = new WireworldSimulation(5, 0.5, grid);
-        simulation.unpause();
-        simulation.runSimulation();
-
-    }
-
 
 }

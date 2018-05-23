@@ -19,12 +19,12 @@ public class Board{
         }
     }
 
-    public Cell getCell(int x, int y) throws IndexOutOfBoundsException{
+    public Cell getCell(int x, int y) throws IndexOutOfBoundsException, NegativeArraySizeException{
         try {
             return board.get(y).get(x);
         } catch (IndexOutOfBoundsException e){
             if(x < 0 || y < 0)
-                throw new IndexOutOfBoundsException("Cell's coordinates mustn't be negative numbers.");
+                throw new NegativeArraySizeException("Cell's coordinates mustn't be negative numbers.");
             else
                 throw new IndexOutOfBoundsException("Board is smaller than given coordinates.");
         }
@@ -62,7 +62,7 @@ public class Board{
 
     public void updateGeneration(ArrayList<Cell> cells){
         for(Cell cell : cells){
-            this.addCell(new Cell(cell.getX(), cell.getY(), cell.getType()));
+            this.addCell(cell);
         }
     }
 
@@ -79,10 +79,6 @@ public class Board{
 
 
     public ArrayList<ArrayList<Cell>> getBoard() { return board; }
-
-    private int getCellsNumber() {
-        return (this.height * this.width);
-    }
 
     public int countElectronHeadsNeighbours(Cell cell){
 
@@ -152,17 +148,5 @@ public class Board{
         }
         return sb.toString();
     }
-
-    public void printBoard(){
-        System.out.println();
-        for(int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                System.out.print(board.get(i).get(j).getType() + ", ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
 
 }

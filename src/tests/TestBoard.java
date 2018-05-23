@@ -9,7 +9,7 @@ public class TestBoard {
         Board board = new Board(3,3);
         assertThatThrownBy(() -> board.getCell(-2, -2))
                 .as("Checking exception thrown by getting cell with negative coordinates")
-                .isInstanceOf(IndexOutOfBoundsException.class)
+                .isInstanceOf(NegativeArraySizeException.class)
                 .hasMessage("Cell's coordinates mustn't be negative numbers.");
         assertThatThrownBy(() -> board.getCell(10, 12))
                 .as("Checking exception thrown by getting cell with coordinates out of board")

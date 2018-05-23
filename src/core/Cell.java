@@ -70,9 +70,9 @@ public class Cell {
             return false;
     }
 
-    public void setCellCoordinate(int x, int y) throws IndexOutOfBoundsException{
+    public void setCellCoordinate(int x, int y) throws NegativeArraySizeException{
         if( x < 0 || y < 0)
-                throw new IndexOutOfBoundsException("Cell's coordinates mustn't be negative numbers.");
+                throw new NegativeArraySizeException("Cell's coordinates mustn't be negative numbers.");
         this.x = x;
         this.y = y;
     }
@@ -96,24 +96,5 @@ public class Cell {
                 .append(getY()).append(")[")
                 .append(this.type).append("]");
         return sb.toString();
-    }
-
-    public static void main(String[] args) {
-        Cell c1 = new Cell(2,2,3);
-        Cell c2 = new Cell(2, 1);
-
-        System.out.println(c1);
-        System.out.println(c2);
-
-        Board board = new Board(3,3);
-
-        board.addCell(c2);
-        board.addCell(c1);
-        System.out.println(board);
-
-
-        ArrayList<Cell> l = board.getNotEmptyCells();
-        System.out.println(l);
-
     }
 }

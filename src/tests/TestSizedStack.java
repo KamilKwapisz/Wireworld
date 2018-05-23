@@ -4,7 +4,7 @@ import utils.SizedStack;
 
 public class TestSizedStack {
 
-    public void test() {
+    private static void testSizedStack() {
 
         SizedStack stack = new SizedStack();
         for (int i = 0; i <= 6; i++) {
@@ -17,6 +17,10 @@ public class TestSizedStack {
         assertThat(stack).hasSize(5)
                 .as("checking stack size");
 
+    }
+
+    public void test(){
+        testSizedStack();
     }
 
     public static void main(String[] args) {

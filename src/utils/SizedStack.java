@@ -18,7 +18,7 @@ public class SizedStack<T> extends Stack<T> {
 
     @Override
     public T push(T object) {
-        //If the stack is too big, remove elements until it's the right size.
+        //If the stack is too big, remove elements until it has the right size.
         while (this.size() >= maxSize) {
             this.remove(0);
         }
