@@ -17,12 +17,12 @@ public class MouseStateChanger {
         logicGate = new LogicGate(game.getGrid());
         insertionFlag = NORMAL;
     }
-    
-    public InsertionFlag getInsertionFlag(){
+
+    public InsertionFlag getInsertionFlag() {
         return insertionFlag;
     }
-    
-    public void setInsertionFlag(InsertionFlag insertionFlag){
+
+    public void setInsertionFlag(InsertionFlag insertionFlag) {
         this.insertionFlag = insertionFlag;
     }
 
@@ -32,45 +32,54 @@ public class MouseStateChanger {
         insertionFlag = NORMAL;
         game.setInsertionFlag(NORMAL);
     }
+
     private void insertOr(int x, int y) {
         logicGate.setProperties(x, y, insertionFlag);
         logicGate.insertOr();
         insertionFlag = NORMAL;
         game.setInsertionFlag(NORMAL);
     }
+
     private void insertXor(int x, int y) {
         logicGate.setProperties(x, y, insertionFlag);
         logicGate.insertXor();
         insertionFlag = NORMAL;
         game.setInsertionFlag(NORMAL);
     }
+
     private void insertNand(int x, int y) {
         logicGate.setProperties(x, y, insertionFlag);
         logicGate.insertNand();
         insertionFlag = NORMAL;
         game.setInsertionFlag(NORMAL);
     }
+
     private void insertNot(int x, int y) {
         logicGate.setProperties(x, y, insertionFlag);
         logicGate.insertNot();
         insertionFlag = NORMAL;
         game.setInsertionFlag(NORMAL);
     }
-    
+
     private void cancelInserting(int x, int y) {
         Rectangle border = game.getRectangle(x, y);
         border.setFill(game.getColor(x, y));
         insertionFlag = NORMAL;
         game.setInsertionFlag(NORMAL);
     }
-    
+
     public void andMouseControl(MouseEvent event, boolean isPossible, int x, int y) {
         if (event.isPrimaryButtonDown()) {
             if (isPossible) {
                 insertAnd(x, y);
             }
         } else if (event.isSecondaryButtonDown()) {
-            cancelInserting(x, y);
+            if (x < game.getXTiles() && y < game.getYTiles()) {
+                cancelInserting(x, y);
+            } else {
+                insertionFlag = NORMAL;
+                game.setInsertionFlag(NORMAL);
+            }
         }
     }
 
@@ -80,7 +89,12 @@ public class MouseStateChanger {
                 insertOr(x, y);
             }
         } else if (event.isSecondaryButtonDown()) {
-            cancelInserting(x, y);
+            if (x < game.getXTiles() && y < game.getYTiles()) {
+                cancelInserting(x, y);
+            } else {
+                insertionFlag = NORMAL;
+                game.setInsertionFlag(NORMAL);
+            }
         }
     }
 
@@ -90,7 +104,12 @@ public class MouseStateChanger {
                 insertXor(x, y);
             }
         } else if (event.isSecondaryButtonDown()) {
-            cancelInserting(x, y);
+            if (x < game.getXTiles() && y < game.getYTiles()) {
+                cancelInserting(x, y);
+            } else {
+                insertionFlag = NORMAL;
+                game.setInsertionFlag(NORMAL);
+            }
         }
     }
 
@@ -100,7 +119,12 @@ public class MouseStateChanger {
                 insertNand(x, y);
             }
         } else if (event.isSecondaryButtonDown()) {
-            cancelInserting(x, y);
+            if (x < game.getXTiles() && y < game.getYTiles()) {
+                cancelInserting(x, y);
+            } else {
+                insertionFlag = NORMAL;
+                game.setInsertionFlag(NORMAL);
+            }
         }
     }
 
@@ -110,7 +134,12 @@ public class MouseStateChanger {
                 insertNot(x, y);
             }
         } else if (event.isSecondaryButtonDown()) {
-            cancelInserting(x, y);
+            if (x < game.getXTiles() && y < game.getYTiles()) {
+                cancelInserting(x, y);
+            } else {
+                insertionFlag = NORMAL;
+                game.setInsertionFlag(NORMAL);
+            }
         }
     }
 }

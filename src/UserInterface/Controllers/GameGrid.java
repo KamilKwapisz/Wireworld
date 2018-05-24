@@ -155,7 +155,8 @@ public class GameGrid {
             this.y = y;
             this.state = state;
             
-            border.setStroke(Color.web("262626"));
+            //border.setStroke(Color.web("262626"));
+            border.setStroke(Color.web("353333"));
             border.setFill(color);
             
             getChildren().addAll(border);
