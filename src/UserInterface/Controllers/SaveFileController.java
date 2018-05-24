@@ -71,7 +71,23 @@ public class SaveFileController implements FileController {
         }
         /* Test print */
         System.out.println("File path:" +  savedFile);
+
+        if (!checkIsAvaliableDiskSpace(savedFile+"")){
+            System.out.println("not enough space");
+            // error
+        } else {
+            // everything cool
+        }
         
         
     }
+
+    private boolean checkIsAvaliableDiskSpace(String filePath) {
+        File file = new File(filePath);
+        if (file.getUsableSpace() < 5000 )
+            return false;
+        else
+            return true;
+    }
+
 }
