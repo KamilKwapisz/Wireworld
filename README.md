@@ -21,7 +21,7 @@ Implementation of cellular automata based on Brian Silverman's Wireworld.
 * loading generations from png and bmp file,
 * saving generations to png and bmp file,
 * 3 sizes of the wireworld board,
-* inserting AND, OR, XOR, NAND, NOT logic gates in 4 directions,
+* inserting AND, OR, XOR, NOT, NAND logic gates in 4 directions,
 * clearing board,
 * changing speed of simulation,
 * restoring up to 6 previous generations,

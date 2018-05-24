@@ -4,6 +4,9 @@ import static UserInterface.Insertion.InsertionFlag.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import UserInterface.Insertion.Insertion;
+import UserInterface.Insertion.InsertionFlag;
 import core.WireworldSimulation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -134,124 +137,109 @@ public class MainController implements Initializable {
         SaveFileController saveFileController = new SaveFileController(game, stage);
     }
 
+    private void setInsertionDetails(InsertionFlag insertionFlag){
+        mouseStateChanger.setInsertionFlag(insertionFlag);
+        game.setInsertionFlag(insertionFlag);
+    }
+
     @FXML
     private void placeAndTop(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(AND_TOP);
-        game.setInsertionFlag(AND_TOP);
+        setInsertionDetails(AND_TOP);
     }
 
     @FXML
     private void placeAndBottom(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(AND_BOT);
-        game.setInsertionFlag(AND_BOT);
+        setInsertionDetails(AND_BOT);
     }
 
     @FXML
     private void placeAndLeft(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(AND_LEFT);
-        game.setInsertionFlag(AND_LEFT);
+        setInsertionDetails(AND_LEFT);
     }
 
     @FXML
     private void placeAndRight(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(AND_RIGHT);
-        game.setInsertionFlag(AND_RIGHT);
+        setInsertionDetails(AND_RIGHT);
     }
 
     @FXML
     private void placeOrTop(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(OR_TOP);
-        game.setInsertionFlag(OR_TOP);
+        setInsertionDetails(OR_TOP);
     }
 
     @FXML
     private void placeOrBottom(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(OR_BOT);
-        game.setInsertionFlag(OR_BOT);
+        setInsertionDetails(OR_BOT);
     }
 
     @FXML
     private void placeOrLeft(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(OR_LEFT);
-        game.setInsertionFlag(OR_LEFT);
+        setInsertionDetails(OR_LEFT);
     }
 
     @FXML
     private void placeOrRight(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(OR_RIGHT);
-        game.setInsertionFlag(OR_RIGHT);
+        setInsertionDetails(OR_RIGHT);
     }
 
     @FXML
     private void placeXorTop(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(XOR_TOP);
-        game.setInsertionFlag(XOR_TOP);
+        setInsertionDetails(XOR_TOP);
     }
 
     @FXML
     private void placeXorBottom(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(XOR_BOT);
-        game.setInsertionFlag(XOR_BOT);
+        setInsertionDetails(XOR_BOT);
     }
 
     @FXML
     private void placeXorLeft(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(XOR_LEFT);
-        game.setInsertionFlag(XOR_LEFT);
+        setInsertionDetails(XOR_LEFT);
     }
 
     @FXML
     private void placeXorRight(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(XOR_RIGHT);
-        game.setInsertionFlag(XOR_RIGHT);
+        setInsertionDetails(XOR_RIGHT);
     }
 
     @FXML
     private void placeNandTop(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(NAND_TOP);
-        game.setInsertionFlag(NAND_TOP);
+        setInsertionDetails(NAND_TOP);
     }
 
     @FXML
     private void placeNandBottom(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(NAND_BOT);
-        game.setInsertionFlag(NAND_BOT);
+        setInsertionDetails(NAND_BOT);
     }
 
     @FXML
     private void placeNandLeft(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(NAND_LEFT);
-        game.setInsertionFlag(NAND_LEFT);
+        setInsertionDetails(NAND_LEFT);
     }
 
     @FXML
     private void placeNandRight(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(NAND_RIGHT);
-        game.setInsertionFlag(NAND_RIGHT);
+        setInsertionDetails(NAND_RIGHT);
     }
 
     @FXML
     private void placeNotTop(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(NOT_TOP);
-        game.setInsertionFlag(NOT_TOP);
+        setInsertionDetails(NOT_TOP);
     }
 
     @FXML
     private void placeNotBottom(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(NOT_BOT);
-        game.setInsertionFlag(NOT_BOT);
+        setInsertionDetails(NOT_BOT);
     }
 
     @FXML
     private void placeNotLeft(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(NOT_LEFT);
-        game.setInsertionFlag(NOT_LEFT);
+        setInsertionDetails(NOT_LEFT);
     }
 
     @FXML
     private void placeNotRight(ActionEvent event) {
-        mouseStateChanger.setInsertionFlag(NOT_RIGHT);
-        game.setInsertionFlag(NOT_RIGHT);
+        setInsertionDetails(NOT_RIGHT);
     }
 
     @FXML
@@ -262,6 +250,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void clearGrid(ActionEvent event) {
+        simulation.pause();
         game.clearGrid();
         simulation.clearBoard();
     }
