@@ -126,7 +126,8 @@ public class SimulationController implements Initializable {
             simulation.setNumberOfIterations(numberOfGenerations);
             simulation.setCurrentGenerationNumber(1);
         } catch(NumberFormatException e){
-            System.out.println("Number of generations is missing or is too big. Number of generations is beeing set to 0.");
+            PopUpWindow errorWindow = new ErrorWindow("Number of generations is missing or is too big.\nNumber of generations is set to 0.");
+            errorWindow.display();
             numberOfGenerations = 0;
             simulation.setNumberOfIterations(numberOfGenerations);
             genNumber.setText("0");

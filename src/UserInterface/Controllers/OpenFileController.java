@@ -21,10 +21,9 @@ public class OpenFileController implements FileController{
         createFileChooser(stage);
         try{
             reader = image.getPixelReader();
-            System.out.println(grid.getXTiles() + "\n" + grid.getYTiles());
             loadToGrid(grid);
         } catch(NullPointerException e){
-            System.out.println("Working bugfix (may be changed)");
+            System.out.println("File was not chosen.");
             reader = null;
         }
     }
