@@ -2,7 +2,7 @@ package UserInterface.Controllers;
 
 import UserInterface.Insertion.InsertionFlag;
 import static UserInterface.Insertion.InsertionFlag.*;
-import UserInterface.Insertion.LogicGate;
+import UserInterface.Insertion.InsertLogicGate;
 import core.Cell;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
@@ -21,7 +21,7 @@ public class GameGrid {
     private static int Y_TILES = HEIGHT / TILE_SIZE;;
     private Tile[][] grid;
     private InsertionFlag insertionFlag = NORMAL;
-    private LogicGate logicGate;
+    private InsertLogicGate logicGate;
     
     public void setInsertionFlag(InsertionFlag flag){
         this.insertionFlag = flag;
@@ -31,7 +31,7 @@ public class GameGrid {
         setTileSize(size);
         calculateTilesNumber();
         grid = new Tile[X_TILES][Y_TILES];
-        logicGate = new LogicGate(grid);
+        logicGate = new InsertLogicGate(grid);
         //fillGrid();
         for(int x = 0; x < X_TILES; x++){
             for(int y = 0; y < Y_TILES; y++){
@@ -43,7 +43,7 @@ public class GameGrid {
 
     public GameGrid(){
         grid = new Tile[X_TILES][Y_TILES];
-        logicGate = new LogicGate(grid);
+        logicGate = new InsertLogicGate(grid);
         //fillGrid();
         for(int x = 0; x < X_TILES; x++){
             for(int y = 0; y < Y_TILES; y++){

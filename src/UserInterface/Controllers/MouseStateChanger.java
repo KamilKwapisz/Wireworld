@@ -2,19 +2,19 @@ package UserInterface.Controllers;
 
 import UserInterface.Insertion.InsertionFlag;
 import static UserInterface.Insertion.InsertionFlag.NORMAL;
-import UserInterface.Insertion.LogicGate;
+import UserInterface.Insertion.InsertLogicGate;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
 public class MouseStateChanger {
 
-    private LogicGate logicGate;
+    private InsertLogicGate logicGate;
     private InsertionFlag insertionFlag;
     private GameGrid game;
 
     public MouseStateChanger(GameGrid game) {
         this.game = game;
-        logicGate = new LogicGate(game.getGrid());
+        logicGate = new InsertLogicGate(game.getGrid());
         insertionFlag = NORMAL;
     }
 

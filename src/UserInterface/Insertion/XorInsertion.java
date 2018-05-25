@@ -2,7 +2,7 @@ package UserInterface.Insertion;
 
 import UserInterface.Controllers.GameGrid;
 
-public class XorInsertion implements Insertion{
+public class XorInsertion extends LogicGate{
 
     @Override
     public void insertTop(GameGrid.Tile[][] grid, int x, int y) {

@@ -1,6 +1,6 @@
 package tests;
 import UserInterface.Controllers.GameGrid;
-import UserInterface.Insertion.LogicGate;
+import UserInterface.Insertion.InsertLogicGate;
 
 import static UserInterface.Insertion.InsertionFlag.*;
 import static org.assertj.core.api.Assertions.*;
@@ -12,7 +12,7 @@ public class TestInsertion {
 
     private void testAndLogicGateInsertion(){
         GameGrid gameGrid = new GameGrid();
-        LogicGate gate = new LogicGate(gameGrid.getGrid());
+        InsertLogicGate gate = new InsertLogicGate(gameGrid.getGrid());
         GameGrid.Tile[][] grid = gameGrid.getGrid();
 
         gate.setProperties(x, y, AND_RIGHT);
@@ -66,7 +66,7 @@ public class TestInsertion {
 
     private void testOrLogicGateInsertion() {
         GameGrid gameGrid = new GameGrid();
-        LogicGate gate = new LogicGate(gameGrid.getGrid());
+        InsertLogicGate gate = new InsertLogicGate(gameGrid.getGrid());
         GameGrid.Tile[][] grid = gameGrid.getGrid();
 
         gate.setProperties(x, y, OR_BOT);
@@ -94,7 +94,7 @@ public class TestInsertion {
 
     private void testXorLogicGateInsertion() {
         GameGrid gameGrid = new GameGrid();
-        LogicGate gate = new LogicGate(gameGrid.getGrid());
+        InsertLogicGate gate = new InsertLogicGate(gameGrid.getGrid());
         GameGrid.Tile[][] grid = gameGrid.getGrid();
 
         gate.setProperties(x, y, XOR_LEFT);
@@ -131,7 +131,7 @@ public class TestInsertion {
 
     private void testNandLogicGateInsertion() {
         GameGrid gameGrid = new GameGrid();
-        LogicGate gate = new LogicGate(gameGrid.getGrid());
+        InsertLogicGate gate = new InsertLogicGate(gameGrid.getGrid());
         GameGrid.Tile[][] grid = gameGrid.getGrid();
 
         gate.setProperties(x, y, NAND_TOP);
@@ -191,7 +191,7 @@ public class TestInsertion {
 
     private void testNotLogicGateInsertion() {
         GameGrid gameGrid = new GameGrid();
-        LogicGate gate = new LogicGate(gameGrid.getGrid());
+        InsertLogicGate gate = new InsertLogicGate(gameGrid.getGrid());
         GameGrid.Tile[][] grid = gameGrid.getGrid();
 
         gate.setProperties(x, y, NOT_RIGHT);
