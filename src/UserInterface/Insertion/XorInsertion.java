@@ -5,7 +5,7 @@ import UserInterface.Controllers.GameGrid;
 public class XorInsertion extends LogicGate{
 
     @Override
-    public void insertTop(GameGrid.Tile[][] grid, int x, int y) {
+    public void topDirection(GameGrid.Tile[][] grid, int x, int y) {
         grid[x][y].yellowTile();
         grid[x][y-1].yellowTile();
         grid[x][y-2].yellowTile();
@@ -38,7 +38,7 @@ public class XorInsertion extends LogicGate{
     }
 
     @Override
-    public void insertBottom(GameGrid.Tile[][] grid, int x, int y) {
+    public void bottomDirection(GameGrid.Tile[][] grid, int x, int y) {
         grid[x][y].yellowTile();
         grid[x-2][y].yellowTile();
         grid[x][y+1].yellowTile();
@@ -69,7 +69,7 @@ public class XorInsertion extends LogicGate{
     }
 
     @Override
-    public void insertLeft(GameGrid.Tile[][] grid, int x, int y) {
+    public void leftDirection(GameGrid.Tile[][] grid, int x, int y) {
         grid[x][y].yellowTile();
         grid[x][y-2].yellowTile();
         grid[x-1][y].yellowTile();
@@ -100,7 +100,7 @@ public class XorInsertion extends LogicGate{
     }
 
     @Override
-    public void insertRight(GameGrid.Tile[][] grid, int x, int y) {
+    public void rightDirection(GameGrid.Tile[][] grid, int x, int y) {
         grid[x][y].yellowTile();
         grid[x][y+2].yellowTile();
         grid[x+1][y].yellowTile();

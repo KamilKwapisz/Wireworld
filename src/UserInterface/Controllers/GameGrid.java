@@ -1,8 +1,8 @@
 package UserInterface.Controllers;
 
+import UserInterface.Insertion.HighlightLogicGate;
 import UserInterface.Insertion.InsertionFlag;
 import static UserInterface.Insertion.InsertionFlag.*;
-import UserInterface.Insertion.InsertLogicGate;
 import core.Cell;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
@@ -21,7 +21,8 @@ public class GameGrid {
     private static int Y_TILES = HEIGHT / TILE_SIZE;;
     private Tile[][] grid;
     private InsertionFlag insertionFlag = NORMAL;
-    private InsertLogicGate logicGate;
+  //  private InsertLogicGate logicGate;
+    private HighlightLogicGate highlightLogicGate;
     
     public void setInsertionFlag(InsertionFlag flag){
         this.insertionFlag = flag;
@@ -31,8 +32,8 @@ public class GameGrid {
         setTileSize(size);
         calculateTilesNumber();
         grid = new Tile[X_TILES][Y_TILES];
-        logicGate = new InsertLogicGate(grid);
-        //fillGrid();
+       // logicGate = new InsertLogicGate(grid);
+        highlightLogicGate = new HighlightLogicGate(grid);
         for(int x = 0; x < X_TILES; x++){
             for(int y = 0; y < Y_TILES; y++){
                 Tile tile = new Tile(x, y, 0);
@@ -43,8 +44,8 @@ public class GameGrid {
 
     public GameGrid(){
         grid = new Tile[X_TILES][Y_TILES];
-        logicGate = new InsertLogicGate(grid);
-        //fillGrid();
+       // logicGate = new InsertLogicGate(grid);
+        highlightLogicGate = new HighlightLogicGate(grid);
         for(int x = 0; x < X_TILES; x++){
             for(int y = 0; y < Y_TILES; y++){
                 Tile tile = new Tile(x, y, 0);
@@ -210,7 +211,7 @@ public class GameGrid {
             }
         }
         
-        private void highlightTile(){
+        public void highlightTile(){
             if(color == Color.BLACK){
                 border.setFill(this.color.brighter().brighter().brighter().brighter());
             } else{
@@ -222,19 +223,27 @@ public class GameGrid {
         private void placeIsAllowed(){
             if(insertionFlag == AND_TOP){
                 if(this.x >= 3 && this.x <= X_TILES - 6 && this.y >= 17){
-                    highlightTile();
+                    highlightLogicGate.setProperties(x, y, insertionFlag);
+                    highlightLogicGate.highlightAnd();
+                    //highlightTile();
                 }
             } else if(insertionFlag == AND_BOT){
                 if(this.x >= 5 && this.x <= X_TILES - 4 && this.y <= Y_TILES - 18){
-                    highlightTile();
+                    highlightLogicGate.setProperties(x, y, insertionFlag);
+                    highlightLogicGate.highlightAnd();
+                    //highlightTile();
                 }
             } else if(insertionFlag == AND_LEFT){
                 if(this.x >= 17 && this.y >= 5 && this.y <= Y_TILES - 4){
-                    highlightTile();
+                    highlightLogicGate.setProperties(x, y, insertionFlag);
+                    highlightLogicGate.highlightAnd();
+                    //highlightTile();
                 }
             } else if(insertionFlag == AND_RIGHT){
                 if(this.x <= X_TILES - 18 && this.y >= 3 && this.y <= Y_TILES - 6){
-                    highlightTile();
+                    highlightLogicGate.setProperties(x, y, insertionFlag);
+                    highlightLogicGate.highlightAnd();
+                    //highlightTile();
                 }
             } else if(insertionFlag == OR_TOP){
                 if(this.x >= 1 && this.x <= X_TILES - 4 && this.y >= 8){
@@ -304,8 +313,13 @@ public class GameGrid {
         }
         /* recover color when mouse leaves the tile. Works when inserting logicGate in onExit event */
         private void leaveTile(){
+            /* TEMPORARY */
             if(insertionFlag != NORMAL){
-                border.setFill(this.color);
+                for(int x = 0; x < X_TILES; x++){
+                    for(int y = 0; y < Y_TILES; y++){
+                        grid[x][y].border.setFill(this.color);
+                    }
+                }
             }
         }
     }

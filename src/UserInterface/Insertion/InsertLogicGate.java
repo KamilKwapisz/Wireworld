@@ -1,4 +1,5 @@
 package UserInterface.Insertion;
+
 import UserInterface.Controllers.GameGrid.Tile;
 import static UserInterface.Insertion.InsertionFlag.*;
 
@@ -32,16 +33,16 @@ public class InsertLogicGate {
     public void insertAnd(){
         switch (insertionFlag) {
             case AND_TOP:
-                andInsertion.insertTop(grid, x, y);
+                andInsertion.topDirection(grid, x, y);
                 break;
             case AND_BOT:
-                andInsertion.insertBottom(grid, x, y);
+                andInsertion.bottomDirection(grid, x, y);
                 break;
             case AND_LEFT:
-                andInsertion.insertLeft(grid, x, y);
+                andInsertion.leftDirection(grid, x, y);
                 break;
             case AND_RIGHT:
-                andInsertion.insertRight(grid, x, y);
+                andInsertion.rightDirection(grid, x, y);
                 break;
             default:
                 break;
@@ -51,16 +52,16 @@ public class InsertLogicGate {
     public void insertNand(){
         switch (insertionFlag) {
             case NAND_TOP:
-                nandInsertion.insertTop(grid, x, y);
+                nandInsertion.topDirection(grid, x, y);
                 break;
             case NAND_BOT:
-                nandInsertion.insertBottom(grid, x, y);
+                nandInsertion.bottomDirection(grid, x, y);
                 break;
             case NAND_LEFT:
-                nandInsertion.insertLeft(grid, x, y);
+                nandInsertion.leftDirection(grid, x, y);
                 break;
             case NAND_RIGHT:
-                nandInsertion.insertRight(grid, x, y);
+                nandInsertion.rightDirection(grid, x, y);
                 break;
             default:
                 break;
@@ -70,16 +71,16 @@ public class InsertLogicGate {
     public void insertNot(){
         switch (insertionFlag) {
             case NOT_TOP:
-                notInsertion.insertTop(grid, x, y);
+                notInsertion.topDirection(grid, x, y);
                 break;
             case NOT_BOT:
-                notInsertion.insertBottom(grid, x, y);
+                notInsertion.bottomDirection(grid, x, y);
                 break;
             case NOT_LEFT:
-                notInsertion.insertLeft(grid, x, y);
+                notInsertion.leftDirection(grid, x, y);
                 break;
             case NOT_RIGHT:
-                notInsertion.insertRight(grid, x, y);
+                notInsertion.rightDirection(grid, x, y);
                 break;
             default:
                 break;
@@ -89,16 +90,16 @@ public class InsertLogicGate {
     public void insertOr(){
         switch (insertionFlag) {
             case OR_TOP:
-                orInsertion.insertTop(grid, x, y);
+                orInsertion.topDirection(grid, x, y);
                 break;
             case OR_BOT:
-                orInsertion.insertBottom(grid, x, y);
+                orInsertion.bottomDirection(grid, x, y);
                 break;
             case OR_LEFT:
-                orInsertion.insertLeft(grid, x, y);
+                orInsertion.leftDirection(grid, x, y);
                 break;
             case OR_RIGHT:
-                orInsertion.insertRight(grid, x, y);
+                orInsertion.rightDirection(grid, x, y);
                 break;
             default:
                 break;
@@ -108,16 +109,16 @@ public class InsertLogicGate {
     public void insertXor(){
         switch (insertionFlag) {
             case XOR_TOP:
-                xorInsertion.insertTop(grid, x, y);
+                xorInsertion.topDirection(grid, x, y);
                 break;
             case XOR_BOT:
-                xorInsertion.insertBottom(grid, x, y);
+                xorInsertion.bottomDirection(grid, x, y);
                 break;
             case XOR_LEFT:
-                xorInsertion.insertLeft(grid, x, y);
+                xorInsertion.leftDirection(grid, x, y);
                 break;
             case XOR_RIGHT:
-                xorInsertion.insertRight(grid, x, y);
+                xorInsertion.rightDirection(grid, x, y);
                 break;
             default:
                 break;
