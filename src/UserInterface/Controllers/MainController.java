@@ -264,8 +264,8 @@ public class MainController implements Initializable {
         }
         reloadSimulationForNewGrid();
 
-        andTop.setVisible(false);
-        andBottom.setVisible(false);
+        andTop.setDisable(true);
+        andBottom.setDisable(true);
     }
 
     @FXML
@@ -278,8 +278,8 @@ public class MainController implements Initializable {
             reloadDisplayedGrid(20);
         }
         reloadSimulationForNewGrid();
-        andTop.setVisible(true);
-        andBottom.setVisible(true);
+        andTop.setDisable(false);
+        andBottom.setDisable(false);
     }
 
     @FXML
@@ -292,8 +292,8 @@ public class MainController implements Initializable {
             reloadDisplayedGrid(10);
         }
         reloadSimulationForNewGrid();
-        andTop.setVisible(true);
-        andBottom.setVisible(true);
+        andTop.setDisable(false);
+        andBottom.setDisable(false);
 
     }
 
