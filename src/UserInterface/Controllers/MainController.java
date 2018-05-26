@@ -393,7 +393,7 @@ public class MainController implements Initializable {
             boolean isPossible = tileXCoordinate <= game.getXTiles() - 9 && tileYCoordinate >= 1 && tileYCoordinate <= game.getYTiles() - 4;
             mouseStateChanger.orMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (mouseStateChanger.getInsertionFlag() == XOR_TOP) {
-            boolean isPossible = tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 10;
+            boolean isPossible = tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 5 && tileYCoordinate >= 10;
             mouseStateChanger.xorMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (mouseStateChanger.getInsertionFlag() == XOR_BOT) {
             boolean isPossible = tileXCoordinate >= 4 && tileXCoordinate <= game.getXTiles() - 3 && tileYCoordinate <= game.getYTiles() - 11;
@@ -420,10 +420,10 @@ public class MainController implements Initializable {
             boolean isPossible = tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 4 && tileYCoordinate >= 11;
             mouseStateChanger.notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (mouseStateChanger.getInsertionFlag() == NOT_BOT) {
-            boolean isPossible = tileXCoordinate >= 2 && tileXCoordinate <= game.getXTiles() - 3 && tileYCoordinate <= game.getYTiles() - 12;
+            boolean isPossible = tileXCoordinate >= 3 && tileXCoordinate <= game.getXTiles() - 3 && tileYCoordinate <= game.getYTiles() - 12;
             mouseStateChanger.notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (mouseStateChanger.getInsertionFlag() == NOT_LEFT) {
-            boolean isPossible = tileXCoordinate >= 11 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 3;
+            boolean isPossible = tileXCoordinate >= 11 && tileYCoordinate >= 3 && tileYCoordinate <= game.getYTiles() - 3;
             mouseStateChanger.notMouseControl(event, isPossible, tileXCoordinate, tileYCoordinate);
         } else if (mouseStateChanger.getInsertionFlag() == NOT_RIGHT) {
             boolean isPossible = tileXCoordinate <= game.getXTiles() - 12 && tileYCoordinate >= 2 && tileYCoordinate <= game.getYTiles() - 4;

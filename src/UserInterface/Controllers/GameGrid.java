@@ -268,7 +268,7 @@ public class GameGrid {
                     highlightLogicGate.highlightOr();
                 }
             } else if (insertionFlag == XOR_TOP) {
-                if (this.x >= 2 && this.x <= X_TILES - 4 && this.y >= 10) {
+                if (this.x >= 2 && this.x <= X_TILES - 5 && this.y >= 10) {
                     highlightLogicGate.setProperties(x, y, insertionFlag);
                     highlightLogicGate.highlightXor();
                 }
@@ -313,12 +313,12 @@ public class GameGrid {
                     highlightLogicGate.highlightNot();
                 }
             } else if (insertionFlag == NOT_BOT) {
-                if (this.x >= 2 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 12) {
+                if (this.x >= 3 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 12) {
                     highlightLogicGate.setProperties(x, y, insertionFlag);
                     highlightLogicGate.highlightNot();
                 }
             } else if (insertionFlag == NOT_LEFT) {
-                if (this.x >= 11 && this.y >= 2 && this.y <= Y_TILES - 3) {
+                if (this.x >= 11 && this.y >= 3 && this.y <= Y_TILES - 3) {
                     highlightLogicGate.setProperties(x, y, insertionFlag);
                     highlightLogicGate.highlightNot();
                 }
