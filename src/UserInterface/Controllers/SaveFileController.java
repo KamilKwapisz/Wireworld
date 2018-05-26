@@ -57,6 +57,7 @@ public class SaveFileController implements FileController {
         File savedFile = fileChooser.showSaveDialog(stage);
 
         if (savedFile != null) {
+//            try {
             BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
             BufferedImage bImage2 = new BufferedImage(bImage.getWidth(), bImage.getHeight(), BufferedImage.TYPE_INT_RGB);
             bImage2.getGraphics().drawImage(bImage, 0, 0, null);
@@ -76,21 +77,26 @@ public class SaveFileController implements FileController {
             }
         }
         /* Chosen file */
-        System.out.println("File path:" + savedFile.getName());
 
-        if (!checkIsAvaliableDiskSpace(savedFile + "")) {
-            PopUpWindow errorWindow = new ErrorWindow("Not enough space to save " + savedFile.getName());
-            errorWindow.display();
-            // error
-        } else {
-            // everything cool
+        try {
+            System.out.println("File path:" + savedFile.getName());
+            if (!checkIsAvaliableDiskSpace(savedFile + "")) {
+                PopUpWindow errorWindow = new ErrorWindow("Not enough space to save " + savedFile.getName());
+                errorWindow.display();
+                // error
+            } else {
+
+                // everything cool
+            }
+        } catch (NullPointerException nullPointer) {
+            System.out.println("Saving file window closed");
         }
 
     }
 
     private boolean checkIsAvaliableDiskSpace(String filePath) {
         File file = new File(filePath);
-        if (file.getUsableSpace() < 5000) {
+        if (file.getUsableSpace() < 15000) {
             return false;
         } else {
             return true;
