@@ -61,9 +61,14 @@ public class MouseStateChanger {
         game.setInsertionFlag(NORMAL);
     }
 
-    private void cancelInserting(int x, int y) {
-        Rectangle border = game.getRectangle(x, y);
-        border.setFill(game.getColor(x, y));
+    private void cancelInserting(int a, int b) {
+        for (int x = 0; x < game.getXTiles(); x++) {
+            for (int y = 0; y < game.getYTiles(); y++) {
+                Rectangle border = game.getRectangle(x, y);
+                border.setFill(game.getColor(x, y));
+            }
+        }
+
         insertionFlag = NORMAL;
         game.setInsertionFlag(NORMAL);
     }
