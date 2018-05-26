@@ -263,6 +263,9 @@ public class MainController implements Initializable {
             reloadDisplayedGrid(40);
         }
         reloadSimulationForNewGrid();
+
+        andTop.setVisible(false);
+        andBottom.setVisible(false);
     }
 
     @FXML
@@ -275,6 +278,8 @@ public class MainController implements Initializable {
             reloadDisplayedGrid(20);
         }
         reloadSimulationForNewGrid();
+        andTop.setVisible(true);
+        andBottom.setVisible(true);
     }
 
     @FXML
@@ -287,6 +292,8 @@ public class MainController implements Initializable {
             reloadDisplayedGrid(10);
         }
         reloadSimulationForNewGrid();
+        andTop.setVisible(true);
+        andBottom.setVisible(true);
 
     }
 
@@ -339,7 +346,7 @@ public class MainController implements Initializable {
                 int tileYCoordinate = (int) event.getY() / game.getTileSize();
                 game.changeState(tileXCoordinate, tileYCoordinate, state);
             } catch (ArrayIndexOutOfBoundsException e) {
-                /* Prevent drawning when user mouse drag not on the grid */
+                /* Prevent drawing when user mouse drag not on the grid */
                 System.out.println("There is no Tile to change.");
             }
         }

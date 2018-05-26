@@ -57,7 +57,7 @@ public class SimulationController implements Initializable {
                  delayValue.setText("");
                  return;
             }
-            if(newValue.equals(0.08) && simulation.isPaused() == false){
+            if(newValue.equals(0.08) && simulation.isPaused() == false ){
                 musicPlayer.play();
             } else{
                 musicPlayer.pause();
@@ -86,13 +86,14 @@ public class SimulationController implements Initializable {
         simulation.pause();
     }
 
+
     @FXML
     private void playSimulation(ActionEvent event) {
         if (simulation.isPaused()) {
             simulation.unpause();
 //            simulation.runSimulation();
         }
-        if(delaySlider.getValue() == 0.08){
+        if(delaySlider.getValue() == 0.08 && simulation.getNumberOfIterations() == 0 ){
             musicPlayer.play();
         }
     }
