@@ -19,10 +19,8 @@ public class GameGrid {
     private static final int HEIGHT = 600;
     private static int X_TILES = WIDTH / TILE_SIZE;
     private static int Y_TILES = HEIGHT / TILE_SIZE;
-    ;
     private Tile[][] grid;
     private InsertionFlag insertionFlag = NORMAL;
-    //  private InsertLogicGate logicGate;
     private HighlightLogicGate highlightLogicGate;
 
     public void setInsertionFlag(InsertionFlag flag) {
@@ -235,122 +233,5 @@ public class GameGrid {
             }
         }
 
-
-        /* Highlights tiles when user can insert logicGate. Used in onEntered event */
-//        private void placeIsAllowed() {
-//            if (insertionFlag == AND_TOP) {
-//                if (this.x >= 3 && this.x <= X_TILES - 6 && this.y >= 17) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightAnd();
-//                }
-//            } else if (insertionFlag == AND_BOT) {
-//                if (this.x >= 5 && this.x <= X_TILES - 4 && this.y <= Y_TILES - 18) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightAnd();
-//                }
-//            } else if (insertionFlag == AND_LEFT) {
-//                if (this.x >= 17 && this.y >= 5 && this.y <= Y_TILES - 4) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightAnd();
-//                }
-//            } else if (insertionFlag == AND_RIGHT) {
-//                if (this.x <= X_TILES - 18 && this.y >= 3 && this.y <= Y_TILES - 6) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightAnd();
-//                }
-//            } else if (insertionFlag == OR_TOP) {
-//                if (this.x >= 1 && this.x <= X_TILES - 4 && this.y >= 8) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightOr();
-//                }
-//            } else if (insertionFlag == OR_BOT) {
-//                if (this.x >= 3 && this.x <= X_TILES - 2 && this.y <= Y_TILES - 9) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightOr();
-//                }
-//            } else if (insertionFlag == OR_LEFT) {
-//                if (this.x >= 8 && this.y >= 3 && this.y <= Y_TILES - 2) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightOr();
-//                }
-//            } else if (insertionFlag == OR_RIGHT) {
-//                if (this.x <= X_TILES - 9 && this.y >= 1 && this.y <= Y_TILES - 4) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightOr();
-//                }
-//            } else if (insertionFlag == XOR_TOP) {
-//                if (this.x >= 2 && this.x <= X_TILES - 5 && this.y >= 10) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightXor();
-//                }
-//            } else if (insertionFlag == XOR_BOT) {
-//                if (this.x >= 4 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 11) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightXor();
-//                }
-//            } else if (insertionFlag == XOR_LEFT) {
-//                if (this.x >= 10 && this.y >= 4 && this.y <= Y_TILES - 3) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightXor();
-//                }
-//            } else if (insertionFlag == XOR_RIGHT) {
-//                if (this.x <= X_TILES - 11 && this.y >= 2 && this.y <= Y_TILES - 5) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightXor();
-//                }
-//            } else if (insertionFlag == NAND_TOP) {
-//                if (this.x >= 5 && this.x <= X_TILES - 8 && this.y >= 13) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightNand();
-//                }
-//            } else if (insertionFlag == NAND_BOT) {
-//                if (this.x >= 7 && this.x <= X_TILES - 6 && this.y <= Y_TILES - 14) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightNand();
-//                }
-//            } else if (insertionFlag == NAND_LEFT) {
-//                if (this.x >= 13 && this.y >= 7 && this.y <= Y_TILES - 6) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightNand();
-//                }
-//            } else if (insertionFlag == NAND_RIGHT) {
-//                if (this.x <= X_TILES - 14 && this.y >= 5 && this.y <= Y_TILES - 8) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightNand();
-//                }
-//            } else if (insertionFlag == NOT_TOP) {
-//                if (this.x >= 2 && this.x <= X_TILES - 4 && this.y >= 11) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightNot();
-//                }
-//            } else if (insertionFlag == NOT_BOT) {
-//                if (this.x >= 3 && this.x <= X_TILES - 3 && this.y <= Y_TILES - 12) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightNot();
-//                }
-//            } else if (insertionFlag == NOT_LEFT) {
-//                if (this.x >= 11 && this.y >= 3 && this.y <= Y_TILES - 3) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightNot();
-//                }
-//            } else if (insertionFlag == NOT_RIGHT) {
-//                if (this.x <= X_TILES - 12 && this.y >= 2 && this.y <= Y_TILES - 4) {
-//                    highlightLogicGate.setProperties(x, y, insertionFlag);
-//                    highlightLogicGate.highlightNot();
-//                }
-//            }
-//        }
-//
-//        /* recover color when mouse leaves the tile. Works when inserting logicGate in onExit event */
-//        private void leaveTile() {
-//            /* TEMPORARY */
-//            if (insertionFlag != NORMAL) {
-//                for (int x = 0; x < X_TILES; x++) {
-//                    for (int y = 0; y < Y_TILES; y++) {
-//                        grid[x][y].border.setFill(grid[x][y].color);
-//                    }
-//                }
-//            }
-//        }
     }
 }
