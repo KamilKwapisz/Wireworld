@@ -1,5 +1,6 @@
-package LogicGates;
+package LogicGate.Insertion;
 
+import LogicGate.LogicGate;
 import UserInterface.Controllers.GameGrid;
 
 public class NandInsertion extends LogicGate{

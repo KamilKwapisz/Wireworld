@@ -1,5 +1,7 @@
-package LogicGates;
+package LogicGate.Highlights;
 
+import LogicGate.Insertion.InsertionFlag;
+import LogicGate.LogicGate;
 import UserInterface.Controllers.GameGrid.Tile;
 
 public class HighlightLogicGate {

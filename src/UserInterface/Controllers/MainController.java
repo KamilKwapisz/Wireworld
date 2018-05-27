@@ -1,11 +1,11 @@
 package UserInterface.Controllers;
 
-import static LogicGates.InsertionFlag.*;
+import static LogicGate.Insertion.InsertionFlag.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import LogicGates.InsertionFlag;
+import LogicGate.Insertion.InsertionFlag;
 import FileHandlers.OpenFileController;
 import FileHandlers.SaveFileController;
 import UserInterface.DialogWindows.HelpWindow;

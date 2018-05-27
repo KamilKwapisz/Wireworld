@@ -1,5 +1,6 @@
-package LogicGates;
+package LogicGate.Highlights;
 
+import LogicGate.LogicGate;
 import UserInterface.Controllers.GameGrid;
 
 public class AndHighlight extends LogicGate {

@@ -1,4 +1,6 @@
-package LogicGates;
+package LogicGate.Insertion;
+
+import LogicGate.LogicGate;
 
 public enum InsertionFlag {
     NORMAL(0),

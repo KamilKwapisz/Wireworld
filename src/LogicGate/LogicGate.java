@@ -1,4 +1,4 @@
-package LogicGates;
+package LogicGate;
 
 import UserInterface.Controllers.GameGrid;
 
