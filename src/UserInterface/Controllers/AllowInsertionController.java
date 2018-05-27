@@ -8,6 +8,7 @@ import static UserInterface.Insertion.InsertionFlag.NORMAL;
 import static UserInterface.Insertion.InsertionFlag.NOT_RIGHT;
 
 public class AllowInsertionController {
+    // class for checking if specific logic gate can be placed
 
     private static int X_TILES;
     private static int Y_TILES;

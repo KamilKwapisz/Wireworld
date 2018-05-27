@@ -30,11 +30,14 @@ public class WireworldSimulation extends Thread{
     }
 
     private void rememberCurrentGeneration(){
+        // method adds list of not empty cells from current gen to a list containing last 5 gen's
         ArrayList<Cell> cells = board.getNotEmptyCells();
         lastGenerations.push( cells );
     }
 
     public void loadLastGeneration(){
+        // method restores previous saved generation
+
         Board board = this.board;
         GameGrid grid = this.grid;
 
@@ -98,7 +101,6 @@ public class WireworldSimulation extends Thread{
     }
 
     private void initializeBoardFromGrid(){
-
         int xTilesNumber = grid.getXTiles();
         int yTilesNumber = grid.getYTiles();
 
@@ -107,6 +109,7 @@ public class WireworldSimulation extends Thread{
     }
 
     public void getCellsFromGrid(){
+        // method gets type of each cell on grid.
         GameGrid.Tile tile;
         GameGrid.Tile [][] tiles = grid.getGrid();
         for(int i = 0; i < grid.getXTiles(); i++){
@@ -156,6 +159,8 @@ public class WireworldSimulation extends Thread{
     }
 
     private void simulate(){
+        // simulation for non-graphical runtime
+
         while ((getCurrentGenerationNumber() < numberOfIterations) || numberOfIterations == 0) {
             if (!isPaused) {
 
@@ -176,6 +181,7 @@ public class WireworldSimulation extends Thread{
     }
 
     public void runSimulation(){
+        // method simulates cellular automata in GUI
         initializeBoardFromGrid(); // initializing board with size of the GUI grid
         Service<Void> backgroundThread;
         backgroundThread = new Service<Void>(){
@@ -227,6 +233,7 @@ public class WireworldSimulation extends Thread{
     }
 
     public void clearBoard(){
+        // change all cell types into 0
         for(int i = 0; i < grid.getXTiles(); i++){
             for(int j=0; j < grid.getYTiles(); j++){
                 this.board.addCell( new Cell(i, j, 0 ) );

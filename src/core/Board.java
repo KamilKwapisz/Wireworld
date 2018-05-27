@@ -19,7 +19,8 @@ public class Board{
         }
     }
 
-    public Cell getCell(int x, int y) throws IndexOutOfBoundsException, NegativeArraySizeException{
+    public Cell getCell(int x, int y) throws IndexOutOfBoundsException, NegativeArraySizeException {
+        // method returns cell located in row x and column y
         try {
             return board.get(y).get(x);
         } catch (IndexOutOfBoundsException e){
@@ -31,6 +32,7 @@ public class Board{
     }
 
     public void setSize(int width, int height) throws NegativeArraySizeException{
+        // setting board size
         if(width < 0 || height < 0)
             throw new NegativeArraySizeException("Board's width and height have to be positive numbers.");
         this.width = width;
@@ -81,6 +83,7 @@ public class Board{
     public ArrayList<ArrayList<Cell>> getBoard() { return board; }
 
     public int countElectronHeadsNeighbours(Cell cell){
+        // method returns number of given cell's neighbours which are electron's head
 
         int x = cell.getX();
         int y = cell.getY();

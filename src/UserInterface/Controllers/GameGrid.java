@@ -52,6 +52,7 @@ public class GameGrid {
     }
 
     public Parent fillGrid() {
+        // filling grid with tiles
         Pane root = new Pane();
         root.setPrefSize(WIDTH, HEIGHT);
 
@@ -221,6 +222,7 @@ public class GameGrid {
         }
 
         public void highlightTile() {
+            // method highlights tile in logic gate insertion mode
             if (color == Color.BLACK) {
                 border.setFill(this.color.brighter().brighter().brighter().brighter());
             } else {
