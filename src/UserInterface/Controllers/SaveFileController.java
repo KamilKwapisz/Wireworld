@@ -80,14 +80,6 @@ public class SaveFileController implements FileController {
 
         try {
             System.out.println("File path:" + savedFile.getName());
-            if (!checkIsAvaliableDiskSpace(savedFile + "")) {
-                PopUpWindow errorWindow = new ErrorWindow("Not enough space to save " + savedFile.getName());
-                errorWindow.display();
-                // error
-            } else {
-
-                // everything cool
-            }
         } catch (NullPointerException nullPointer) {
             System.out.println("Saving file window closed");
         }
