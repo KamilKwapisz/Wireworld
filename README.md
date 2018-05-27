@@ -10,7 +10,7 @@ Implementation of cellular automata based on Brian Silverman's Wireworld.
 
 ## Version
 
-1.0
+2.0
 
 ## Features
 
