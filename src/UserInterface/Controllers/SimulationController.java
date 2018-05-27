@@ -9,10 +9,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.GridPane;
 import javafx.scene.media.MediaPlayer;
 
 
@@ -23,21 +21,9 @@ public class SimulationController implements Initializable {
     @FXML
     private Label currentGen;
     @FXML
-    private GridPane menuPane;
-    @FXML
-    private Button backwardB;
-    @FXML
-    private Button pauseB;
-    @FXML
-    private Button playB;
-    @FXML
-    private Button forwardB;
-    @FXML
     private Slider delaySlider;
     @FXML
     private Label delayValue;
-    @FXML
-    private Button apply;
     
     private WireworldSimulation simulation;
     private int numberOfGenerations = 0;
@@ -57,7 +43,7 @@ public class SimulationController implements Initializable {
                  delayValue.setText("");
                  return;
             }
-            if(newValue.equals(0.08) && simulation.isPaused() == false ){
+            if(newValue.equals(0.08) && simulation.isPaused() == false && simulation.getNumberOfIterations() == 0){
                 musicPlayer.play();
             } else{
                 musicPlayer.pause();
@@ -125,6 +111,8 @@ public class SimulationController implements Initializable {
 
             numberOfGenerations = Integer.parseInt(genNumber.getText());
             simulation.setNumberOfIterations(numberOfGenerations);
+            simulation.pause();
+            musicPlayer.pause();
             simulation.setCurrentGenerationNumber(1);
         } catch(NumberFormatException e){
             PopUpWindow errorWindow = new ErrorWindow("Number of generations is missing or too big.\nNumber of generations is set to 0.");
@@ -132,6 +120,8 @@ public class SimulationController implements Initializable {
             numberOfGenerations = 0;
             simulation.setNumberOfIterations(numberOfGenerations);
             genNumber.setText("0");
+            simulation.pause();
+            musicPlayer.pause();
             simulation.setCurrentGenerationNumber(1);
         }
     }

@@ -24,63 +24,19 @@ import javafx.util.Duration;
 public class MainController implements Initializable {
 
     @FXML
-    private MenuItem fileOpen;
-    @FXML
-    private MenuItem fileSave;
-    @FXML
     private MenuItem andTop;
     @FXML
     private MenuItem andBottom;
     @FXML
-    private MenuItem andLeft;
-    @FXML
-    private MenuItem andRight;
-    @FXML
-    private MenuItem orTop;
-    @FXML
-    private MenuItem orBottom;
-    @FXML
-    private MenuItem orLeft;
-    @FXML
-    private MenuItem orRight;
-    @FXML
-    private MenuItem xorTop;
-    @FXML
-    private MenuItem xorBottom;
-    @FXML
-    private MenuItem xorLeft;
-    @FXML
-    private MenuItem xorRight;
-    @FXML
-    private MenuItem nandTop;
-    @FXML
-    private MenuItem nandBottom;
-    @FXML
-    private MenuItem nandLeft;
-    @FXML
-    private MenuItem nandRight;
-    @FXML
-    private MenuItem helpMenu;
-    @FXML
     private BorderPane wireDisplay;
     @FXML
     private BorderPane wireMenu;
-    @FXML
-    private MenuItem fileClear;
     @FXML
     private CheckMenuItem smallGrid;
     @FXML
     private CheckMenuItem mediumGrid;
     @FXML
     private CheckMenuItem largeGrid;
-    @FXML
-    private MenuItem notRight;
-    @FXML
-    private MenuItem notTop;
-    @FXML
-    private MenuItem notBottom;
-    @FXML
-    private MenuItem notLeft;
 
     private GameGrid game;
     private WireworldSimulation simulation;
