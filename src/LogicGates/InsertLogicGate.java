@@ -1,7 +1,7 @@
-package UserInterface.Insertion;
+package LogicGates;
 
 import UserInterface.Controllers.GameGrid.Tile;
-import static UserInterface.Insertion.InsertionFlag.*;
+import static LogicGates.InsertionFlag.*;
 
 public class InsertLogicGate {
     

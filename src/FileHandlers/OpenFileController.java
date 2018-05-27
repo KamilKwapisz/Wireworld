@@ -1,8 +1,10 @@
-package UserInterface.Controllers;
+package FileHandlers;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import UserInterface.Controllers.GameGrid;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
@@ -12,7 +14,7 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 
-public class OpenFileController implements FileController{
+public class OpenFileController implements FileController {
     private Image image;
     private FileChooser fileChooser;
     private PixelReader reader;

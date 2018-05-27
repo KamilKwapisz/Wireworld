@@ -1,8 +1,9 @@
 package UserInterface.Controllers;
 
-import UserInterface.Insertion.HighlightLogicGate;
-import UserInterface.Insertion.InsertionFlag;
-import static UserInterface.Insertion.InsertionFlag.*;
+import LogicGates.AllowInsertionController;
+import LogicGates.HighlightLogicGate;
+import LogicGates.InsertionFlag;
+import static LogicGates.InsertionFlag.*;
 import core.Cell;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;

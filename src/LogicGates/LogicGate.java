@@ -1,4 +1,4 @@
-package UserInterface.Insertion;
+package LogicGates;
 
 import UserInterface.Controllers.GameGrid;
 

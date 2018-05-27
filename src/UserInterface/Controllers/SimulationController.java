@@ -1,5 +1,7 @@
 package UserInterface.Controllers;
 
+import UserInterface.DialogWindows.ErrorWindow;
+import UserInterface.DialogWindows.PopUpWindow;
 import UserInterface.Fxml.NumOfGenField;
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -1,8 +1,8 @@
 package tests;
 import UserInterface.Controllers.GameGrid;
-import UserInterface.Insertion.InsertLogicGate;
+import LogicGates.InsertLogicGate;
 
-import static UserInterface.Insertion.InsertionFlag.*;
+import static LogicGates.InsertionFlag.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class TestInsertion {

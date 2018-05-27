@@ -1,11 +1,12 @@
-package UserInterface.Controllers;
+package LogicGates;
 
-import UserInterface.Insertion.HighlightLogicGate;
-import UserInterface.Insertion.InsertionFlag;
+import LogicGates.HighlightLogicGate;
+import LogicGates.InsertionFlag;
+import UserInterface.Controllers.GameGrid;
 
-import static UserInterface.Insertion.InsertionFlag.*;
-import static UserInterface.Insertion.InsertionFlag.NORMAL;
-import static UserInterface.Insertion.InsertionFlag.NOT_RIGHT;
+import static LogicGates.InsertionFlag.*;
+import static LogicGates.InsertionFlag.NORMAL;
+import static LogicGates.InsertionFlag.NOT_RIGHT;
 
 public class AllowInsertionController {
     // class for checking if specific logic gate can be placed

@@ -1,6 +1,6 @@
-package UserInterface.Controllers;
+package UserInterface.DialogWindows;
 
-import java.io.File;
+import UserInterface.Controllers.SimulationController;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

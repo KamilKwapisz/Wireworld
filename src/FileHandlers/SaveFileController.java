@@ -1,8 +1,12 @@
-package UserInterface.Controllers;
+package FileHandlers;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import UserInterface.DialogWindows.ErrorWindow;
+import UserInterface.Controllers.GameGrid;
+import UserInterface.DialogWindows.PopUpWindow;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;

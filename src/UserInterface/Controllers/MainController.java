@@ -1,11 +1,15 @@
 package UserInterface.Controllers;
 
-import static UserInterface.Insertion.InsertionFlag.*;
+import static LogicGates.InsertionFlag.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import UserInterface.Insertion.InsertionFlag;
+import LogicGates.InsertionFlag;
+import FileHandlers.OpenFileController;
+import FileHandlers.SaveFileController;
+import UserInterface.DialogWindows.HelpWindow;
+import UserInterface.DialogWindows.PopUpWindow;
 import core.WireworldSimulation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

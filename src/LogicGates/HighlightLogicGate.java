@@ -1,7 +1,6 @@
-package UserInterface.Insertion;
+package LogicGates;
 
 import UserInterface.Controllers.GameGrid.Tile;
-import static UserInterface.Insertion.InsertionFlag.*;
 
 public class HighlightLogicGate {
 
@@ -21,7 +20,7 @@ public class HighlightLogicGate {
         orHighlight = new OrHighlight();
         xorHighlight = new XorHighlight();
         this.grid = grid;
-        this.insertionFlag = NORMAL;
+        this.insertionFlag = InsertionFlag.NORMAL;
     }
 
     public void setProperties(int x, int y, InsertionFlag insertionFlag) {

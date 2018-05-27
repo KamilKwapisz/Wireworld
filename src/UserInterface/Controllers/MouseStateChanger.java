@@ -1,8 +1,8 @@
 package UserInterface.Controllers;
 
-import UserInterface.Insertion.InsertionFlag;
-import static UserInterface.Insertion.InsertionFlag.NORMAL;
-import UserInterface.Insertion.InsertLogicGate;
+import LogicGates.InsertionFlag;
+import static LogicGates.InsertionFlag.NORMAL;
+import LogicGates.InsertLogicGate;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 

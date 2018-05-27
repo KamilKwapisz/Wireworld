@@ -1,4 +1,4 @@
-package UserInterface.Controllers;
+package FileHandlers;
 
 import javafx.stage.Stage;
 
