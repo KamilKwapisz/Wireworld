@@ -19,10 +19,6 @@ public class GameGrid {
     private static final int HEIGHT = 600;
     private static int X_TILES = WIDTH / TILE_SIZE;
     private static int Y_TILES = HEIGHT / TILE_SIZE;
-<<<<<<< HEAD
-=======
-    
->>>>>>> a36f8806ced49cafeedd0e67bb9221c534a12de4
     private Tile[][] grid;
     private InsertionFlag insertionFlag = NORMAL;
     private HighlightLogicGate highlightLogicGate;
@@ -165,17 +161,11 @@ public class GameGrid {
             setTranslateX(x * TILE_SIZE);
             setTranslateY(y * TILE_SIZE);
 
-<<<<<<< HEAD
             AllowInsertionController allowInsert = new AllowInsertionController(X_TILES, Y_TILES);
-
 
             //  setOnMousePressed(e ->changeState(e, this.state));
             setOnMouseEntered(en -> allowInsert.placeIsAllowed(x, y, highlightLogicGate, insertionFlag));
             setOnMouseExited(ex -> allowInsert.leaveTile(grid, insertionFlag));
-=======
-            setOnMouseEntered(en -> placeIsAllowed());
-            setOnMouseExited(ex -> leaveTile());
->>>>>>> a36f8806ced49cafeedd0e67bb9221c534a12de4
         }
 
         public int getX() {
