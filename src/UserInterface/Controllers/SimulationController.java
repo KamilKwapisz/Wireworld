@@ -9,10 +9,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.GridPane;
 import javafx.scene.media.MediaPlayer;
 
 
@@ -23,21 +21,9 @@ public class SimulationController implements Initializable {
     @FXML
     private Label currentGen;
     @FXML
-    private GridPane menuPane;
-    @FXML
-    private Button backwardB;
-    @FXML
-    private Button pauseB;
-    @FXML
-    private Button playB;
-    @FXML
-    private Button forwardB;
-    @FXML
     private Slider delaySlider;
     @FXML
     private Label delayValue;
-    @FXML
-    private Button apply;
     
     private WireworldSimulation simulation;
     private int numberOfGenerations = 0;

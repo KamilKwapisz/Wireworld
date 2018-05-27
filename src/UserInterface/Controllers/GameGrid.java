@@ -19,7 +19,7 @@ public class GameGrid {
     private static final int HEIGHT = 600;
     private static int X_TILES = WIDTH / TILE_SIZE;
     private static int Y_TILES = HEIGHT / TILE_SIZE;
-    ;
+    
     private Tile[][] grid;
     private InsertionFlag insertionFlag = NORMAL;
     //  private InsertLogicGate logicGate;
@@ -33,7 +33,6 @@ public class GameGrid {
         setTileSize(size);
         calculateTilesNumber();
         grid = new Tile[X_TILES][Y_TILES];
-        // logicGate = new InsertLogicGate(grid);
         highlightLogicGate = new HighlightLogicGate(grid);
         for (int x = 0; x < X_TILES; x++) {
             for (int y = 0; y < Y_TILES; y++) {
@@ -45,7 +44,6 @@ public class GameGrid {
 
     public GameGrid() {
         grid = new Tile[X_TILES][Y_TILES];
-        // logicGate = new InsertLogicGate(grid);
         highlightLogicGate = new HighlightLogicGate(grid);
         for (int x = 0; x < X_TILES; x++) {
             for (int y = 0; y < Y_TILES; y++) {
@@ -61,8 +59,6 @@ public class GameGrid {
 
         for (int x = 0; x < X_TILES; x++) {
             for (int y = 0; y < Y_TILES; y++) {
-                //Tile tile = new Tile(x, y, 0);
-                //grid[x][y] = tile;
                 root.getChildren().add(grid[x][y]);
             }
         }
@@ -149,7 +145,8 @@ public class GameGrid {
 
     public class Tile extends StackPane {
 
-        private int x, y;
+        private final int x;
+        private final int y;
         private int state;
         private Rectangle border = new Rectangle(TILE_SIZE, TILE_SIZE);
         private Color color = Color.BLACK;
@@ -159,7 +156,6 @@ public class GameGrid {
             this.y = y;
             this.state = state;
 
-            //border.setStroke(Color.web("262626"));
             border.setStroke(Color.web("353333"));
             border.setFill(color);
 
@@ -167,7 +163,6 @@ public class GameGrid {
             setTranslateX(x * TILE_SIZE);
             setTranslateY(y * TILE_SIZE);
 
-            //  setOnMousePressed(e ->changeState(e, this.state));
             setOnMouseEntered(en -> placeIsAllowed());
             setOnMouseExited(ex -> leaveTile());
         }
@@ -332,7 +327,6 @@ public class GameGrid {
 
         /* recover color when mouse leaves the tile. Works when inserting logicGate in onExit event */
         private void leaveTile() {
-            /* TEMPORARY */
             if (insertionFlag != NORMAL) {
                 for (int x = 0; x < X_TILES; x++) {
                     for (int y = 0; y < Y_TILES; y++) {
