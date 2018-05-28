@@ -67,18 +67,15 @@ public class SaveFileController implements FileController {
             bImage2.getGraphics().drawImage(bImage, 0, 0, null);
             String fileName = savedFile.getName();
             String extension = fileName.substring(fileName.indexOf(".") + 1, savedFile.getName().length());
-            if (!checkIsAvaliableDiskSpace(savedFile + "")) {
-                // error
+          
+            
+            try {
+                ImageIO.write(bImage2, extension, savedFile);
+            } catch (IOException e) {
                 PopUpWindow errorWindow = new ErrorWindow("Not enough space to save " + savedFile.getName());
                 errorWindow.display();
-            } else {
-                // everything cool
-                try {
-                    ImageIO.write(bImage2, extension, savedFile);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
             }
+            
         }
         /* Chosen file */
 
@@ -90,13 +87,5 @@ public class SaveFileController implements FileController {
 
     }
 
-    private boolean checkIsAvaliableDiskSpace(String filePath) {
-        File file = new File(filePath);
-        if (file.getUsableSpace() < 15000) {
-            return false;
-        } else {
-            return true;
-        }
-    }
 
 }
