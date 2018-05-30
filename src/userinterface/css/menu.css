@@ -3,6 +3,7 @@
 }
 #layout {
     -fx-background-color: #141111;
+    -fx-font-family: "Eras Demi ITC";
 }
 .label {
     -fx-text-fill: #a6acad;

@@ -48,7 +48,7 @@ public class ErrorWindow extends PopUpWindow{
         AnchorPane.setTopAnchor(imageView, 25.0);
         
         AnchorPane layout = new AnchorPane();
-        layout.setPrefSize(390, 120);
+        layout.setPrefSize(340, 120);
         layout.setId("layout");
         String css = SimulationController.class.getResource("/userinterface/css/menu.css").toExternalForm();
         layout.getStylesheets().add(css);
