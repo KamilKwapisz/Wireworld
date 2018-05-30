@@ -2,7 +2,7 @@ package userinterface.controllers;
 
 import userinterface.dialogwindows.ErrorWindow;
 import userinterface.dialogwindows.PopUpWindow;
-import userinterface.Fxml.NumOfGenField;
+import userinterface.fxml.NumOfGenField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import simulation.WireworldSimulation;
