@@ -124,12 +124,12 @@ public class WireworldSimulation extends Thread{
     private void changeCellType(Cell cell){
         // method changes cell given as a parameter type using wireworld rules
         int neighbours = this.board.countElectronHeadsNeighbours(cell);
-        if( cell.getType() == 1 && (neighbours == 1 || neighbours == 2) ){
+        if( cell.getType() == CellType.CONDUCTOR && (neighbours == 1 || neighbours == 2) ){
             // if cell has 1 or 2 electron's head neighbours it also become electron's head
             cell.changeToHead();
-        } else if( cell.getType() == 3 ) {  // if cell was electron's head it become electron's tail
+        } else if( cell.getType() == CellType.HEAD ) {  // if cell was electron's head it become electron's tail
             cell.changeToTail();
-        } else if( cell.getType() == 2 ) { // if cell was electron's tail it become conductor
+        } else if( cell.getType() == CellType.TAIL ) { // if cell was electron's tail it become conductor
             cell.changeToConductor();
         } else {
             cell.changeToConductor();
@@ -236,7 +236,7 @@ public class WireworldSimulation extends Thread{
         // change all cell types into 0
         for(int i = 0; i < grid.getXTiles(); i++){
             for(int j=0; j < grid.getYTiles(); j++){
-                this.board.addCell( new Cell(i, j, 0 ) );
+                this.board.addCell( new Cell(i, j, CellType.EMPTY ) );
             }
         }
 

@@ -10,6 +10,7 @@ import FileHandlers.OpenFileController;
 import FileHandlers.SaveFileController;
 import UserInterface.DialogWindows.HelpWindow;
 import UserInterface.DialogWindows.PopUpWindow;
+import core.CellType;
 import core.WireworldSimulation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -293,13 +294,13 @@ public class MainController implements Initializable {
     @FXML
     private void mouseDraggedDraw(MouseEvent event) {
         if (event.isPrimaryButtonDown() && event.isControlDown()) {
-            dragChangeState(event, 1);
+            dragChangeState(event, CellType.CONDUCTOR);
         } else if (event.isPrimaryButtonDown() && event.isShiftDown()) {
-            dragChangeState(event, 0);
+            dragChangeState(event, CellType.EMPTY);
         }
     }
 
-    private void dragChangeState(MouseEvent event, int state) {
+    private void dragChangeState(MouseEvent event, CellType state) {
         if (event.getX() >= 0 && event.getX() <= game.getWidth() && event.getY() >= 0 && event.getY() <= game.getHeight()) {
             try {
                 int tileXCoordinate = (int) event.getX() / game.getTileSize();
@@ -320,18 +321,18 @@ public class MainController implements Initializable {
         if (mouseStateChanger.getInsertionFlag() == NORMAL) {
             if (tileXCoordinate < game.getXTiles() && tileYCoordinate < game.getYTiles()) {
                 if (event.isPrimaryButtonDown()) {
-                    if (game.getGridState(tileXCoordinate, tileYCoordinate) == 1) {
-                        game.changeState(tileXCoordinate, tileYCoordinate, 0);
+                    if (game.getGridState(tileXCoordinate, tileYCoordinate) == CellType.CONDUCTOR) {
+                        game.changeState(tileXCoordinate, tileYCoordinate, CellType.EMPTY);
                     } else {
-                        game.changeState(tileXCoordinate, tileYCoordinate, 1);
+                        game.changeState(tileXCoordinate, tileYCoordinate, CellType.CONDUCTOR);
                     }
                 } else if (event.isSecondaryButtonDown()) {
-                    if (game.getGridState(tileXCoordinate, tileYCoordinate) == 2) {
-                        game.changeState(tileXCoordinate, tileYCoordinate, 0);
-                    } else if (game.getGridState(tileXCoordinate, tileYCoordinate) == 3) {
-                        game.changeState(tileXCoordinate, tileYCoordinate, 2);
+                    if (game.getGridState(tileXCoordinate, tileYCoordinate) == CellType.TAIL) {
+                        game.changeState(tileXCoordinate, tileYCoordinate, CellType.EMPTY);
+                    } else if (game.getGridState(tileXCoordinate, tileYCoordinate) == CellType.HEAD) {
+                        game.changeState(tileXCoordinate, tileYCoordinate, CellType.TAIL);
                     } else {
-                        game.changeState(tileXCoordinate, tileYCoordinate, 3);
+                        game.changeState(tileXCoordinate, tileYCoordinate, CellType.HEAD);
                     }
                 }
             }

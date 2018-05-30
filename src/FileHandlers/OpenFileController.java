@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 import UserInterface.Controllers.GameGrid;
+import core.CellType;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
@@ -55,15 +56,15 @@ public class OpenFileController implements FileController {
             for(int y = 0; y < image.getHeight() && y < grid.getYTiles(); y++){
                 Color color = reader.getColor(x, y);
                 if(color.equals(Color.BLACK)){
-                    grid.changeState(x, y, 0);
+                    grid.changeState(x, y, CellType.EMPTY);
                 } else if(color.equals(Color.YELLOW)){
-                    grid.changeState(x, y, 1);
+                    grid.changeState(x, y, CellType.CONDUCTOR);
                 } else if(color.equals(Color.BLUE)){
-                    grid.changeState(x, y, 3);
+                    grid.changeState(x, y, CellType.HEAD);
                 } else if(color.equals(Color.RED)){
-                    grid.changeState(x, y, 2);
+                    grid.changeState(x, y, CellType.TAIL);
                 } else{
-                    grid.changeState(x, y, 0);
+                    grid.changeState(x, y, CellType.EMPTY);
                 }
             }
         }

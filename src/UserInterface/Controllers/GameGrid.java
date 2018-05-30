@@ -5,6 +5,7 @@ import LogicGate.Highlights.HighlightLogicGate;
 import LogicGate.Insertion.InsertionFlag;
 import static LogicGate.Insertion.InsertionFlag.*;
 import core.Cell;
+import core.CellType;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -35,7 +36,7 @@ public class GameGrid {
         highlightLogicGate = new HighlightLogicGate(grid);
         for (int x = 0; x < X_TILES; x++) {
             for (int y = 0; y < Y_TILES; y++) {
-                Tile tile = new Tile(x, y, 0);
+                Tile tile = new Tile(x, y, CellType.EMPTY);
                 grid[x][y] = tile;
             }
         }
@@ -46,7 +47,7 @@ public class GameGrid {
         highlightLogicGate = new HighlightLogicGate(grid);
         for (int x = 0; x < X_TILES; x++) {
             for (int y = 0; y < Y_TILES; y++) {
-                Tile tile = new Tile(x, y, 0);
+                Tile tile = new Tile(x, y, CellType.EMPTY);
                 grid[x][y] = tile;
             }
         }
@@ -89,7 +90,7 @@ public class GameGrid {
     public void clearGrid() {
         for (int x = 0; x < X_TILES; x++) {
             for (int y = 0; y < Y_TILES; y++) {
-                changeState(x, y, 0);;
+                changeState(x, y, CellType.EMPTY);;
             }
         }
     }
@@ -106,22 +107,22 @@ public class GameGrid {
         return Y_TILES;
     }
 
-    public int getGridState(int x, int y) {
+    public CellType getGridState(int x, int y) {
         return grid[x][y].getState();
     }
 
-    public void changeState(int x, int y, int newState) {
+    public void changeState(int x, int y, CellType newState) {
         switch (newState) {
-            case 0:
+            case EMPTY:
                 grid[x][y].blackTile();
                 break;
-            case 1:
+            case CONDUCTOR:
                 grid[x][y].yellowTile();
                 break;
-            case 2:
+            case TAIL:
                 grid[x][y].redTile();
                 break;
-            case 3:
+            case HEAD:
                 grid[x][y].blueTile();
                 break;
             default:
@@ -147,11 +148,11 @@ public class GameGrid {
 
         private final int x;
         private final int y;
-        private int state;
+        private CellType state;
         private Rectangle border = new Rectangle(TILE_SIZE, TILE_SIZE);
         private Color color = Color.BLACK;
 
-        public Tile(int x, int y, int state) {
+        public Tile(int x, int y, CellType state) {
             this.x = x;
             this.y = y;
             this.state = state;
@@ -186,13 +187,13 @@ public class GameGrid {
             return this.y;
         }
 
-        public int getState() {
+        public CellType getState() {
             return this.state;
         }
 
         private void blackTile() {
 
-            this.state = 0;
+            this.state = CellType.EMPTY;
             this.color = Color.BLACK;
             border.setFill(color);
 
@@ -200,7 +201,7 @@ public class GameGrid {
 
         public void yellowTile() {
 
-            this.state = 1;
+            this.state = CellType.CONDUCTOR;
             this.color = Color.YELLOW;
             border.setFill(color);
 
@@ -208,7 +209,7 @@ public class GameGrid {
 
         public void blueTile() {
 
-            this.state = 3;
+            this.state = CellType.HEAD;
             this.color = Color.BLUE;
             border.setFill(color);
 
@@ -216,7 +217,7 @@ public class GameGrid {
 
         public void redTile() {
 
-            this.state = 2;
+            this.state = CellType.TAIL;
             this.color = Color.RED;
             border.setFill(color);
 

@@ -55,7 +55,7 @@ public class Board{
         for(int i = 0; i < height; i++){
             for(int j = 0; j < width; j++){
                 tempCell = board.get(i).get(j);
-                if(  tempCell.getType() != 0)
+                if(  tempCell.getType() != CellType.EMPTY)
                     newList.add(tempCell);
             }
         }

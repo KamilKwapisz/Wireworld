@@ -29,16 +29,16 @@ public class SaveFileController implements FileController {
         for (int x = 0; x < grid.getXTiles(); x++) {
             for (int y = 0; y < grid.getYTiles(); y++) {
                 switch (grid.getGridState(x, y)) {
-                    case 0:
+                    case EMPTY:
                         writer.setColor(x, y, Color.BLACK);
                         break;
-                    case 1:
+                    case CONDUCTOR:
                         writer.setColor(x, y, Color.YELLOW);
                         break;
-                    case 2:
+                    case TAIL:
                         writer.setColor(x, y, Color.RED);
                         break;
-                    case 3:
+                    case HEAD:
                         writer.setColor(x, y, Color.BLUE);
                         break;
                     default:

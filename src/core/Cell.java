@@ -1,18 +1,17 @@
 package core;
 
 import UserInterface.Controllers.GameGrid;
-
 import java.util.ArrayList;
 
 public class Cell {
 
-    private int type; // 0 - empty | 1 - conductor | 2 - electron tail | 3 - electron head
-    private int nextType; // type which cell will have after change
+    private CellType type;
+    private CellType nextType;
     private int x;
     private int y;
 
     public Cell(int x, int y){
-        setType(0);
+        setType(CellType.EMPTY);
         setCellCoordinate(x, y);
     }
 
@@ -21,13 +20,13 @@ public class Cell {
         setCellCoordinate(tile.getX(), tile.getY());
     }
 
-    public Cell(int x, int y, int type){
+    public Cell(int x, int y, CellType type){
         setType(type);
         setCellCoordinate(x, y);
     }
 
-    private void setType(int type) throws IllegalStateException {
-        if(type >= 0 && type <= 3)
+    private void setType(CellType type) throws IllegalStateException {
+        if(type == CellType.EMPTY || type == CellType.CONDUCTOR || type == CellType.HEAD  || type == CellType.TAIL)
             this.type = type;
         else
             throw new IllegalStateException("Incorrect cell type.");
@@ -36,27 +35,27 @@ public class Cell {
     public int getX(){ return this.x;}
     public int getY(){ return this.y;}
 
-    public int getType() {
+    public CellType getType() {
         return type;
     }
-    public int getNextType() {
+    public CellType getNextType() {
         return nextType;
     }
 
     public void changeToEmpty(){
-        this.nextType = 0;
+        this.nextType = CellType.EMPTY;
     }
 
     public void changeToConductor(){
-        this.nextType = 1;
+        this.nextType = CellType.CONDUCTOR;
     }
 
     public void changeToTail(){
-        this.nextType = 2;
+        this.nextType = CellType.TAIL;
     }
 
     public void changeToHead(){
-        this.nextType = 3;
+        this.nextType = CellType.HEAD;
     }
 
     public void changeType(){
@@ -64,7 +63,7 @@ public class Cell {
     }
 
     public boolean isEmpty(){
-        if( this.type == 0 )
+        if( this.type == CellType.EMPTY )
             return true;
         else
             return false;
@@ -80,7 +79,7 @@ public class Cell {
     public int isHead(){
         // method returns 1 if true and 0 if false
         // it's int method not boolean in order to provide more convenient way of calculating neighbours
-        if(type == 3)
+        if(type == CellType.HEAD)
             return 1;
         else
             return 0;
