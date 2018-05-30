@@ -1,7 +1,6 @@
 package core;
 
-import UserInterface.Controllers.GameGrid;
-import java.util.ArrayList;
+import userinterface.controllers.GameGrid;
 
 public class Cell {
 

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #262626;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userinterface.controllers.MainController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="1280.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints maxHeight="25.0" minHeight="25.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="600.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="170.0" minHeight="170.0" prefHeight="170.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <MenuBar maxHeight="25.0" minHeight="25.0" prefHeight="25.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="fileOpen" mnemonicParsing="false" onAction="#openFile" text="Open..." />
+                  <MenuItem fx:id="fileSave" mnemonicParsing="false" onAction="#saveFile" text="Save..." />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Insert">
+               <items>
+                  <Menu mnemonicParsing="false" text="AND">
+                    <items>
+                        <MenuItem fx:id="andRight" mnemonicParsing="false" onAction="#placeAndRight" text="Right" />
+                      <MenuItem fx:id="andTop" mnemonicParsing="false" onAction="#placeAndTop" text="Top" />
+                        <MenuItem fx:id="andBottom" mnemonicParsing="false" onAction="#placeAndBottom" text="Bottom" />
+                        <MenuItem fx:id="andLeft" mnemonicParsing="false" onAction="#placeAndLeft" text="Left" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="OR">
+                    <items>
+                        <MenuItem fx:id="orRight" mnemonicParsing="false" onAction="#placeOrRight" text="Right" />
+                      <MenuItem fx:id="orTop" mnemonicParsing="false" onAction="#placeOrTop" text="Top" />
+                        <MenuItem fx:id="orBottom" mnemonicParsing="false" onAction="#placeOrBottom" text="Bottom" />
+                        <MenuItem fx:id="orLeft" mnemonicParsing="false" onAction="#placeOrLeft" text="Left" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="XOR">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#placeXorRight" text="Right" fx:id="xorRight" />
+                      <MenuItem mnemonicParsing="false" onAction="#placeXorTop" text="Top" fx:id="xorTop" />
+                        <MenuItem mnemonicParsing="false" onAction="#placeXorBottom" text="Bottom" fx:id="xorBottom" />
+                        <MenuItem mnemonicParsing="false" onAction="#placeXorLeft" text="Left" fx:id="xorLeft" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="NAND">
+                    <items>
+                        <MenuItem fx:id="nandRight" mnemonicParsing="false" onAction="#placeNandRight" text="Right" />
+                      <MenuItem fx:id="nandTop" mnemonicParsing="false" onAction="#placeNandTop" text="Top" />
+                        <MenuItem fx:id="nandBottom" mnemonicParsing="false" onAction="#placeNandBottom" text="Bottom" />
+                        <MenuItem fx:id="nandLeft" mnemonicParsing="false" onAction="#placeNandLeft" text="Left" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="NOT">
+                     <items>
+                        <MenuItem fx:id="notRight" mnemonicParsing="false" onAction="#placeNotRight" text="Right" />
+                        <MenuItem fx:id="notTop" mnemonicParsing="false" onAction="#placeNotTop" text="Top" />
+                        <MenuItem fx:id="notBottom" mnemonicParsing="false" onAction="#placeNotBottom" text="Bottom" />
+                        <MenuItem fx:id="notLeft" mnemonicParsing="false" onAction="#placeNotLeft" text="Left" />
+                     </items>
+                  </Menu>
+               </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Board">
+               <items>
+                  <MenuItem fx:id="fileClear" mnemonicParsing="false" onAction="#clearGrid" text="Clear grid" />
+                  <Menu mnemonicParsing="false" text="Size of grid">
+                     <items>
+                        <CheckMenuItem fx:id="smallGrid" mnemonicParsing="false" onAction="#setSmallGrid" text="Small" />
+                        <CheckMenuItem fx:id="mediumGrid" mnemonicParsing="false" onAction="#setMediumGrid" text="Medium" />
+                        <CheckMenuItem fx:id="largeGrid" mnemonicParsing="false" onAction="#setLargeGrid" text="Large" />
+                     </items>
+                  </Menu>
+               </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem fx:id="helpMenu" mnemonicParsing="false" onAction="#showHelp" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <BorderPane fx:id="wireDisplay" maxWidth="1.7976931348623157E308" onMouseDragged="#mouseDraggedDraw" onMousePressed="#mouseChangeState" GridPane.rowIndex="1" />
+      <BorderPane fx:id="wireMenu" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2" />
+   </children>
+</GridPane>

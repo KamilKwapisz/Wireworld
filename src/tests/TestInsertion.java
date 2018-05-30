@@ -1,9 +1,9 @@
 package tests;
-import UserInterface.Controllers.GameGrid;
-import LogicGate.Insertion.InsertLogicGate;
+import userinterface.controllers.GameGrid;
+import logicgate.insertion.InsertLogicGate;
 import core.CellType;
 
-import static LogicGate.Insertion.InsertionFlag.*;
+import static logicgate.insertion.InsertionFlag.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class TestInsertion {

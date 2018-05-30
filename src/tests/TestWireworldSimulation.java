@@ -1,7 +1,8 @@
 package tests;
 import static org.assertj.core.api.Assertions.*;
-import UserInterface.Controllers.GameGrid;
+import userinterface.controllers.GameGrid;
 import core.*;
+import simulation.WireworldSimulation;
 
 
 public class TestWireworldSimulation {

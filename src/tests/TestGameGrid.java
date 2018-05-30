@@ -1,6 +1,6 @@
 package tests;
 import static org.assertj.core.api.Assertions.*;
-import UserInterface.Controllers.GameGrid;
+import userinterface.controllers.GameGrid;
 import core.CellType;
 
 public class TestGameGrid {
