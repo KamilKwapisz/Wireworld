@@ -18,7 +18,7 @@ public class TestCell {
         testcell.changeToHead();
         assertThat(testcell.getNextType()).as("check head cell type").isEqualTo(CellType.HEAD);
         testcell.changeType();
-        assertThat(testcell.isHead()).as("check if cell is head").isEqualTo(CellType.CONDUCTOR);
+        assertThat(testcell.isHead()).as("check if cell is head").isEqualTo(1);
 
         testcell.changeToTail();
         assertThat(testcell.getNextType()).as("check tail cell type").isEqualTo(CellType.TAIL);

@@ -165,7 +165,6 @@ public class WireworldSimulation extends Thread{
             if (!isPaused) {
 
                 nextGeneration(); // create next generation
-                System.out.println(currentGenerationNumber);
 
                 try {
                     sleep((int) (delay * 1000)); //delay value in milliseconds

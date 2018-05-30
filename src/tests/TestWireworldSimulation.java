@@ -96,7 +96,26 @@ public class TestWireworldSimulation {
     }
 
     private static void testRunSimulation(){
-        // TODO
+        GameGrid grid = new GameGrid(20);
+        grid.fillGrid();
+        int maxGenNumber = 15;
+        WireworldSimulation simulation = new WireworldSimulation(maxGenNumber, 0.08, grid);
+        simulation.unpause();
+        simulation.runSimulation();
+
+        assertThat(simulation.getCurrentGenerationNumber())
+                .as("checking whether simulation creates proper number of generations")
+                .isEqualTo(maxGenNumber);
+
+        simulation.setNumberOfIterations(10);
+        assertThat(simulation.getCurrentGenerationNumber())
+                .as("checking whether simulation resets current generation number after setting different max generation number")
+                .isEqualTo(1);
+
+        simulation.runSimulation();
+        assertThat(simulation.getCurrentGenerationNumber())
+                .as("checking whether simulation creates proper number of generation after setting max number manually")
+                .isEqualTo(10);
     }
 
     public void test(){
@@ -104,6 +123,7 @@ public class TestWireworldSimulation {
         testSeters();
         testGetCellsFromGrid();
         testNextGeneration();
+        testRunSimulation();
     }
 
     public static void main(String[] args) {
