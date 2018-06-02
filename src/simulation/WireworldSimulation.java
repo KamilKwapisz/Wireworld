@@ -1,15 +1,16 @@
 package simulation;
-
 import userinterface.controllers.GameGrid;
 import core.Board;
 import core.Cell;
 import core.CellType;
+import utils.SizedStack;
+import java.util.ArrayList;
+
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
-import utils.SizedStack;
 
-import java.util.ArrayList;
+
 
 public class WireworldSimulation extends Thread{
 
