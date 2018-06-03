@@ -84,7 +84,6 @@ public class Cell {
             return 0;
     }
 
-
     @Override
     public String toString(){
         // (x,y)[type]

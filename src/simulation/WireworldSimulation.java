@@ -5,12 +5,9 @@ import core.Cell;
 import core.CellType;
 import utils.SizedStack;
 import java.util.ArrayList;
-
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
-
-
 
 public class WireworldSimulation extends Thread{
 
@@ -66,10 +63,7 @@ public class WireworldSimulation extends Thread{
             }
         };
         backgroundThread.restart();
-
-
     }
-
 
     public int getCurrentGenerationNumber(){ return currentGenerationNumber; }
     public void setCurrentGenerationNumber(int number){ this.currentGenerationNumber = number; }
@@ -122,7 +116,6 @@ public class WireworldSimulation extends Thread{
                 this.board.addCell( new Cell( tile ) );
             }
         }
-
     }
 
     private void changeCellType(Cell cell){
@@ -151,9 +144,7 @@ public class WireworldSimulation extends Thread{
     public void nextGeneration(){
         // method creates one next generation
         rememberCurrentGeneration();
-
         getCellsFromGrid(); // get the most recent grid board setup
-
         ArrayList<Cell> notEmptyCells = this.board.getNotEmptyCells();
         for (Cell cell : notEmptyCells) {
             changeCellType(cell);

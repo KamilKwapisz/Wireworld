@@ -19,18 +19,6 @@ public class Board{
         }
     }
 
-    public Cell getCell(int x, int y) throws IndexOutOfBoundsException, NegativeArraySizeException {
-        // method returns cell located in row x and column y
-        try {
-            return board.get(y).get(x);
-        } catch (IndexOutOfBoundsException e){
-            if(x < 0 || y < 0)
-                throw new NegativeArraySizeException("Cell's coordinates mustn't be negative numbers.");
-            else
-                throw new IndexOutOfBoundsException("Board is smaller than given coordinates.");
-        }
-    }
-
     public void setSize(int width, int height) throws NegativeArraySizeException{
         // setting board size
         if(width < 0 || height < 0)
@@ -45,6 +33,18 @@ public class Board{
 
     public int getHeight() {
         return this.height;
+    }
+
+    public Cell getCell(int x, int y) throws IndexOutOfBoundsException, NegativeArraySizeException {
+        // method returns cell located in row x and column y
+        try {
+            return board.get(y).get(x);
+        } catch (IndexOutOfBoundsException e){
+            if(x < 0 || y < 0)
+                throw new NegativeArraySizeException("Cell's coordinates mustn't be negative numbers.");
+            else
+                throw new IndexOutOfBoundsException("Board is smaller than given coordinates.");
+        }
     }
 
     public ArrayList<Cell> getNotEmptyCells(){
@@ -77,8 +77,6 @@ public class Board{
                 throw new IndexOutOfBoundsException("Board is too small for this cell.");
         }
     }
-
-
 
     public ArrayList<ArrayList<Cell>> getBoard() { return board; }
 
