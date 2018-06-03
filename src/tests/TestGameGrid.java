@@ -1,6 +1,7 @@
 package tests;
 import static org.assertj.core.api.Assertions.*;
-import UserInterface.Controllers.GameGrid;
+import userinterface.controllers.GameGrid;
+import core.CellType;
 
 public class TestGameGrid {
 
@@ -20,11 +21,11 @@ public class TestGameGrid {
         GameGrid grid = new GameGrid();
 
         for(int i = 0; i < 6; i++){
-                grid.changeState(i, i, (i % 3) + 1);
+                grid.changeState(i, i, CellType.CONDUCTOR);
         }
 
         for(int i = 0; i < 6; i++){
-            assertThat(grid.getGridState(i,i)).as("checking tile type").isEqualTo( (i % 3) + 1);
+            assertThat(grid.getGridState(i,i)).as("checking tile type").isEqualTo( CellType.CONDUCTOR );
         }
 
     }
@@ -32,11 +33,11 @@ public class TestGameGrid {
     private static void testClearGrid() {
         GameGrid grid = new GameGrid();
         for(int i = 0; i < 15; i++){
-            grid.changeState(i, i, (i % 3) + 1);
+            grid.changeState(i, i, CellType.TAIL);
         }
         grid.clearGrid();
         for(int i = 0; i < 15; i++){
-            assertThat(grid.getGridState(i,i)).as("checking clear grid").isEqualTo(0);
+            assertThat(grid.getGridState(i,i)).as("checking clear grid").isEqualTo(CellType.EMPTY);
         }
 
     }

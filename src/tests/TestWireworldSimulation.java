@@ -1,7 +1,8 @@
 package tests;
 import static org.assertj.core.api.Assertions.*;
-import UserInterface.Controllers.GameGrid;
+import userinterface.controllers.GameGrid;
 import core.*;
+import simulation.WireworldSimulation;
 
 
 public class TestWireworldSimulation {
@@ -42,9 +43,9 @@ public class TestWireworldSimulation {
     private static void testGetCellsFromGrid(){
         GameGrid grid = new GameGrid(20);
         grid.fillGrid();
-        grid.changeState(0, 0, 1);
-        grid.changeState(1, 1, 3);
-        grid.changeState(2, 2, 2);
+        grid.changeState(0, 0, CellType.CONDUCTOR);
+        grid.changeState(1, 1, CellType.HEAD);
+        grid.changeState(2, 2, CellType.TAIL);
 
         WireworldSimulation simulation = new WireworldSimulation(3, 0.5, grid);
         simulation.getCellsFromGrid();
@@ -56,22 +57,22 @@ public class TestWireworldSimulation {
 
         assertThat(cell1.getType())
                 .as("checking cell's from board type")
-                .isEqualTo(1);
+                .isEqualTo(CellType.CONDUCTOR);
         assertThat(cell2.getType())
                 .as("checking cell's from board type")
-                .isEqualTo(3);
+                .isEqualTo(CellType.HEAD);
         assertThat(cell3.getType())
                 .as("checking cell's from board type")
-                .isEqualTo(2);
+                .isEqualTo(CellType.TAIL);
 
     }
 
     private static void testNextGeneration(){
         GameGrid grid = new GameGrid(20);
         grid.fillGrid();
-        grid.changeState(0, 0, 1); grid.changeState(0, 1, 3); grid.changeState(0, 2, 1);
-        grid.changeState(1, 0, 3); grid.changeState(1, 1, 2); grid.changeState(1, 2, 2);
-        grid.changeState(2, 0, 2); grid.changeState(2, 1, 1); grid.changeState(2, 2, 3);
+        grid.changeState(0, 0, CellType.CONDUCTOR); grid.changeState(0, 1, CellType.HEAD); grid.changeState(0, 2, CellType.CONDUCTOR);
+        grid.changeState(1, 0, CellType.HEAD); grid.changeState(1, 1, CellType.TAIL); grid.changeState(1, 2, CellType.TAIL);
+        grid.changeState(2, 0, CellType.TAIL); grid.changeState(2, 1, CellType.CONDUCTOR); grid.changeState(2, 2, CellType.HEAD);
         /* 1 3 2
            3 2 1
            1 2 3
@@ -81,22 +82,41 @@ public class TestWireworldSimulation {
         simulation.nextGeneration();
         Board board = simulation.getBoard();
 
-        assertThat(board.getCell(0,0).getType()).isEqualTo(3);
-        assertThat(board.getCell(0,1).getType()).isEqualTo(2);
-        assertThat(board.getCell(0,2).getType()).isEqualTo(3);
+        assertThat(board.getCell(0,0).getType()).isEqualTo(CellType.HEAD);
+        assertThat(board.getCell(0,1).getType()).isEqualTo(CellType.TAIL);
+        assertThat(board.getCell(0,2).getType()).isEqualTo(CellType.HEAD);
 
-        assertThat(board.getCell(1,0).getType()).isEqualTo(2);
-        assertThat(board.getCell(1,1).getType()).isEqualTo(1);
-        assertThat(board.getCell(1,2).getType()).isEqualTo(1);
+        assertThat(board.getCell(1,0).getType()).isEqualTo(CellType.TAIL);
+        assertThat(board.getCell(1,1).getType()).isEqualTo(CellType.CONDUCTOR);
+        assertThat(board.getCell(1,2).getType()).isEqualTo(CellType.CONDUCTOR);
 
-        assertThat(board.getCell(2,0).getType()).isEqualTo(1);
-        assertThat(board.getCell(2,1).getType()).isEqualTo(3);
-        assertThat(board.getCell(2,2).getType()).isEqualTo(2);
+        assertThat(board.getCell(2,0).getType()).isEqualTo(CellType.CONDUCTOR);
+        assertThat(board.getCell(2,1).getType()).isEqualTo(CellType.HEAD);
+        assertThat(board.getCell(2,2).getType()).isEqualTo(CellType.TAIL);
 
     }
 
     private static void testRunSimulation(){
-        // TODO
+        GameGrid grid = new GameGrid(20);
+        grid.fillGrid();
+        int maxGenNumber = 15;
+        WireworldSimulation simulation = new WireworldSimulation(maxGenNumber, 0.08, grid);
+        simulation.unpause();
+        simulation.runSimulation();
+
+        assertThat(simulation.getCurrentGenerationNumber())
+                .as("checking whether simulation creates proper number of generations")
+                .isEqualTo(maxGenNumber);
+
+        simulation.setNumberOfIterations(10);
+        assertThat(simulation.getCurrentGenerationNumber())
+                .as("checking whether simulation resets current generation number after setting different max generation number")
+                .isEqualTo(1);
+
+        simulation.runSimulation();
+        assertThat(simulation.getCurrentGenerationNumber())
+                .as("checking whether simulation creates proper number of generation after setting max number manually")
+                .isEqualTo(10);
     }
 
     public void test(){
@@ -104,6 +124,7 @@ public class TestWireworldSimulation {
         testSeters();
         testGetCellsFromGrid();
         testNextGeneration();
+        testRunSimulation();
     }
 
     public static void main(String[] args) {

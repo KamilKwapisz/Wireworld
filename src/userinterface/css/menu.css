@@ -1,0 +1,111 @@
+#menuPane {
+    -fx-background-color: #141111;
+}
+#layout {
+    -fx-background-color: #141111;
+    -fx-font-family: "Eras Demi ITC";
+}
+.label {
+    -fx-text-fill: #a6acad;
+    -fx-font-weight: 900;
+}
+
+#apply {
+    -fx-background-color: #141111;
+    -fx-text-fill: #a6acad;
+    -fx-font-weight: 900;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: #a6acad;
+    -fx-border-radius: 10px;
+}
+
+#apply:pressed {
+    -fx-border-color: darkolivegreen;
+}
+
+#genNumber {
+    -fx-text-fill: #a6acad;
+    -fx-background-color: #141111;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: #a6acad;
+    -fx-border-radius: 10px;
+}
+
+#closeButton {
+    -fx-text-fill: #a6acad;
+    -fx-background-color: #141111;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-color: #a6acad;
+    -fx-border-radius: 12px;
+}
+
+#playB {
+    -fx-background-color: transparent;
+    -fx-background-size: 50px 50px;
+    -fx-graphic: url('play.png');
+}
+
+#playB:hover {
+    -fx-graphic: url('playhover.png');
+}
+
+#playB:pressed{
+    -fx-background-color: darkolivegreen;
+}
+
+#forwardB {
+    -fx-background-color: transparent;
+    -fx-background-size: 50px 50px;
+    -fx-graphic: url('forward.png');
+}
+
+#forwardB:hover {
+    -fx-graphic: url('forwardhover.png');
+}
+
+#forwardB:pressed{
+    -fx-background-color: darkolivegreen;
+}
+
+#backwardB {
+    -fx-background-color: transparent;
+    -fx-background-size: 50px 50px;
+    -fx-graphic: url('forward.png');
+    -fx-rotate: 180;
+}
+
+#backwardB:hover {
+    -fx-graphic: url('forwardhover.png');
+}
+
+#backwardB:pressed{
+    -fx-background-color: darkolivegreen;
+    
+}
+
+#pauseB {
+    -fx-background-color: transparent;
+    -fx-background-size: 50px 50px;
+    -fx-graphic: url('pause.png');
+}
+
+#pauseB:hover {
+    -fx-graphic: url('pausehover.png');
+}
+
+#pauseB:pressed{
+    -fx-background-color: darkolivegreen;
+}
+
+.slider .track {
+    -fx-background-color: #a6acad;
+    -fx-padding: 0.25em;
+}
+
+.slider .thumb {
+    -fx-background-color: YELLOW;
+    -fx-background-radius: 0.3em;
+}

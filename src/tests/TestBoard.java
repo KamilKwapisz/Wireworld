@@ -19,48 +19,48 @@ public class TestBoard {
 
     private static void testCountElectronHeadsNeighbours(){
         Board board = new Board(3,3);
-        board.addCell(new Cell(0, 0, 3));
-        board.addCell(new Cell(1, 0, 1));
-        board.addCell(new Cell(2, 0, 3));
+        board.addCell(new Cell(0, 0, CellType.HEAD));
+        board.addCell(new Cell(1, 0, CellType.CONDUCTOR));
+        board.addCell(new Cell(2, 0, CellType.HEAD));
 
-        board.addCell(new Cell(0, 1, 3));
-        board.addCell(new Cell(1, 1, 3));
-        board.addCell(new Cell(2, 1, 1));
+        board.addCell(new Cell(0, 1, CellType.HEAD));
+        board.addCell(new Cell(1, 1, CellType.HEAD));
+        board.addCell(new Cell(2, 1, CellType.CONDUCTOR));
 
-        board.addCell(new Cell(0, 2, 3));
-        board.addCell(new Cell(1, 2, 1));
-        board.addCell(new Cell(2, 2, 3));
+        board.addCell(new Cell(0, 2, CellType.HEAD));
+        board.addCell(new Cell(1, 2, CellType.CONDUCTOR));
+        board.addCell(new Cell(2, 2, CellType.HEAD));
         /*
          *  3    1   3
          *  3    3   1
          *  3    1   3
          */
 
-        assertThat( board.countElectronHeadsNeighbours( new Cell(1, 1, 3) ) )
+        assertThat( board.countElectronHeadsNeighbours( new Cell(1, 1, CellType.HEAD) ) )
                 .as("checking neighbours number: cell in the middle")
                 .isEqualTo(5);
-        assertThat( board.countElectronHeadsNeighbours( new Cell(0, 0, 3) ) )
+        assertThat( board.countElectronHeadsNeighbours( new Cell(0, 0, CellType.HEAD) ) )
                 .as("checking neighbours number: left top cell")
                 .isEqualTo(2);
-        assertThat( board.countElectronHeadsNeighbours( new Cell(0, 2, 3) ) )
+        assertThat( board.countElectronHeadsNeighbours( new Cell(0, 2, CellType.HEAD) ) )
                 .as("checking neighbours number: left bottom cell")
                 .isEqualTo(2);
-        assertThat( board.countElectronHeadsNeighbours( new Cell(2, 0, 3) ) )
+        assertThat( board.countElectronHeadsNeighbours( new Cell(2, 0, CellType.HEAD) ) )
                 .as("checking neighbours number: right top cell")
                 .isEqualTo(1);
-        assertThat( board.countElectronHeadsNeighbours( new Cell(2, 2, 3) ) )
+        assertThat( board.countElectronHeadsNeighbours( new Cell(2, 2, CellType.HEAD) ) )
                 .as("checking neighbours number: right bottom cell")
                 .isEqualTo(1);
-        assertThat( board.countElectronHeadsNeighbours( new Cell(1, 2, 3) ) )
+        assertThat( board.countElectronHeadsNeighbours( new Cell(1, 2, CellType.HEAD) ) )
                 .as("checking neighbours number: middle bottom cell")
                 .isEqualTo(4);
-        assertThat( board.countElectronHeadsNeighbours( new Cell(2, 1, 3) ) )
+        assertThat( board.countElectronHeadsNeighbours( new Cell(2, 1, CellType.HEAD) ) )
                 .as("checking neighbours number: right edge cell")
                 .isEqualTo(3);
-        assertThat( board.countElectronHeadsNeighbours( new Cell(0, 1, 3) ) )
+        assertThat( board.countElectronHeadsNeighbours( new Cell(0, 1, CellType.HEAD) ) )
                 .as("checking neighbours number: left edge cell ")
                 .isEqualTo(3);
-        assertThat( board.countElectronHeadsNeighbours( new Cell(1, 0, 1) ) )
+        assertThat( board.countElectronHeadsNeighbours( new Cell(1, 0, CellType.HEAD) ) )
                 .as("checking neighbours number: top edge cell ")
                 .isEqualTo(4);
     }
@@ -83,9 +83,9 @@ public class TestBoard {
 
     private static void testAddCell() {
         Board board = new Board(3,3);
-        Cell cell = new Cell(0, 0, 1);
-        Cell cell2 = new Cell(1, 0, 3);
-        Cell cell3 = new Cell(2, 2, 2);
+        Cell cell = new Cell(0, 0, CellType.CONDUCTOR);
+        Cell cell2 = new Cell(1, 0, CellType.HEAD);
+        Cell cell3 = new Cell(2, 2, CellType.TAIL);
 
         board.addCell(cell);
         board.addCell(cell2);
@@ -99,15 +99,15 @@ public class TestBoard {
                 .isEqualTo(cell2);
         assertThat(board.getCell(1, 1).getType())
                 .as("checking current type of added cell")
-                .isEqualTo(0);
+                .isEqualTo(CellType.EMPTY);
         assertThat(board.getCell(1, 0).getType())
                 .as("checking current type of added cell")
-                .isEqualTo(3);
+                .isEqualTo(CellType.HEAD);
         assertThat(board.getCell(1, 2).getType())
                 .as("checking current type of added cell")
-                .isEqualTo(0);
+                .isEqualTo(CellType.EMPTY);
 
-        Cell cell4 = new Cell(5, 3, 2);
+        Cell cell4 = new Cell(5, 3, CellType.TAIL);
 
         assertThatThrownBy(() -> board.addCell(cell4))
                 .as("Checking exception thrown by adding cell with coordinates higher than board size")
@@ -117,9 +117,9 @@ public class TestBoard {
     }
     private static void testGetBoard() {
         Board board = new Board(3,3);
-        Cell cell = new Cell(0, 0, 1);
-        Cell cell2 = new Cell(1, 0, 3);
-        Cell cell3 = new Cell(2, 2, 2);
+        Cell cell = new Cell(0, 0, CellType.CONDUCTOR);
+        Cell cell2 = new Cell(1, 0, CellType.HEAD);
+        Cell cell3 = new Cell(2, 2, CellType.TAIL);
 
         board.addCell(cell);
         board.addCell(cell2);
@@ -164,9 +164,9 @@ public class TestBoard {
 
     private static void testGetNotEmptyCells(){
         Board board = new Board(4,4);
-        Cell cell = new Cell(0,0, 1);
-        Cell cell2 = new Cell(1,1, 1);
-        Cell cell3 = new Cell(2,2, 1);
+        Cell cell = new Cell(0,0, CellType.CONDUCTOR);
+        Cell cell2 = new Cell(1,1, CellType.CONDUCTOR);
+        Cell cell3 = new Cell(2,2, CellType.CONDUCTOR);
 
         board.addCell(cell);
         board.addCell(cell2);
