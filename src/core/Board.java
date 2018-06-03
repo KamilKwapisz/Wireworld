@@ -69,7 +69,7 @@ public class Board{
     }
 
     public void addCell(Cell cell) throws IndexOutOfBoundsException{
-        // Function add Cell given as a parameter to a board.
+        // method add Cell given as a parameter to a board.
         // this function get x, y and coordinates directly from cell fields
         try {
             board.get(cell.getY()).set(cell.getX(), cell);

@@ -61,7 +61,6 @@ public class SaveFileController implements FileController {
         File savedFile = fileChooser.showSaveDialog(stage);
 
         if (savedFile != null) {
-//            try {
             BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
             BufferedImage bImage2 = new BufferedImage(bImage.getWidth(), bImage.getHeight(), BufferedImage.TYPE_INT_RGB);
             bImage2.getGraphics().drawImage(bImage, 0, 0, null);

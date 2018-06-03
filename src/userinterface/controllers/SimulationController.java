@@ -37,8 +37,6 @@ public class SimulationController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         delaySlider.setValue(0.2);
         
-        //delayValue.textProperty().bindBidirectional(delaySlider.valueProperty(), NumberFormat.getNumberInstance());
-     
         delayValue.setText(Math.round(delaySlider.getValue()) + "");
         delaySlider.valueProperty().addListener(new ChangeListener<Number>() {
         @Override 
@@ -66,7 +64,6 @@ public class SimulationController implements Initializable {
 
     @FXML
     private void backGeneration(ActionEvent event) {
-//        this.simulation.decrementCurrentGenNumber(); // decrementing current gen number
         this.simulation.loadLastGeneration();
     }
 
@@ -81,7 +78,6 @@ public class SimulationController implements Initializable {
     private void playSimulation(ActionEvent event) {
         if (simulation.isPaused()) {
             simulation.unpause();
-//            simulation.runSimulation();
         }
         if(delaySlider.getValue() == 0.08 && simulation.getNumberOfIterations() == 0 ){
             musicPlayer.play();

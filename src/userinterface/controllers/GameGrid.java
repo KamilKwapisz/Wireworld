@@ -166,7 +166,6 @@ public class GameGrid {
 
             AllowInsertionController allowInsert = new AllowInsertionController(X_TILES, Y_TILES);
 
-            //  setOnMousePressed(e ->changeState(e, this.state));
             setOnMouseEntered(en -> allowInsert.placeIsAllowed(x, y, highlightLogicGate, insertionFlag));
             setOnMouseExited(ex -> allowInsert.leaveTile(grid, insertionFlag));
         }
